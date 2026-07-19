@@ -70,38 +70,6 @@ def _sample_frames(video_path: str) -> list[Image.Image]:
     return [Image.fromarray(cv2.cvtColor(f, cv2.COLOR_BGR2RGB)) for f in frames]
 
 
-_SEV = {"down": 3, "distress": 2, "normal": 0}
-
-
-def _domain_aug(frames):
-    """Compact real-video-style augmentation for test-time augmentation (self-contained)."""
-    from PIL import ImageEnhance, ImageFilter
-    import random
-    b, c, s = random.uniform(0.7, 1.4), random.uniform(0.7, 1.4), random.uniform(0.6, 1.3)
-    blur = random.random() < 0.4
-    out = []
-    for im in frames:
-        im = ImageEnhance.Brightness(im).enhance(b)
-        im = ImageEnhance.Contrast(im).enhance(c)
-        im = ImageEnhance.Color(im).enhance(s)
-        if blur:
-            im = im.filter(ImageFilter.GaussianBlur(random.uniform(0.4, 1.3)))
-        w, h = im.size
-        d = random.uniform(0.5, 1.0)
-        if d < 1.0:
-            im = im.resize((max(8, int(w * d)), max(8, int(h * d)))).resize((w, h))
-        out.append(im)
-    return out
-
-
-def _status_of(gen: str) -> str:
-    m = list(_JSON.finditer(gen))
-    if m:
-        try: return _canon(json.loads(m[-1].group(0)).get("status", gen))
-        except json.JSONDecodeError: pass
-    return _canon(gen)
-
-
 def _generate(proc, model, frames, device) -> str:
     msgs = [{"role": "user", "content": [{"type": "image"} for _ in frames] +
              [{"type": "text", "text": PROMPT}]}]
@@ -112,28 +80,12 @@ def _generate(proc, model, frames, device) -> str:
     return proc.batch_decode(out[:, batch["input_ids"].shape[1]:], skip_special_tokens=True)[0]
 
 
-def _run(proc, model, frames, device, k):
-    """k=0: single pass. k>0: test-time augmentation — original + k augmented views,
-    keep the most severe verdict. Recovers small-model recall (256M 0.16→0.47,
-    500M 0.31→0.55 in-the-wild; see SIZE_COMPARISON.md)."""
-    if k <= 0:
-        return _generate(proc, model, frames, device)
-    views = [frames] + [_domain_aug(frames) for _ in range(k)]
-    gens = [_generate(proc, model, v, device) for v in views]
-    best_g, best_sev = gens[0], -1
-    for g in gens:
-        sev = _SEV.get(_status_of(g), 0)
-        if sev > best_sev:
-            best_g, best_sev = g, sev
-    return best_g
-
-
-@spaces.GPU(duration=90)
-def _infer_gpu(frames, model_id, k) -> str:
+@spaces.GPU(duration=60)
+def _infer_gpu(frames, model_id) -> str:
     proc, model = _get(model_id)
     model.to("cuda")
     try:
-        return _run(proc, model, frames, "cuda", k)
+        return _generate(proc, model, frames, "cuda")
     finally:
         model.to("cpu")   # keep model on CPU between calls (ZeroGPU releases the GPU)
 
@@ -151,25 +103,23 @@ def _format(gen: str, used: str, size: str):
     return _LABEL[status], parsed
 
 
-def analyze(video_path, size, tta):
-    """Detect fall / person-down / distress in a short clip with the chosen model size.
-    `tta` enables test-time augmentation (higher recall for small models, ~5x slower).
-    Uses ZeroGPU when quota is available, else falls back to (slower) CPU."""
+def analyze(video_path, size):
+    """Detect fall / person-down / distress in a short clip with the chosen model size
+    (single pass — real deployment behavior). Uses ZeroGPU, else CPU fallback."""
     if not video_path:
         raise gr.Error("Please provide a video clip.")
     model_id = MODEL_IDS[size]
-    k = 4 if tta else 0
     frames = _sample_frames(video_path)
     try:
-        gen = _infer_gpu(frames, model_id, k)
-        used = "ZeroGPU" + (" +TTA" if tta else "")
+        gen = _infer_gpu(frames, model_id)
+        used = "ZeroGPU"
     except Exception as e:
         msg = str(e).lower()
         if any(x in msg for x in ("quota", "gpu", "zerogpu", "exceeded", "abort")):
             gr.Info("ZeroGPU quota unavailable — running on CPU (slower).")
             proc, model = _get(model_id)
-            gen = _run(proc, model, frames, "cpu", k)
-            used = "CPU fallback" + (" +TTA" if tta else "")
+            gen = _generate(proc, model, frames, "cpu")
+            used = "CPU fallback"
         else:
             raise
     label, parsed = _format(gen, used, size)
@@ -192,8 +142,6 @@ with gr.Blocks(title="Edge Fall / Danger Detection VLM") as demo:
     with gr.Row(equal_height=False):
         with gr.Column(scale=3):
             size = gr.Radio(choices=list(MODEL_IDS), value=DEFAULT_MODEL, label="Model size")
-            tta = gr.Checkbox(value=False, label="Test-time augmentation (boosts small-model "
-                              "recall — 256M 0.16→0.47, 500M 0.31→0.55 in-the-wild; ~5× slower)")
             vid = gr.Video(label="Video clip", sources=["upload"], height=440, autoplay=True)
             btn = gr.Button("Analyze", variant="primary")
             gr.Examples(
@@ -204,7 +152,7 @@ with gr.Blocks(title="Edge Fall / Danger Detection VLM") as demo:
             verdict = gr.Label(label="Verdict")
             raw = gr.JSON(label="Model output")
             gallery = gr.Gallery(label="Sampled frames (oldest → newest)", columns=6, height=160)
-    btn.click(analyze, inputs=[vid, size, tta], outputs=[verdict, raw, gallery])
+    btn.click(analyze, inputs=[vid, size], outputs=[verdict, raw, gallery])
 
 if __name__ == "__main__":
     demo.launch(mcp_server=True)
