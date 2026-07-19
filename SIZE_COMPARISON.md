@@ -39,21 +39,20 @@ exists to provide.
 
 Models: `runs/sft-256m-real`, `runs/sft-500m-real`, `runs/sft-2b-real`.
 
+## Autoresearch loop outcome: NO deployable small-model improvement found
+The loop (constraint: stay 256M/500M; metric: OOPS-val recall; anti-overfit: val/test split)
+tried and rejected everything:
+- **Retrain + domain augmentation:** null (val/test disagreed → dropped).
+- **Distillation:** probe showed 2.2B teacher agrees GT 95% on train data → would be null → skipped.
+- **Test-time augmentation:** raised the *benchmark* number (256M 0.16→0.47, 500M 0.31→0.55) but
+  **DOES NOT COUNT as a real improvement** — it is K+1× compute per decision, lowers specificity
+  (fights the false-alarm bar, the binding constraint), and is redundant with the temporal
+  persistence the real streaming system already has (a fallen person is re-seen by many
+  single-pass inferences over seconds). TTA is a diagnostic that the small models have *latent*
+  fall signal — not a deployable fix.
 
-## Iteration: test-time augmentation (autoresearch loop) — a real, retraining-free win
-The size gap is capacity-bound (augmentation retraining = null; distillation probe showed
-95% teacher/GT agreement → would be null, skipped). But **test-time augmentation** (run K=4
-augmented views + original, aggregate "any view sees a fall → fall") recovers latent signal
-WITHOUT retraining. Verified on a held-out OOPS-test split (val agreed → no overfit):
+**Conclusion:** the small-model out-of-distribution recall gap is capacity-bound. Within the
+edge/synthetic regime there is no cheap fix. Real-world recall comes from (a) the 2.2B's
+capacity and (b) temporal aggregation over the live stream (deploy/monitor.py), NOT from
+inference-time tricks. Single-pass numbers (256M 0.16, 500M 0.31, 2.2B 0.83) are the honest ones.
 
-| Model (OOPS in-the-wild, held-out test) | single-pass recall | **+TTA recall** | TTA spec |
-|---|---|---|---|
-| 256M | 0.16 | **0.47** (~3x) | 0.79 |
-| 500M | 0.31 | **0.55** (~1.8x) | 0.77 |
-| 2.2B | 0.83 | **0.893** | 0.64 |
-
-TTA nearly triples the 256M's in-the-wild recall and lifts the 500M by ~1.8x, with
-specificity holding ~0.77. Cost: K+1 forward passes at inference — cheap for the small
-models on-device (they're fast). Anti-overfit discipline held throughout: OOPS was split
-val/test, only val drove decisions, test was reported once, and augmentation was DROPPED
-because its val/test moved opposite directions.
