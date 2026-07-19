@@ -1,0 +1,6 @@
+transformers>=4.49
+accelerate>=1.1
+num2words
+opencv-python-headless
+pillow
+numpy

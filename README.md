@@ -54,8 +54,8 @@ python scripts/validate_real.py --model runs/... --manifest ...          # valid
 Blender-free tests: `bash scripts/run_tests.sh`.
 
 ## Models & demo
-- **Model:** [Hugging Face model repo](https://huggingface.co/) (SmolVLM2-2.2B fine-tune + GGUF)
-- **Demo:** [Hugging Face Space (ZeroGPU)](https://huggingface.co/spaces) — upload a clip or try examples
+- **Model:** https://huggingface.co/Luigi/edge-fall-vlm-2.2b (SmolVLM2-2.2B fine-tune + GGUF)
+- **Demo:** ZeroGPU Gradio app in [`space/`](space/) — `app.py` + example clips, ready to deploy (HF Gradio hosting requires a PRO plan)
 
 ## Honest status
 Research prototype. Strong sim-to-real transfer and competitive in-the-wild recall, but
