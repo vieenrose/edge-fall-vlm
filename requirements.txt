@@ -1,0 +1,19 @@
+# Core training / inference
+torch>=2.4
+transformers>=4.49
+accelerate>=1.1
+peft>=0.13
+num2words
+datasets
+pillow
+numpy
+opencv-python
+
+# Synthetic data generation (Blender is fetched by blenderproc on first run)
+blenderproc>=2.7
+
+# Real-dataset validation / utilities
+huggingface_hub
+gdown
+
+# Optional: GGUF export + on-device inference uses llama.cpp (built separately)

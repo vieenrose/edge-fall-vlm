@@ -1,0 +1,21 @@
+# Model weights & exports -> published to Hugging Face, not git
+runs/
+export/
+models/
+*.gguf
+*.safetensors
+
+# Data: synthetic renders + third-party datasets (URFD/OOPS) are NOT redistributed here
+data/
+!data/README.md
+
+# Python
+__pycache__/
+*.pyc
+.venv*/
+*.egg-info/
+
+# Scratch / OS
+.DS_Store
+*.log
+output/

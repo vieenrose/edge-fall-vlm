@@ -1,0 +1,18 @@
+{
+  "iters": 10,
+  "latency_s": {
+    "p50": 0.01,
+    "p95": 0.01,
+    "min": 0.01,
+    "max": 0.01
+  },
+  "sustainable_cadence_hz": 99.44,
+  "peak_rss_mb": 42.6,
+  "thermal": {
+    "max_c": null,
+    "final_c": null,
+    "throttle_warn": false
+  },
+  "wall_s": 0.2,
+  "projected_false_alarms_per_day@spec0.99": 8591.6
+}
