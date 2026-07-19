@@ -1,0 +1,22 @@
+{
+  "2.2B-ternary-mlp-only": {
+    "n": 60,
+    "accuracy": 0.783,
+    "binary_sensitivity_recall": 0.844,
+    "binary_specificity": 0.714,
+    "binary_precision": 0.771,
+    "binary_f1": 0.806,
+    "person_down_recall": 0.844,
+    "peak_rss_mb": 5147.3,
+    "prefill_time": {
+      "p50_s": 0.048,
+      "p95_s": 0.048,
+      "mean_s": 0.051
+    },
+    "inference_time_full_generate": {
+      "p50_s": 0.402,
+      "p95_s": 0.404,
+      "mean_s": 0.402
+    }
+  }
+}

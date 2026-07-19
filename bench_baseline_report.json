@@ -1,0 +1,62 @@
+{
+  "256M-fp16": {
+    "n": 60,
+    "accuracy": 0.483,
+    "binary_sensitivity_recall": 0.156,
+    "binary_specificity": 0.964,
+    "binary_precision": 0.833,
+    "binary_f1": 0.263,
+    "person_down_recall": 0.156,
+    "peak_rss_mb": 1992.7,
+    "prefill_time": {
+      "p50_s": 0.023,
+      "p95_s": 0.054,
+      "mean_s": 0.036
+    },
+    "inference_time_full_generate": {
+      "p50_s": 0.351,
+      "p95_s": 0.404,
+      "mean_s": 0.35
+    }
+  },
+  "500M-fp16": {
+    "n": 60,
+    "accuracy": 0.583,
+    "binary_sensitivity_recall": 0.344,
+    "binary_specificity": 0.929,
+    "binary_precision": 0.846,
+    "binary_f1": 0.489,
+    "person_down_recall": 0.281,
+    "peak_rss_mb": 2884.2,
+    "prefill_time": {
+      "p50_s": 0.029,
+      "p95_s": 0.059,
+      "mean_s": 0.034
+    },
+    "inference_time_full_generate": {
+      "p50_s": 0.394,
+      "p95_s": 0.486,
+      "mean_s": 0.421
+    }
+  },
+  "2.2B-fp16-baseline": {
+    "n": 60,
+    "accuracy": 0.867,
+    "binary_sensitivity_recall": 0.938,
+    "binary_specificity": 0.786,
+    "binary_precision": 0.833,
+    "binary_f1": 0.882,
+    "person_down_recall": 0.938,
+    "peak_rss_mb": 6211.9,
+    "prefill_time": {
+      "p50_s": 0.075,
+      "p95_s": 0.119,
+      "mean_s": 0.075
+    },
+    "inference_time_full_generate": {
+      "p50_s": 0.458,
+      "p95_s": 0.708,
+      "mean_s": 0.49
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "2.2B-ternary-QAT": {
+    "n": 60,
+    "accuracy": 0.667,
+    "binary_sensitivity_recall": 0.531,
+    "binary_specificity": 0.821,
+    "binary_precision": 0.773,
+    "binary_f1": 0.63,
+    "person_down_recall": 0.531,
+    "peak_rss_mb": 5148.2,
+    "prefill_time": {
+      "p50_s": 0.048,
+      "p95_s": 0.048,
+      "mean_s": 0.051
+    },
+    "inference_time_full_generate": {
+      "p50_s": 0.402,
+      "p95_s": 0.403,
+      "mean_s": 0.402
+    }
+  }
+}

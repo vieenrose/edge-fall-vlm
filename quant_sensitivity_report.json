@@ -1,0 +1,245 @@
+{
+  "fp16_baseline": {
+    "n": 50,
+    "binary_sensitivity": 0.889,
+    "binary_specificity": 0.565,
+    "binary_f1": 0.787,
+    "per_class_recall": {
+      "down": 0.889,
+      "normal": 0.565
+    },
+    "accuracy": 0.74,
+    "confusion": {
+      "down": {
+        "down": 24,
+        "normal": 3
+      },
+      "normal": {
+        "normal": 13,
+        "down": 10
+      }
+    },
+    "person_down_recall": 0.889
+  },
+  "role_q_proj": {
+    "n": 50,
+    "binary_sensitivity": 0.0,
+    "binary_specificity": 1.0,
+    "binary_f1": NaN,
+    "per_class_recall": {
+      "down": 0.0,
+      "normal": 1.0
+    },
+    "accuracy": 0.46,
+    "confusion": {
+      "down": {
+        "normal": 27
+      },
+      "normal": {
+        "normal": 23
+      }
+    },
+    "person_down_recall": 0.0
+  },
+  "role_k_proj": {
+    "n": 50,
+    "binary_sensitivity": 0.0,
+    "binary_specificity": 1.0,
+    "binary_f1": NaN,
+    "per_class_recall": {
+      "down": 0.0,
+      "normal": 1.0
+    },
+    "accuracy": 0.46,
+    "confusion": {
+      "down": {
+        "normal": 27
+      },
+      "normal": {
+        "normal": 23
+      }
+    },
+    "person_down_recall": 0.0
+  },
+  "role_v_proj": {
+    "n": 50,
+    "binary_sensitivity": 0.037,
+    "binary_specificity": 1.0,
+    "binary_f1": 0.071,
+    "per_class_recall": {
+      "down": 0.0,
+      "normal": 1.0
+    },
+    "accuracy": 0.46,
+    "confusion": {
+      "down": {
+        "normal": 26,
+        "fall": 1
+      },
+      "normal": {
+        "normal": 23
+      }
+    },
+    "person_down_recall": 0.037
+  },
+  "role_o_proj": {
+    "n": 50,
+    "binary_sensitivity": 0.0,
+    "binary_specificity": 1.0,
+    "binary_f1": NaN,
+    "per_class_recall": {
+      "down": 0.0,
+      "normal": 1.0
+    },
+    "accuracy": 0.46,
+    "confusion": {
+      "down": {
+        "normal": 27
+      },
+      "normal": {
+        "normal": 23
+      }
+    },
+    "person_down_recall": 0.0
+  },
+  "role_gate_proj": {
+    "n": 50,
+    "binary_sensitivity": 0.0,
+    "binary_specificity": 1.0,
+    "binary_f1": NaN,
+    "per_class_recall": {
+      "down": 0.0,
+      "normal": 1.0
+    },
+    "accuracy": 0.46,
+    "confusion": {
+      "down": {
+        "normal": 27
+      },
+      "normal": {
+        "normal": 23
+      }
+    },
+    "person_down_recall": 0.0
+  },
+  "role_up_proj": {
+    "n": 50,
+    "binary_sensitivity": 0.0,
+    "binary_specificity": 1.0,
+    "binary_f1": NaN,
+    "per_class_recall": {
+      "down": 0.0,
+      "normal": 1.0
+    },
+    "accuracy": 0.46,
+    "confusion": {
+      "down": {
+        "normal": 27
+      },
+      "normal": {
+        "normal": 23
+      }
+    },
+    "person_down_recall": 0.0
+  },
+  "role_down_proj": {
+    "n": 50,
+    "binary_sensitivity": 0.0,
+    "binary_specificity": 1.0,
+    "binary_f1": NaN,
+    "per_class_recall": {
+      "down": 0.0,
+      "normal": 1.0
+    },
+    "accuracy": 0.46,
+    "confusion": {
+      "down": {
+        "normal": 27
+      },
+      "normal": {
+        "normal": 23
+      }
+    },
+    "person_down_recall": 0.0
+  },
+  "depth_early_0-7": {
+    "n": 50,
+    "binary_sensitivity": 0.0,
+    "binary_specificity": 1.0,
+    "binary_f1": NaN,
+    "per_class_recall": {
+      "down": 0.0,
+      "normal": 1.0
+    },
+    "accuracy": 0.46,
+    "confusion": {
+      "down": {
+        "normal": 27
+      },
+      "normal": {
+        "normal": 23
+      }
+    },
+    "person_down_recall": 0.0
+  },
+  "depth_mid_8-15": {
+    "n": 50,
+    "binary_sensitivity": 0.0,
+    "binary_specificity": 1.0,
+    "binary_f1": NaN,
+    "per_class_recall": {
+      "down": 0.0,
+      "normal": 1.0
+    },
+    "accuracy": 0.46,
+    "confusion": {
+      "down": {
+        "normal": 27
+      },
+      "normal": {
+        "normal": 23
+      }
+    },
+    "person_down_recall": 0.0
+  },
+  "depth_late_16-23": {
+    "n": 50,
+    "binary_sensitivity": 0.0,
+    "binary_specificity": 1.0,
+    "binary_f1": NaN,
+    "per_class_recall": {
+      "down": 0.0,
+      "normal": 1.0
+    },
+    "accuracy": 0.46,
+    "confusion": {
+      "down": {
+        "normal": 27
+      },
+      "normal": {
+        "normal": 23
+      }
+    },
+    "person_down_recall": 0.0
+  },
+  "full_ternary_naive_no_qat": {
+    "n": 50,
+    "binary_sensitivity": 0.0,
+    "binary_specificity": 1.0,
+    "binary_f1": NaN,
+    "per_class_recall": {
+      "down": 0.0,
+      "normal": 1.0
+    },
+    "accuracy": 0.46,
+    "confusion": {
+      "down": {
+        "normal": 27
+      },
+      "normal": {
+        "normal": 23
+      }
+    },
+    "person_down_recall": 0.0
+  }
+}
