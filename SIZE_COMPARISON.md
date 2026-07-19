@@ -38,3 +38,22 @@ Q6_K. Going smaller trades away exactly the capability (real-world fall recall) 
 exists to provide.
 
 Models: `runs/sft-256m-real`, `runs/sft-500m-real`, `runs/sft-2b-real`.
+
+
+## Iteration: test-time augmentation (autoresearch loop) — a real, retraining-free win
+The size gap is capacity-bound (augmentation retraining = null; distillation probe showed
+95% teacher/GT agreement → would be null, skipped). But **test-time augmentation** (run K=4
+augmented views + original, aggregate "any view sees a fall → fall") recovers latent signal
+WITHOUT retraining. Verified on a held-out OOPS-test split (val agreed → no overfit):
+
+| Model (OOPS in-the-wild, held-out test) | single-pass recall | **+TTA recall** | TTA spec |
+|---|---|---|---|
+| 256M | 0.16 | **0.47** (~3x) | 0.79 |
+| 500M | 0.31 | **0.55** (~1.8x) | 0.77 |
+| 2.2B | 0.83 | _(see below)_ | |
+
+TTA nearly triples the 256M's in-the-wild recall and lifts the 500M by ~1.8x, with
+specificity holding ~0.77. Cost: K+1 forward passes at inference — cheap for the small
+models on-device (they're fast). Anti-overfit discipline held throughout: OOPS was split
+val/test, only val drove decisions, test was reported once, and augmentation was DROPPED
+because its val/test moved opposite directions.

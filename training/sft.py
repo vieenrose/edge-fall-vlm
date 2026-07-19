@@ -31,9 +31,11 @@ def _subsample(items: list, k: int) -> list:
     return [items[i] for i in idx]
 
 
-def build_collator(processor, max_frames: int = 6, fps_augment: bool = True):
+def build_collator(processor, max_frames: int = 6, fps_augment: bool = True,
+                   domain_augment: bool = False):
     import numpy as np
     from training.dataset import temporal_augment
+    from training.dataset import domain_augment as _domain_aug
     rng = np.random.default_rng(0)
 
     def collate(samples: list[Sample]):
@@ -44,6 +46,8 @@ def build_collator(processor, max_frames: int = 6, fps_augment: bool = True):
             if fps_augment:
                 imgs = temporal_augment(imgs, rng, max_n=max_frames)
             imgs = _subsample(imgs, max_frames)
+            if domain_augment:
+                imgs = _domain_aug(imgs, rng)
             msgs = [{"role": "user",
                      "content": [{"type": "image"} for _ in imgs] + [{"type": "text", "text": s.prompt}]},
                     {"role": "assistant",
@@ -75,6 +79,7 @@ def main():
     ap.add_argument("--max-frames", type=int, default=6, help="cap frames/sample fed to VLM")
     ap.add_argument("--holdout-views", default="", help="comma-sep camera archetypes held out for cross-view eval")
     ap.add_argument("--label-set", default="fine", help="fine (5-class) | down3 (normal/down/distress) | binary")
+    ap.add_argument("--domain-augment", action="store_true", help="strong photometric/degradation aug (real-video domain shift)")
     ap.add_argument("--balance", action="store_true", help="oversample minority classes to majority count")
     ap.add_argument("--eval-after", action="store_true", help="run cross-view eval after training")
     ap.add_argument("--eval-n", type=int, default=160, help="cap eval samples (generation is slow)")
@@ -132,7 +137,8 @@ def main():
         print(f"balanced: {dict(Counter(s.label for s in samples))} -> "
               f"{dict(Counter(s.label for s in balanced))}")
         samples = balanced
-    collate = build_collator(processor, max_frames=args.max_frames)
+    collate = build_collator(processor, max_frames=args.max_frames,
+                             domain_augment=args.domain_augment)
 
     targs = TrainingArguments(
         output_dir=str(args.out),

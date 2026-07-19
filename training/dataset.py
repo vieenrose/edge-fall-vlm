@@ -64,6 +64,49 @@ def load_records(samples_jsonl: Path, label_set: str | None = None) -> list[Samp
     return out
 
 
+def domain_augment(frames: list, rng) -> list:
+    """Simulate real-video domain shift so small models generalize to in-the-wild footage
+    instead of memorizing the clean synthetic look. Applied per-STRIP with consistent
+    params (a clip has one lighting/compression), except noise which varies per frame.
+    Targets the exact gap that tanked small-model in-the-wild recall (0.13/0.31)."""
+    import numpy as np
+    from PIL import Image, ImageEnhance, ImageFilter
+    import cv2
+    # per-strip params
+    bright = rng.uniform(0.6, 1.5)
+    contrast = rng.uniform(0.6, 1.5)
+    sat = rng.uniform(0.5, 1.4)
+    do_gray = rng.random() < 0.12
+    do_blur = rng.random() < 0.4
+    blur_r = rng.uniform(0.4, 1.6)
+    jpeg_q = int(rng.integers(25, 75)) if rng.random() < 0.6 else None
+    down = rng.uniform(0.4, 1.0) if rng.random() < 0.5 else 1.0   # low-res web video
+    noise_sd = rng.uniform(0, 14)
+    out = []
+    for im in frames:
+        im = ImageEnhance.Brightness(im).enhance(bright)
+        im = ImageEnhance.Contrast(im).enhance(contrast)
+        im = ImageEnhance.Color(im).enhance(sat)
+        if do_gray:
+            im = im.convert("L").convert("RGB")
+        if do_blur:
+            im = im.filter(ImageFilter.GaussianBlur(blur_r))
+        w, h = im.size
+        if down < 1.0:
+            im = im.resize((max(8, int(w * down)), max(8, int(h * down)))).resize((w, h))
+        a = np.asarray(im).astype(np.float32)
+        if noise_sd > 0:
+            a = a + rng.normal(0, noise_sd, a.shape)
+        a = np.clip(a, 0, 255).astype(np.uint8)
+        if jpeg_q is not None:
+            ok, enc = cv2.imencode(".jpg", cv2.cvtColor(a, cv2.COLOR_RGB2BGR),
+                                   [cv2.IMWRITE_JPEG_QUALITY, jpeg_q])
+            if ok:
+                a = cv2.cvtColor(cv2.imdecode(enc, cv2.IMREAD_COLOR), cv2.COLOR_BGR2RGB)
+        out.append(Image.fromarray(a))
+    return out
+
+
 def temporal_augment(frames: list, rng, min_n=4, max_n=8, jitter=0.35,
                      drop_p=0.15) -> list:
     """Make training fps-robust by randomizing how the strip is temporally sampled.
