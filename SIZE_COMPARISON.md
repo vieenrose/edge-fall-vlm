@@ -50,7 +50,7 @@ WITHOUT retraining. Verified on a held-out OOPS-test split (val agreed → no ov
 |---|---|---|---|
 | 256M | 0.16 | **0.47** (~3x) | 0.79 |
 | 500M | 0.31 | **0.55** (~1.8x) | 0.77 |
-| 2.2B | 0.83 | _(see below)_ | |
+| 2.2B | 0.83 | **0.893** | 0.64 |
 
 TTA nearly triples the 256M's in-the-wild recall and lifts the 500M by ~1.8x, with
 specificity holding ~0.77. Cost: K+1 forward passes at inference — cheap for the small
