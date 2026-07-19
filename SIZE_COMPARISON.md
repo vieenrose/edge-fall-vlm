@@ -43,7 +43,13 @@ Models: `runs/sft-256m-real`, `runs/sft-500m-real`, `runs/sft-2b-real`.
 The loop (constraint: stay 256M/500M; metric: OOPS-val recall; anti-overfit: val/test split)
 tried and rejected everything:
 - **Retrain + domain augmentation:** null (val/test disagreed → dropped).
-- **Distillation:** probe showed 2.2B teacher agrees GT 95% on train data → would be null → skipped.
+- **Hard-label distillation:** probe showed 2.2B teacher agrees GT 95% on train data → skipped.
+- **Soft-label (logit) distillation:** implemented properly (KL on the teacher's answer-token
+  distribution + CE, with augmented/OOD-like views). Result: NULL/worse — 256M 0.16→0.09 (worse),
+  500M val 0.32→0.29 down / test 0.31→0.36 up (inconsistent → not kept). The teacher is confident
+  on in-distribution training data, so its soft targets carry no OOD signal to transfer
+  (cf. "Does KD Really Work?", arXiv 2106.05945).
+
 - **Test-time augmentation:** raised the *benchmark* number (256M 0.16→0.47, 500M 0.31→0.55) but
   **DOES NOT COUNT as a real improvement** — it is K+1× compute per decision, lowers specificity
   (fights the false-alarm bar, the binding constraint), and is redundant with the temporal

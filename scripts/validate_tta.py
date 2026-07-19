@@ -32,6 +32,7 @@ def main():
     ap.add_argument("--manifest", type=Path, required=True)
     ap.add_argument("--label-set", default="down3")
     ap.add_argument("--k", type=int, default=4)
+    ap.add_argument("--geo", action="store_true", help="add geometric views (flip + zoom crop)")
     ap.add_argument("--n", type=int, default=200)
     args = ap.parse_args()
 
@@ -58,16 +59,26 @@ def main():
         gen = proc.batch_decode(o[:, b["input_ids"].shape[1]:], skip_special_tokens=True)[0]
         return parse_answer(gen).get("status", "normal")
 
+    def geo_views(frames):
+        """Geometric views: horizontal flip + a center zoom-crop (person often small/off-center)."""
+        from PIL import Image
+        flip = [f.transpose(Image.FLIP_LEFT_RIGHT) for f in frames]
+        w, h = frames[0].size
+        cx0, cy0, cx1, cy1 = int(w * 0.12), int(h * 0.12), int(w * 0.88), int(h * 0.88)
+        crop = [f.crop((cx0, cy0, cx1, cy1)).resize((w, h)) for f in frames]
+        return [flip, crop]
+
     preds, golds = [], []
     for s in samples:
         base = _subsample(load_images(s), 6)
         views = [base] + [domain_augment(base, rng) for _ in range(args.k)]
+        if args.geo:
+            views += geo_views(base)
         statuses = [run(v) for v in views]
-        # aggregate: highest severity across views
-        best = max(statuses, key=lambda st: SEV.get(st, 0))
+        best = max(statuses, key=lambda st: SEV.get(st, 0))   # recall-max aggregation
         preds.append(best); golds.append(s.label)
     m = score(preds, golds)
-    print(f"=== TTA (k={args.k}) {args.model} on {args.manifest.name} ===")
+    print(f"=== TTA (k={args.k}{'+geo' if args.geo else ''}) {args.model} on {args.manifest.name} ===")
     print(f"person-down recall={m.person_down_recall} spec={m.binary_specificity} acc={m.accuracy}")
 
 
