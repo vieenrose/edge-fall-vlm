@@ -10,7 +10,12 @@ import torch
 from PIL import Image
 from transformers import AutoModelForImageTextToText, AutoProcessor
 
-MODEL_ID = "Luigi/edge-fall-vlm-2.2b"
+MODEL_IDS = {
+    "2.2B — best accuracy (recommended)": "Luigi/edge-fall-vlm-2.2b",
+    "500M — faster, weaker": "Luigi/edge-fall-vlm-500m",
+    "256M — fastest, weakest": "Luigi/edge-fall-vlm-256m",
+}
+DEFAULT_MODEL = "2.2B — best accuracy (recommended)"
 N_FRAMES = 6
 IMG_SIZE = 384
 
@@ -18,11 +23,17 @@ PROMPT = ("You are a safety monitor. These are consecutive video frames (oldest 
           "possibly with more than one person. Report whether ANYONE has fallen, fainted, "
           "is lying immobile, or is in distress; else normal. Answer with JSON only.")
 
-# Load on CPU at module scope. We move to GPU inside @spaces.GPU when ZeroGPU quota is
-# available, and fall back to CPU inference when it is exhausted (see analyze()).
-processor = AutoProcessor.from_pretrained(MODEL_ID, do_image_splitting=False,
-                                          size={"longest_edge": IMG_SIZE})
-model = AutoModelForImageTextToText.from_pretrained(MODEL_ID, dtype=torch.bfloat16).eval()
+_cache = {}   # model_id -> (processor, model on CPU)
+
+
+def _get(model_id):
+    if model_id not in _cache:
+        proc = AutoProcessor.from_pretrained(model_id, do_image_splitting=False,
+                                             size={"longest_edge": IMG_SIZE})
+        model = AutoModelForImageTextToText.from_pretrained(model_id, dtype=torch.bfloat16).eval()
+        _cache[model_id] = (proc, model)
+    return _cache[model_id]
+
 
 _JSON = re.compile(r"\{[^{}]*\}")
 _LABEL = {"down": "🔴 PERSON DOWN (fall / fainted / lying immobile)",
@@ -59,25 +70,27 @@ def _sample_frames(video_path: str) -> list[Image.Image]:
     return [Image.fromarray(cv2.cvtColor(f, cv2.COLOR_BGR2RGB)) for f in frames]
 
 
-def _infer(frames, device: str) -> str:
-    """Run the model on `device` ('cuda' or 'cpu'). Moves weights as needed."""
-    model.to(device)
+def _generate(proc, model, frames, device) -> str:
     msgs = [{"role": "user", "content": [{"type": "image"} for _ in frames] +
              [{"type": "text", "text": PROMPT}]}]
-    text = processor.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
-    batch = processor(text=[text], images=[frames], return_tensors="pt").to(device)
+    text = proc.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
+    batch = proc(text=[text], images=[frames], return_tensors="pt").to(device)
     with torch.no_grad():
         out = model.generate(**batch, max_new_tokens=64, do_sample=False)
-    return processor.batch_decode(out[:, batch["input_ids"].shape[1]:],
-                                  skip_special_tokens=True)[0]
+    return proc.batch_decode(out[:, batch["input_ids"].shape[1]:], skip_special_tokens=True)[0]
 
 
-@spaces.GPU(duration=40)
-def _infer_gpu(frames) -> str:
-    return _infer(frames, "cuda")
+@spaces.GPU(duration=60)
+def _infer_gpu(frames, model_id) -> str:
+    proc, model = _get(model_id)
+    model.to("cuda")
+    try:
+        return _generate(proc, model, frames, "cuda")
+    finally:
+        model.to("cpu")   # keep model on CPU between calls (ZeroGPU releases the GPU)
 
 
-def _format(gen: str, used: str):
+def _format(gen: str, used: str, size: str):
     m = list(_JSON.finditer(gen))
     parsed = {}
     if m:
@@ -85,48 +98,51 @@ def _format(gen: str, used: str):
         except json.JSONDecodeError: pass
     status = _canon(parsed.get("status", gen))
     parsed.setdefault("status", status)
+    parsed["_model"] = size.split(" ")[0]
     parsed["_compute"] = used
     return _LABEL[status], parsed
 
 
-def analyze(video_path):
-    """Detect fall / person-down / distress in a short clip. Uses ZeroGPU when quota is
-    available, else falls back to (slower) CPU inference."""
+def analyze(video_path, size):
+    """Detect fall / person-down / distress in a short clip with the chosen model size.
+    Uses ZeroGPU when quota is available, else falls back to (slower) CPU."""
     if not video_path:
         raise gr.Error("Please provide a video clip.")
+    model_id = MODEL_IDS[size]
     frames = _sample_frames(video_path)
     try:
-        gen = _infer_gpu(frames)          # ZeroGPU
+        gen = _infer_gpu(frames, model_id)
         used = "ZeroGPU"
-    except Exception as e:                 # quota exhausted / no GPU -> CPU fallback
+    except Exception as e:
         msg = str(e).lower()
         if any(k in msg for k in ("quota", "gpu", "zerogpu", "exceeded", "abort")):
-            gr.Info("ZeroGPU quota unavailable — running on CPU (slower, ~30–60 s).")
-            gen = _infer(frames, "cpu")
+            gr.Info("ZeroGPU quota unavailable — running on CPU (slower).")
+            proc, model = _get(model_id)
+            gen = _generate(proc, model, frames, "cpu")
             used = "CPU fallback"
         else:
             raise
-    label, parsed = _format(gen, used)
+    label, parsed = _format(gen, used, size)
     return label, parsed, frames
 
 
 with gr.Blocks(title="Edge Fall / Danger Detection VLM") as demo:
     gr.Markdown(
         "# 🛡️ Edge Fall / Danger Detection — single VLM\n"
-        "A **SmolVLM2-2.2B** fine-tune ([`Luigi/edge-fall-vlm-2.2b`]"
-        "(https://huggingface.co/Luigi/edge-fall-vlm-2.2b)) that flags **falls, a person "
-        "down, or distress** from a short clip — trained mostly on **synthetic 3D data**, "
-        "sized to run on a **Raspberry Pi 5**. "
+        "A **SmolVLM2** fine-tune that flags **falls, a person down, or distress** from a "
+        "short clip — trained mostly on **synthetic 3D data**, sized to run on a "
+        "**Raspberry Pi 5**. Pick a **model size** to compare accuracy vs size "
+        "([details](https://github.com/vieenrose/edge-fall-vlm/blob/master/SIZE_COMPARISON.md)). "
         "[Code](https://github.com/vieenrose/edge-fall-vlm).\n\n"
-        "Upload a short clip (or try an example — **real footage** from the UR Fall Detection "
-        "dataset [Kwolek & Kepski, 2014]). Runs on **ZeroGPU**; if your daily GPU quota is "
-        "exhausted it falls back to **CPU** (slower). Note: trained mostly on synthetic data, "
-        "so it may false-alarm on out-of-distribution real scenes. "
-        "*Research prototype — not a medical/safety device.*")
+        "Try an example (**real footage**, UR Fall Detection dataset [Kwolek & Kepski, 2014]) "
+        "or upload a clip. **Note:** smaller models miss most *in-the-wild* falls; the 2.2B "
+        "is the only size usable for the real task. Trained on synthetic data, so it may "
+        "false-alarm on out-of-distribution real scenes. *Research prototype — not a "
+        "medical/safety device.*")
     with gr.Row(equal_height=False):
         with gr.Column(scale=3):
-            vid = gr.Video(label="Video clip", sources=["upload"], height=440,
-                           autoplay=True)
+            size = gr.Radio(choices=list(MODEL_IDS), value=DEFAULT_MODEL, label="Model size")
+            vid = gr.Video(label="Video clip", sources=["upload"], height=440, autoplay=True)
             btn = gr.Button("Analyze", variant="primary")
             gr.Examples(
                 examples=[["examples/real_fall.mp4"], ["examples/real_person_down.mp4"],
@@ -136,7 +152,7 @@ with gr.Blocks(title="Edge Fall / Danger Detection VLM") as demo:
             verdict = gr.Label(label="Verdict")
             raw = gr.JSON(label="Model output")
             gallery = gr.Gallery(label="Sampled frames (oldest → newest)", columns=6, height=160)
-    btn.click(analyze, inputs=vid, outputs=[verdict, raw, gallery])
+    btn.click(analyze, inputs=[vid, size], outputs=[verdict, raw, gallery])
 
 if __name__ == "__main__":
     demo.launch(mcp_server=True)
