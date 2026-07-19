@@ -20,3 +20,10 @@ at Q6_K GGUF.
 - Code: https://github.com/vieenrose/edge-fall-vlm
 
 Upload a clip or try an example. Research prototype — **not a medical/safety device**.
+
+## Example footage attribution
+The example clips are from the **UR Fall Detection (URFD) dataset** — B. Kwolek & M.
+Kepski, *"Human fall detection on embedded platform using depth maps and wireless
+accelerometer"*, Computer Methods and Programs in Biomedicine, 2014.
+Source: http://fenix.ur.edu.pl/~mkepski/ds/uf.html (held-out test clips, used for
+illustration/evaluation).
