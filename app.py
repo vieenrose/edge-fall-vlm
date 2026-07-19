@@ -123,18 +123,19 @@ with gr.Blocks(title="Edge Fall / Danger Detection VLM") as demo:
         "exhausted it falls back to **CPU** (slower). Note: trained mostly on synthetic data, "
         "so it may false-alarm on out-of-distribution real scenes. "
         "*Research prototype — not a medical/safety device.*")
-    with gr.Row():
-        with gr.Column():
-            vid = gr.Video(label="Video clip", sources=["upload"])
+    with gr.Row(equal_height=False):
+        with gr.Column(scale=3):
+            vid = gr.Video(label="Video clip", sources=["upload"], height=440,
+                           autoplay=True)
             btn = gr.Button("Analyze", variant="primary")
             gr.Examples(
                 examples=[["examples/real_fall.mp4"], ["examples/real_person_down.mp4"],
                           ["examples/real_normal_walk.mp4"], ["examples/real_normal_sit.mp4"]],
                 inputs=vid, label="Example clips (real footage — UR Fall Detection dataset)")
-        with gr.Column():
+        with gr.Column(scale=2):
             verdict = gr.Label(label="Verdict")
             raw = gr.JSON(label="Model output")
-            gallery = gr.Gallery(label="Sampled frames (oldest → newest)", columns=6, height=140)
+            gallery = gr.Gallery(label="Sampled frames (oldest → newest)", columns=6, height=160)
     btn.click(analyze, inputs=vid, outputs=[verdict, raw, gallery])
 
 if __name__ == "__main__":
