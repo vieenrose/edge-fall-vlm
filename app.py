@@ -118,17 +118,19 @@ with gr.Blocks(title="Edge Fall / Danger Detection VLM") as demo:
         "down, or distress** from a short clip — trained mostly on **synthetic 3D data**, "
         "sized to run on a **Raspberry Pi 5**. "
         "[Code](https://github.com/vieenrose/edge-fall-vlm).\n\n"
-        "Upload a short clip (or try an example). Runs on **ZeroGPU**; if your daily GPU "
-        "quota is exhausted it falls back to **CPU** (slower). "
+        "Upload a short clip (or try an example — **real footage** from the UR Fall Detection "
+        "dataset [Kwolek & Kepski, 2014]). Runs on **ZeroGPU**; if your daily GPU quota is "
+        "exhausted it falls back to **CPU** (slower). Note: trained mostly on synthetic data, "
+        "so it may false-alarm on out-of-distribution real scenes. "
         "*Research prototype — not a medical/safety device.*")
     with gr.Row():
         with gr.Column():
             vid = gr.Video(label="Video clip", sources=["upload"])
             btn = gr.Button("Analyze", variant="primary")
             gr.Examples(
-                examples=[["examples/fall.mp4"], ["examples/person_down.mp4"],
-                          ["examples/distress.mp4"], ["examples/normal.mp4"]],
-                inputs=vid, label="Example clips (synthetic)")
+                examples=[["examples/real_fall.mp4"], ["examples/real_person_down.mp4"],
+                          ["examples/real_normal_walk.mp4"], ["examples/real_normal_sit.mp4"]],
+                inputs=vid, label="Example clips (real footage — UR Fall Detection dataset)")
         with gr.Column():
             verdict = gr.Label(label="Verdict")
             raw = gr.JSON(label="Model output")
