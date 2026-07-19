@@ -6,7 +6,7 @@ colorTo: indigo
 sdk: gradio
 app_file: app.py
 python_version: "3.12"
-short_description: Fall/person-down/distress from a clip — SmolVLM2-2.2B, RPi5-sized
+short_description: Fall / person-down / distress from a video clip
 startup_duration_timeout: 1h
 ---
 
