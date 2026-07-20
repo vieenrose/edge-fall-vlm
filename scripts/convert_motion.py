@@ -306,9 +306,12 @@ def gen_distress(rng, T=90):
 def gen_normal(rng, T=90):
     # HARD negatives dominate: poses that resemble "down" but are normal daily activity.
     # These are what drive specificity (the model was calling half of normals "fall").
+    # near_fall (destabilize+recover) excluded from sampling: empirically it appears to
+    # teach the model "ambiguous partial-descent = normal", which suppressed recall on
+    # real falls sharing that early-stage kinematic signature (0.938->0.31-0.59 recall
+    # regression when included). Function kept for a future isolated ablation.
     kind = rng.choice(["stand", "sit_fast", "lie_sofa", "bend", "walk",
-                       "crouch", "sit_floor", "reach_down", "squat_exercise", "kneel",
-                       "near_fall"])
+                       "crouch", "sit_floor", "reach_down", "squat_exercise", "kneel"])
     j = _base_standing(T)
     if kind == "crouch":                             # low but stable, upright torso
         for t in range(T):

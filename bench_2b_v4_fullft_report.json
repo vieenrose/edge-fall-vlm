@@ -1,0 +1,22 @@
+{
+  "SmolVLM2-2.2B-v4-fullFT": {
+    "n": 60,
+    "accuracy": 0.517,
+    "binary_sensitivity_recall": 0.156,
+    "binary_specificity": 1.0,
+    "binary_precision": 1.0,
+    "binary_f1": 0.27,
+    "person_down_recall": 0.125,
+    "peak_rss_mb": 5126.7,
+    "prefill_time": {
+      "p50_s": 0.05,
+      "p95_s": 0.052,
+      "mean_s": 0.058
+    },
+    "inference_time_full_generate": {
+      "p50_s": 0.373,
+      "p95_s": 0.607,
+      "mean_s": 0.391
+    }
+  }
+}
