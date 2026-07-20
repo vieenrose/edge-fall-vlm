@@ -10,9 +10,10 @@ import torch
 from PIL import Image
 from transformers import AutoModelForImageTextToText, AutoProcessor
 
-MODEL_ID = "Luigi/edge-fall-vlm-2.2b"
+MODEL_ID = "Luigi/edge-fall-vlm-qwen3.5-2b"
 N_FRAMES = 6
-IMG_SIZE = 384
+MIN_PIXELS = 64 * 64
+MAX_PIXELS = 384 * 384
 
 PROMPT = ("You are a safety monitor. These are consecutive video frames (oldest first), "
           "possibly with more than one person. Report whether ANYONE has fallen, fainted, "
@@ -24,7 +25,7 @@ _cache = {}   # model_id -> (processor, model on CPU)
 def _get(model_id=MODEL_ID):
     if model_id not in _cache:
         proc = AutoProcessor.from_pretrained(model_id, do_image_splitting=False,
-                                             size={"longest_edge": IMG_SIZE})
+                                             size={"shortest_edge": MIN_PIXELS, "longest_edge": MAX_PIXELS})
         model = AutoModelForImageTextToText.from_pretrained(model_id, dtype=torch.bfloat16).eval()
         _cache[model_id] = (proc, model)
     return _cache[model_id]
@@ -68,7 +69,14 @@ def _sample_frames(video_path: str) -> list[Image.Image]:
 def _generate(proc, model, frames, device) -> str:
     msgs = [{"role": "user", "content": [{"type": "image"} for _ in frames] +
              [{"type": "text", "text": PROMPT}]}]
-    text = proc.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
+    # enable_thinking=False is required for Qwen-family chat templates -- without it, the
+    # template injects a <think> block and generation rambles into open-ended reasoning
+    # instead of the trained JSON format. Harmless no-op for non-Qwen models.
+    try:
+        text = proc.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True,
+                                        enable_thinking=False)
+    except TypeError:
+        text = proc.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
     batch = proc(text=[text], images=[frames], return_tensors="pt").to(device)
     with torch.no_grad():
         out = model.generate(**batch, max_new_tokens=64, do_sample=False)
@@ -121,11 +129,13 @@ def analyze(video_path):
 
 with gr.Blocks(title="Edge Fall / Danger Detection VLM") as demo:
     gr.Markdown(
-        "# 🛡️ Edge Fall / Danger Detection — single VLM\n"
-        "A **SmolVLM2-2.2B** fine-tune that flags **falls, a person down, or distress** "
-        "from a short clip — trained mostly on **synthetic 3D data**, sized to run on a "
-        "**Raspberry Pi 5**. "
-        "[Code](https://github.com/vieenrose/edge-fall-vlm).\n\n"
+        "# 🛡️ Fall / Danger Detection — single VLM\n"
+        "A **Qwen3.5-2B** fine-tune that flags **falls, a person down, or distress** "
+        "from a short clip — trained mostly on **synthetic 3D data**. Chosen for "
+        "**capability on hard real cases over raw benchmark recall** — see the model "
+        "card for the honest trade-off vs. the SmolVLM2 sibling model. "
+        "[Code](https://github.com/vieenrose/edge-fall-vlm) · "
+        "[Model card](https://huggingface.co/Luigi/edge-fall-vlm-qwen3.5-2b).\n\n"
         "Try an example (**real footage**, UR Fall Detection dataset [Kwolek & Kepski, 2014]) "
         "or upload a clip. Trained on synthetic data, so it may false-alarm on out-of-"
         "distribution real scenes. *Research prototype — not a medical/safety device.*")
