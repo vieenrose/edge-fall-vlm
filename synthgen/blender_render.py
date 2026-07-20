@@ -167,6 +167,65 @@ def setup_scene_and_floor(rng, floor_rgb=None):
     return floor
 
 
+ASSETS_DIR = Path(__file__).resolve().parent / "assets"
+TEXTURE_FILES = sorted((ASSETS_DIR / "textures").glob("*.jpg")) if (ASSETS_DIR / "textures").is_dir() else []
+HDRI_FILES = sorted((ASSETS_DIR / "hdris").glob("*.exr")) if (ASSETS_DIR / "hdris").is_dir() else []
+
+
+def _real_texture_mat(name, tex_path, scale=1.0, rough=0.85):
+    """Material using a REAL CC0 photo texture (fabric/wood/carpet, downloaded from
+    Poly Haven) instead of a procedural pattern -- a genuinely photoreal stand-in for
+    the "busy patterned blanket/upholstery" camouflage case a real missed fall exposed,
+    rather than a synthetic checker approximation of it."""
+    bpy = _bpy()
+    m = bpy.data.materials.new(name)
+    m.use_nodes = True
+    nt = m.node_tree
+    bsdf = nt.nodes.get("Principled BSDF")
+    img = bpy.data.images.load(str(tex_path), check_existing=True)
+    tex_node = nt.nodes.new("ShaderNodeTexImage")
+    tex_node.image = img
+    mapping = nt.nodes.new("ShaderNodeMapping")
+    mapping.inputs["Scale"].default_value = (scale, scale, scale)
+    coord = nt.nodes.new("ShaderNodeTexCoord")
+    nt.links.new(coord.outputs["Generated"], mapping.inputs["Vector"])
+    nt.links.new(mapping.outputs["Vector"], tex_node.inputs["Vector"])
+    nt.links.new(tex_node.outputs["Color"], bsdf.inputs["Base Color"])
+    bsdf.inputs["Roughness"].default_value = rough
+    return m
+
+
+def apply_hdri_lighting(rng, strength=None):
+    """Light the scene with a REAL indoor HDRI environment (Poly Haven, CC0) instead of
+    the procedural point/area lights -- targets the warm/dim real-CCTV-footage look a
+    real missed fall exposed (procedural point lights + color-temp tint is a coarser
+    approximation of this than an actual photographed indoor lighting environment).
+    Returns True if an HDRI was applied, False if none are available (falls back to the
+    caller's existing procedural lighting)."""
+    if not HDRI_FILES:
+        return False
+    bpy = _bpy()
+    path = HDRI_FILES[int(rng.integers(len(HDRI_FILES)))]
+    world = bpy.context.scene.world
+    world.use_nodes = True
+    nt = world.node_tree
+    for n in list(nt.nodes):
+        nt.nodes.remove(n)
+    bg = nt.nodes.new("ShaderNodeBackground")
+    env = nt.nodes.new("ShaderNodeTexEnvironment")
+    env.image = bpy.data.images.load(str(path), check_existing=True)
+    mapping = nt.nodes.new("ShaderNodeMapping")
+    mapping.inputs["Rotation"].default_value = (0, 0, rng.uniform(0, 2 * math.pi))
+    coord = nt.nodes.new("ShaderNodeTexCoord")
+    out = nt.nodes.new("ShaderNodeOutputWorld")
+    nt.links.new(coord.outputs["Generated"], mapping.inputs["Vector"])
+    nt.links.new(mapping.outputs["Vector"], env.inputs["Vector"])
+    nt.links.new(env.outputs["Color"], bg.inputs["Color"])
+    bg.inputs["Strength"].default_value = strength if strength is not None else rng.uniform(0.4, 1.4)
+    nt.links.new(bg.outputs["Background"], out.inputs["Surface"])
+    return True
+
+
 def _checker_mat(name, rgb_a, rgb_b, scale, rough=0.8):
     """Procedural checker material -- a cheap, asset-free way to approximate a "busy
     patterned" surface (patterned blanket/upholstery/rug) that can visually camouflage a
@@ -197,7 +256,8 @@ def add_clutter_props(rng, subject_positions, n_range=(1, 4), near_prob=0.6):
 
     subject_positions: list of (x, y) floor positions (e.g. each person's final resting
     spot) to bias clutter placement toward -- empty list means fully random placement.
-    Returns the list of created Blender objects (for cleanup/hide_render toggling)."""
+    Returns the list of created object NAMES (for remove_clutter_props next scene --
+    raw object references can go stale between scenes under BlenderProc)."""
     bpy = _bpy()
     n = int(rng.integers(n_range[0], n_range[1] + 1))
     objs = []
@@ -225,7 +285,10 @@ def add_clutter_props(rng, subject_positions, n_range=(1, 4), near_prob=0.6):
         obj.scale = (sx, sy, sz)
         bpy.ops.object.transform_apply(scale=True)
         patterned = kind == "blanket" or rng.random() < 0.35   # patterned furniture too
-        if patterned:
+        if TEXTURE_FILES and rng.random() < 0.7:
+            tex_path = TEXTURE_FILES[int(rng.integers(len(TEXTURE_FILES)))]
+            mat = _real_texture_mat(f"clutter{i}", tex_path, scale=rng.uniform(0.6, 2.5))
+        elif patterned:
             rgb_a = tuple(rng.uniform(0.2, 0.9, size=3))
             rgb_b = tuple(rng.uniform(0.2, 0.9, size=3))
             mat = _checker_mat(f"clutter{i}", rgb_a, rgb_b, rng.uniform(4, 16))
@@ -233,28 +296,50 @@ def add_clutter_props(rng, subject_positions, n_range=(1, 4), near_prob=0.6):
             rgb = tuple(rng.uniform(0.15, 0.7, size=3))
             mat = _mat(f"clutter{i}", rgb, rng.uniform(0.3, 0.95))
         obj.data.materials.append(mat)
-        objs.append(obj)
+        objs.append(obj.name)
     return objs
 
 
-def remove_clutter_props(objs):
-    """Delete the previous scene's clutter objects before spawning the next scene's --
-    the Blender process is reused across scenes (not restarted), so stale clutter would
-    otherwise accumulate."""
+def remove_clutter_props(obj_names):
+    """Delete the previous scene's clutter objects (by name -- BlenderProc's internal
+    bookkeeping between scenes can invalidate raw Python object references, so we look
+    each one up fresh rather than holding onto the object handle) before spawning the
+    next scene's; the Blender process is reused across scenes (not restarted), so stale
+    clutter would otherwise accumulate. Silently skips names that no longer resolve."""
     bpy = _bpy()
-    for obj in objs:
-        bpy.data.objects.remove(obj, do_unlink=True)
+    for name in obj_names:
+        obj = bpy.data.objects.get(name)
+        if obj is not None:
+            bpy.data.objects.remove(obj, do_unlink=True)
 
 
-def setup_lighting(rng, light):
-    """light: scene.LightingSample. Creates sun/area lights matching mode/lux/temp."""
+def reset_world_background():
+    """Clear the World node tree back to a plain Background->Output pair. Needed before
+    both setup_lighting and apply_hdri_lighting, since the Blender process is reused
+    across scenes -- without this, a previous scene's HDRI environment texture would
+    otherwise linger as the background for a later non-HDRI-lit scene (only its
+    Strength would change, not its Color, since setup_lighting only touched Strength)."""
     bpy = _bpy()
     world = bpy.context.scene.world
     world.use_nodes = True
-    bg = world.node_tree.nodes.get("Background")
+    nt = world.node_tree
+    for n in list(nt.nodes):
+        nt.nodes.remove(n)
+    bg = nt.nodes.new("ShaderNodeBackground")
+    out = nt.nodes.new("ShaderNodeOutputWorld")
+    nt.links.new(bg.outputs["Background"], out.inputs["Surface"])
+    return bg
+
+
+def setup_lighting(rng, light):
+    """light: scene.LightingSample. Creates sun/area lights matching mode/lux/temp.
+    Returns the list of created light objects (for cleanup next scene)."""
+    bpy = _bpy()
+    bg = reset_world_background()
     amb = 0.02 if light.mode == "night_ir" else rng.uniform(0.1, 0.5)
     bg.inputs["Strength"].default_value = amb
     n = light.n_sources
+    created = []
     for _ in range(max(1, n)):
         bpy.ops.object.light_add(type="AREA",
                                  location=(rng.uniform(-3, 3), rng.uniform(-3, 3), rng.uniform(1.8, 3.0)))
@@ -264,6 +349,18 @@ def setup_lighting(rng, light):
         # warm/cool tint from temp
         t = (light.temp_k - 2500) / 4000
         L.data.color = (1.0, 0.75 + 0.2 * t, 0.5 + 0.5 * t)
+        created.append(L.name)
+    return created
+
+
+def remove_lights(light_names):
+    """By name, same rationale as remove_clutter_props -- raw object references can go
+    stale between scenes under BlenderProc."""
+    bpy = _bpy()
+    for name in light_names:
+        obj = bpy.data.objects.get(name)
+        if obj is not None:
+            bpy.data.objects.remove(obj, do_unlink=True)
 
 
 def configure_render(cycles_samples=48, denoise=True):

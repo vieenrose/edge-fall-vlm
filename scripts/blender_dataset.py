@@ -81,6 +81,7 @@ def main():
     sf = (args.out / "samples.jsonl").open("w")
     n_written = 0
     clutter_objs = []
+    scene_lights = []
     for si in range(args.scenes):
         spec = compose_scene(rng, picker)
         # load + place each person's joints; derive per-person actual label from kinematics
@@ -120,8 +121,13 @@ def main():
         # frame the scene: aim at the label-driving person's centroid
         centroid = people_joints[di]["pelvis"].mean(axis=0)
         strip = _strip_frame_indices(people_joints[0]["pelvis"].shape[0], cfg)
+        br.remove_lights(scene_lights)
+        scene_lights = []
         light = sample_lighting(rng, cfg.lighting)
-        br.setup_lighting(rng, light)
+        used_hdri = (light.mode != "night_ir" and rng.random() < 0.5
+                    and br.apply_hdri_lighting(rng))
+        if not used_hdri:
+            scene_lights = br.setup_lighting(rng, light)
         forced = _forced_projections(cfg)
 
         br.remove_clutter_props(clutter_objs)
