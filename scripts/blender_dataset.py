@@ -59,6 +59,11 @@ def main():
     ap.add_argument("--short", type=int, default=384)
     ap.add_argument("--samples", type=int, default=20)
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--clutter-prob", type=float, default=0.6,
+                    help="fraction of scenes that get randomized furniture-like occluders "
+                    "(some patterned/camouflaging, some biased near a subject's resting "
+                    "position) -- real-world falls often end up partially hidden behind "
+                    "furniture, a gap plain-floor synthetic scenes never covered")
     args = ap.parse_args()
 
     bproc.init()
@@ -75,6 +80,7 @@ def main():
 
     sf = (args.out / "samples.jsonl").open("w")
     n_written = 0
+    clutter_objs = []
     for si in range(args.scenes):
         spec = compose_scene(rng, picker)
         # load + place each person's joints; derive per-person actual label from kinematics
@@ -117,6 +123,12 @@ def main():
         light = sample_lighting(rng, cfg.lighting)
         br.setup_lighting(rng, light)
         forced = _forced_projections(cfg)
+
+        br.remove_clutter_props(clutter_objs)
+        clutter_objs = []
+        if rng.random() < args.clutter_prob:
+            subject_positions = [tuple(pj["pelvis"][-1][:2]) for pj in people_joints]
+            clutter_objs = br.add_clutter_props(rng, subject_positions)
 
         for i in range(args.k):
             force = forced[i] if i < len(forced) else None

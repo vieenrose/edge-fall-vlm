@@ -167,6 +167,85 @@ def setup_scene_and_floor(rng, floor_rgb=None):
     return floor
 
 
+def _checker_mat(name, rgb_a, rgb_b, scale, rough=0.8):
+    """Procedural checker material -- a cheap, asset-free way to approximate a "busy
+    patterned" surface (patterned blanket/upholstery/rug) that can visually camouflage a
+    person against it, without needing external texture/fabric image files."""
+    bpy = _bpy()
+    m = bpy.data.materials.new(name)
+    m.use_nodes = True
+    nt = m.node_tree
+    bsdf = nt.nodes.get("Principled BSDF")
+    checker = nt.nodes.new("ShaderNodeTexChecker")
+    checker.inputs["Color1"].default_value = (*rgb_a, 1.0)
+    checker.inputs["Color2"].default_value = (*rgb_b, 1.0)
+    checker.inputs["Scale"].default_value = scale
+    nt.links.new(checker.outputs["Color"], bsdf.inputs["Base Color"])
+    bsdf.inputs["Roughness"].default_value = rough
+    return m
+
+
+def add_clutter_props(rng, subject_positions, n_range=(1, 4), near_prob=0.6):
+    """Spawn simple furniture-like occluders (boxes standing in for a low table, chair,
+    nightstand, or a patterned blanket/throw) around the scene, some deliberately placed
+    near a subject's resting position so they partially occlude the person from camera --
+    the real-world failure mode found in a held-out clip (person ends up tucked behind
+    furniture, partially hidden, blended into a busy patterned blanket). Not tied to any
+    specific clip's exact geometry (that would be cheating/overfitting to one sample) --
+    randomized size/position/material every scene so the model has to generalize to
+    "danger despite clutter/occlusion/camouflage" broadly, not memorize one layout.
+
+    subject_positions: list of (x, y) floor positions (e.g. each person's final resting
+    spot) to bias clutter placement toward -- empty list means fully random placement.
+    Returns the list of created Blender objects (for cleanup/hide_render toggling)."""
+    bpy = _bpy()
+    n = int(rng.integers(n_range[0], n_range[1] + 1))
+    objs = []
+    for i in range(n):
+        near_subject = subject_positions and rng.random() < near_prob
+        if near_subject:
+            cx, cy = subject_positions[int(rng.integers(len(subject_positions)))]
+            ox = cx + rng.uniform(-0.5, 0.5)
+            oy = cy + rng.uniform(-0.5, 0.5)
+        else:
+            ox, oy = rng.uniform(-2.5, 2.5), rng.uniform(-2.5, 2.5)
+        # Blender's default cube is 2x2x2 (extends -1..1), so `scale` doubles these --
+        # halved here so the RENDERED object matches the intended real-world size range.
+        kind = rng.choice(["low_table", "chair", "box", "blanket"])
+        if kind == "low_table":
+            sx, sy, sz = rng.uniform(0.175, 0.3), rng.uniform(0.175, 0.3), rng.uniform(0.175, 0.25)
+        elif kind == "chair":
+            sx, sy, sz = rng.uniform(0.125, 0.2), rng.uniform(0.125, 0.2), rng.uniform(0.2, 0.425)
+        elif kind == "blanket":  # flat, wide, low -- classic camouflage-by-clutter case
+            sx, sy, sz = rng.uniform(0.25, 0.5), rng.uniform(0.25, 0.5), rng.uniform(0.015, 0.04)
+        else:  # box / nightstand
+            sx, sy, sz = rng.uniform(0.125, 0.225), rng.uniform(0.125, 0.225), rng.uniform(0.125, 0.275)
+        bpy.ops.mesh.primitive_cube_add(location=(ox, oy, sz))
+        obj = bpy.context.active_object
+        obj.scale = (sx, sy, sz)
+        bpy.ops.object.transform_apply(scale=True)
+        patterned = kind == "blanket" or rng.random() < 0.35   # patterned furniture too
+        if patterned:
+            rgb_a = tuple(rng.uniform(0.2, 0.9, size=3))
+            rgb_b = tuple(rng.uniform(0.2, 0.9, size=3))
+            mat = _checker_mat(f"clutter{i}", rgb_a, rgb_b, rng.uniform(4, 16))
+        else:
+            rgb = tuple(rng.uniform(0.15, 0.7, size=3))
+            mat = _mat(f"clutter{i}", rgb, rng.uniform(0.3, 0.95))
+        obj.data.materials.append(mat)
+        objs.append(obj)
+    return objs
+
+
+def remove_clutter_props(objs):
+    """Delete the previous scene's clutter objects before spawning the next scene's --
+    the Blender process is reused across scenes (not restarted), so stale clutter would
+    otherwise accumulate."""
+    bpy = _bpy()
+    for obj in objs:
+        bpy.data.objects.remove(obj, do_unlink=True)
+
+
 def setup_lighting(rng, light):
     """light: scene.LightingSample. Creates sun/area lights matching mode/lux/temp."""
     bpy = _bpy()
