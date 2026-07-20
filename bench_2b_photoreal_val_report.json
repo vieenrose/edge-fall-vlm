@@ -1,0 +1,22 @@
+{
+  "SmolVLM2-2.2B-photoreal": {
+    "n": 150,
+    "accuracy": 0.767,
+    "binary_sensitivity_recall": 0.88,
+    "binary_specificity": 0.667,
+    "binary_precision": 0.725,
+    "binary_f1": 0.795,
+    "person_down_recall": 0.88,
+    "peak_rss_mb": 5128.7,
+    "prefill_time": {
+      "p50_s": 0.049,
+      "p95_s": 0.051,
+      "mean_s": 0.051
+    },
+    "inference_time_full_generate": {
+      "p50_s": 0.349,
+      "p95_s": 0.513,
+      "mean_s": 0.365
+    }
+  }
+}
