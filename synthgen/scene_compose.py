@@ -17,7 +17,7 @@ import numpy as np
 from .config import LabelClass
 
 # severity order: the scene status is the worst danger present
-SEVERITY = [LabelClass.FALL, LabelClass.FAINT, LabelClass.IMMOBILE,
+SEVERITY = [LabelClass.FALL, LabelClass.SEIZURE, LabelClass.FAINT, LabelClass.IMMOBILE,
             LabelClass.DISTRESS, LabelClass.NORMAL]
 _RANK = {c: i for i, c in enumerate(SEVERITY)}
 

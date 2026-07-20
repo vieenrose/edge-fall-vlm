@@ -119,13 +119,21 @@ def gen_fall(rng, T=90, fast=True):
 
 def _low_pose_heights(kind):
     """Starting joint heights for a bent/crouched/reaching/kneeling pose -- the SAME
-    pose family as gen_normal's hard-negative low poses. Returns dict name->height."""
+    pose family as gen_normal's hard-negative low poses. Returns dict name->height.
+    Includes hip (kept close to pelvis, as gen_normal's crouch/kneel do) -- leaving hip
+    frozen at standing height while pelvis is at crouch/kneel height breaks the skin-mesh
+    bone chain pelvis->hip->knee->ankle into a physically-impossible configuration that
+    renders as a degenerate spike/blade (the root cause of a real visual bug found by
+    inspecting actual training renders)."""
     if kind == "crouch":
-        return {"head": 1.0, "neck": 0.86, "l_shoulder": 0.84, "r_shoulder": 0.84, "pelvis": 0.6}
+        return {"head": 1.0, "neck": 0.86, "l_shoulder": 0.84, "r_shoulder": 0.84,
+               "pelvis": 0.6, "hip": 0.56}
     if kind == "reach_down":
-        return {"head": 0.85, "neck": 0.75, "l_shoulder": 0.73, "r_shoulder": 0.73, "pelvis": 0.7}
+        return {"head": 0.85, "neck": 0.75, "l_shoulder": 0.73, "r_shoulder": 0.73,
+               "pelvis": 0.7, "hip": 0.66}
     if kind == "kneel":
-        return {"head": 1.1, "neck": 0.9, "l_shoulder": 0.88, "r_shoulder": 0.88, "pelvis": 0.5}
+        return {"head": 1.1, "neck": 0.9, "l_shoulder": 0.88, "r_shoulder": 0.88,
+               "pelvis": 0.5, "hip": 0.45}
     raise ValueError(kind)
 
 
@@ -141,7 +149,10 @@ def gen_fall_from_low(rng, T=90):
     heights = _low_pose_heights(kind)
     j = _base_standing(T)
     for n, h in heights.items():
-        j[n][:, 2] = h
+        if n == "hip":
+            j["l_hip"][:, 2] = j["r_hip"][:, 2] = h
+        else:
+            j[n][:, 2] = h
     if kind == "reach_down":
         for n in ("head", "neck", "l_shoulder", "r_shoulder"):
             j[n][:, 0] += 0.35   # leaning forward, reaching
@@ -167,6 +178,12 @@ def gen_fall_from_low(rng, T=90):
             j[n][t, 2] = ankle0 * (1 - f) + ankle0 * f + kick
             j[n][t, 0] += -dx * f * 0.3
             j[n][t, 1] += -dy * f * 0.3
+        # keep hips consistent with pelvis throughout -- frozen-at-standing-height hips
+        # while pelvis descends breaks the pelvis->hip->knee->ankle bone chain
+        for n in ("l_hip", "r_hip"):
+            j[n][t, 2] = heights["hip"] * (1 - f) + 0.18 * f
+            j[n][t, 0] += dx * f * 0.3
+            j[n][t, 1] += dy * f * 0.3
     return j, f"fall_from_{kind}"
 
 
@@ -178,10 +195,13 @@ def gen_fall_from_seated(rng, T=90):
     sideways or forward off the seat to the floor."""
     j = _base_standing(T)
     sit_h = rng.uniform(0.45, 0.55)     # chair/bed-edge seat height
+    hip_h = sit_h - 0.05
     heights = {"head": 1.15, "neck": 0.95, "l_shoulder": 0.93, "r_shoulder": 0.93,
               "pelvis": sit_h}
     for n, h in heights.items():
         j[n][:, 2] = h
+    j["l_hip"][:, 2] = j["r_hip"][:, 2] = hip_h   # keep hip consistent with seated pelvis
+                                                    # (frozen-standing hip breaks the bone chain)
     j["l_ankle"][:, 2] = j["r_ankle"][:, 2] = 0.08
     j["l_ankle"][:, 0] = 0.25; j["r_ankle"][:, 0] = 0.25   # feet forward, seated
 
@@ -189,8 +209,15 @@ def gen_fall_from_seated(rng, T=90):
     dur = int(rng.integers(8, 14))
     fall_dir = rng.choice(["forward", "lateral"], p=[0.4, 0.6])  # sideways-off-chair common
     ang = {"forward": 0.0}.get(fall_dir, rng.choice([np.pi / 2, -np.pi / 2])) + rng.uniform(-0.3, 0.3)
-    _tip_over(j, start, dur, (np.cos(ang), np.sin(ang)), rng=rng, fall_dir=fall_dir,
+    dx, dy = np.cos(ang), np.sin(ang)
+    _tip_over(j, start, dur, (dx, dy), rng=rng, fall_dir=fall_dir,
              start_heights=heights)
+    for t in range(start, T):
+        f = min(1.0, (t - start) / max(1, dur))
+        for n in ("l_hip", "r_hip"):
+            j[n][t, 2] = hip_h * (1 - f) + 0.18 * f
+            j[n][t, 0] += dx * f * 0.3
+            j[n][t, 1] += dy * f * 0.3
     return j, "fall_from_seated"
 
 
@@ -323,7 +350,9 @@ def gen_normal(rng, T=90):
         start = int(rng.integers(30, 50))
         for t in range(start, T):
             f = min(1.0, (t - start) / 6)
-            j["pelvis"][t, 2] = 1.0 - 0.45 * f          # hips drop to ~0.55 (chair), stays upright
+            j["pelvis"][t, 2] = 1.0 - 0.45 * f          # pelvis drops to ~0.55 (chair), stays upright
+            j["l_hip"][t, 2] = j["r_hip"][t, 2] = 0.95 - 0.45 * f   # keep hip consistent
+                                                                     # with pelvis (bone chain)
     elif kind == "lie_sofa":
         for n in JOINTS:                                 # horizontal but elevated (sofa ~0.5m)
             j[n][:, 2] = np.clip(j[n][:, 2] * 0.0 + 0.55, 0.5, 0.6)

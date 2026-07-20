@@ -153,7 +153,13 @@ def main():
         remove_unused_columns=False,
         max_steps=2 if args.smoke else -1,
         report_to=[],
+        optim="adamw_torch" if args.lora else "adamw_bnb_8bit",
+        gradient_checkpointing=True,
+        gradient_checkpointing_kwargs={"use_reentrant": False},
     )
+    model.config.use_cache = False
+    if args.lora:
+        model.enable_input_require_grads()
     trainer = Trainer(model=model, args=targs, data_collator=collate, train_dataset=samples)
     trainer.train()
     if not args.smoke:

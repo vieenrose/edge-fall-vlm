@@ -60,8 +60,17 @@ def _derived_points(j: dict[str, np.ndarray]) -> dict[str, np.ndarray]:
     """Add arm (elbow/hand) and knee points so limbs read naturally, even though the
     procedural skeleton has only 9 joints. Arms hang along the torso-down axis with a
     slight forward elbow bend; knees bend forward between hip and ankle."""
-    pelvis, neck = np.asarray(j["pelvis"]), np.asarray(j["neck"])
+    pelvis, neck, head = np.asarray(j["pelvis"]), np.asarray(j["neck"]), np.asarray(j["head"])
     down = pelvis - neck
+    if np.linalg.norm(down) < 0.15:
+        # pelvis and neck can nearly coincide (e.g. mid-fall torso compression, or for
+        # some fall-direction/starting-pose combinations even in the settled end pose --
+        # head and neck already converge to the same point when lying flat by design, so
+        # this isn't just transient). Normalizing a near-zero vector sends the derived
+        # hand/elbow shooting off arbitrarily (a degenerate spike in the rendered mesh).
+        down = pelvis - head            # first fallback: a longer, more stable reference
+        if np.linalg.norm(down) < 0.15:
+            down = np.array([0.0, 0.0, -1.0])   # last resort: arms hang straight down
     down = down / (np.linalg.norm(down) + 1e-6)
     # a horizontal 'forward' roughly perpendicular to the torso, for limb bend
     fwd = np.cross(down, np.array([0.0, 0.0, 1.0]))

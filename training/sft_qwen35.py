@@ -69,6 +69,10 @@ def main():
     ap.add_argument("--epochs", type=float, default=1.0)
     ap.add_argument("--bs", type=int, default=2)
     ap.add_argument("--lr", type=float, default=1e-5)
+    ap.add_argument("--deepspeed", default=None,
+                    help="path to a DeepSpeed config JSON (e.g. ZeRO-2 CPU-offloaded "
+                    "optimizer) -- lets a full fine-tune of a model too big for plain "
+                    "bf16+8bit-Adam on one GPU fit by offloading optimizer state to RAM")
     ap.add_argument("--lora", action="store_true")
     ap.add_argument("--lora-r", type=int, default=16)
     ap.add_argument("--lora-mlp", action="store_true",
@@ -156,9 +160,10 @@ def main():
         remove_unused_columns=False,
         max_steps=2 if args.smoke else -1,
         report_to=[],
-        optim="adamw_torch" if (args.lora or args.qlora) else "adamw_bnb_8bit",
+        optim="adamw_torch" if (args.lora or args.qlora or args.deepspeed) else "adamw_bnb_8bit",
         gradient_checkpointing=True,
         gradient_checkpointing_kwargs={"use_reentrant": False},
+        deepspeed=args.deepspeed,
     )
     model.config.use_cache = False
     if args.lora or args.qlora:
