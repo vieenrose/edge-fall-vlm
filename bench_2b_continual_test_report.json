@@ -1,0 +1,22 @@
+{
+  "SmolVLM2-2.2B-continual": {
+    "n": 60,
+    "accuracy": 0.817,
+    "binary_sensitivity_recall": 0.906,
+    "binary_specificity": 0.714,
+    "binary_precision": 0.784,
+    "binary_f1": 0.841,
+    "person_down_recall": 0.906,
+    "peak_rss_mb": 5129.0,
+    "prefill_time": {
+      "p50_s": 0.049,
+      "p95_s": 0.05,
+      "mean_s": 0.054
+    },
+    "inference_time_full_generate": {
+      "p50_s": 0.296,
+      "p95_s": 0.461,
+      "mean_s": 0.348
+    }
+  }
+}
