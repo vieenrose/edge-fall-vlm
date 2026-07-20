@@ -1,0 +1,22 @@
+{
+  "2.2B-ternary-mlp-anneal": {
+    "n": 60,
+    "accuracy": 0.75,
+    "binary_sensitivity_recall": 0.906,
+    "binary_specificity": 0.571,
+    "binary_precision": 0.707,
+    "binary_f1": 0.795,
+    "person_down_recall": 0.906,
+    "peak_rss_mb": 5147.6,
+    "prefill_time": {
+      "p50_s": 0.048,
+      "p95_s": 0.048,
+      "mean_s": 0.052
+    },
+    "inference_time_full_generate": {
+      "p50_s": 0.403,
+      "p95_s": 0.404,
+      "mean_s": 0.394
+    }
+  }
+}

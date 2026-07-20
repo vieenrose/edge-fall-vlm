@@ -1,0 +1,22 @@
+{
+  "Qwen3.5-0.8B-ft": {
+    "n": 60,
+    "accuracy": 0.733,
+    "binary_sensitivity_recall": 0.625,
+    "binary_specificity": 0.857,
+    "binary_precision": 0.833,
+    "binary_f1": 0.714,
+    "person_down_recall": 0.625,
+    "peak_rss_mb": 2672.0,
+    "prefill_time": {
+      "p50_s": 0.076,
+      "p95_s": 0.078,
+      "mean_s": 0.08
+    },
+    "inference_time_full_generate": {
+      "p50_s": 0.416,
+      "p95_s": 0.561,
+      "mean_s": 0.451
+    }
+  }
+}

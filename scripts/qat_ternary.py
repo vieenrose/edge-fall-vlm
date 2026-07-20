@@ -56,6 +56,7 @@ SCOPES = {
     "all": lambda name: True,
     "mlp": lambda name: name.endswith(MLP_ROLES),
     "attn": lambda name: name.endswith(ATTN_ROLES),
+    "mlp_gateup": lambda name: name.endswith(("gate_proj", "up_proj")),
 }
 
 
@@ -119,7 +120,9 @@ def ternary_fit_report(model, mode: str, scope: str = "all") -> dict:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--teacher", default="runs/sft-2b-real")
+    ap.add_argument("--teacher", default="runs/sft-2b-real", help="KD reference (always original fp16)")
+    ap.add_argument("--init", default=None, help="student init checkpoint (default: --teacher); "
+                    "pass a previous QAT output dir to continue/anneal training")
     ap.add_argument("--mode", choices=["ternary", "binary"], required=True)
     ap.add_argument("--samples", default="data/train_mixed.jsonl")
     ap.add_argument("--out", required=True)
@@ -142,7 +145,7 @@ def main():
     teacher = AutoModelForImageTextToText.from_pretrained(args.teacher, dtype=torch.bfloat16).to("cuda").eval()
     for p in teacher.parameters(): p.requires_grad_(False)
 
-    student = AutoModelForImageTextToText.from_pretrained(args.teacher, dtype=torch.bfloat16).to("cuda")
+    student = AutoModelForImageTextToText.from_pretrained(args.init or args.teacher, dtype=torch.bfloat16).to("cuda")
     n_wrapped = qat_wrap(student.model.text_model, args.mode, args.scope)
     print(f"QAT-wrapped {n_wrapped} Linear layers in text_model ({args.mode}, scope={args.scope})", flush=True)
     before = ternary_fit_report(student, args.mode, args.scope)

@@ -42,8 +42,13 @@ def bench_one(model_dir: str, samples, device: str, max_frames: int, img_size: i
     from training.dataset import load_images
 
     dtype = torch.bfloat16 if device == "cuda" else torch.float32
-    proc = AutoProcessor.from_pretrained(model_dir, do_image_splitting=False,
-                                         size={"longest_edge": img_size})
+    try:
+        proc = AutoProcessor.from_pretrained(model_dir, do_image_splitting=False,
+                                             size={"longest_edge": img_size})
+    except (ValueError, TypeError):
+        # non-SmolVLM processors (e.g. Qwen3.5's Qwen2VLImageProcessorFast, sized by pixel
+        # area) don't take these kwargs -- the saved model dir already has correct sizing.
+        proc = AutoProcessor.from_pretrained(model_dir)
     model = AutoModelForImageTextToText.from_pretrained(model_dir, dtype=dtype).to(device).eval()
 
     prefill_t, gen_t = [], []
@@ -52,7 +57,11 @@ def bench_one(model_dir: str, samples, device: str, max_frames: int, img_size: i
         imgs = _subsample(load_images(s), max_frames)
         msgs = [{"role": "user", "content": [{"type": "image"} for _ in imgs] +
                  [{"type": "text", "text": s.prompt}]}]
-        text = proc.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
+        try:
+            text = proc.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True,
+                                            enable_thinking=False)
+        except TypeError:
+            text = proc.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
         batch = proc(text=[text], images=[imgs], return_tensors="pt").to(device)
 
         if device == "cuda": torch.cuda.synchronize()

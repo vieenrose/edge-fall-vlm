@@ -82,6 +82,10 @@ def domain_augment(frames: list, rng) -> list:
     jpeg_q = int(rng.integers(25, 75)) if rng.random() < 0.6 else None
     down = rng.uniform(0.4, 1.0) if rng.random() < 0.5 else 1.0   # low-res web video
     noise_sd = rng.uniform(0, 14)
+    # per-channel white-balance cast (warm/cool/greenish CCTV-style color response) --
+    # distinct from saturation: this is a DIRECTIONAL shift, not a colorfulness scale.
+    do_tint = rng.random() < 0.4
+    ch_gain = rng.uniform(0.82, 1.22, size=3) if do_tint else np.ones(3)
     out = []
     for im in frames:
         im = ImageEnhance.Brightness(im).enhance(bright)
@@ -95,6 +99,8 @@ def domain_augment(frames: list, rng) -> list:
         if down < 1.0:
             im = im.resize((max(8, int(w * down)), max(8, int(h * down)))).resize((w, h))
         a = np.asarray(im).astype(np.float32)
+        if do_tint:
+            a = a * ch_gain[np.newaxis, np.newaxis, :]
         if noise_sd > 0:
             a = a + rng.normal(0, noise_sd, a.shape)
         a = np.clip(a, 0, 255).astype(np.uint8)

@@ -69,6 +69,65 @@ def gen_fall(rng, T=90, fast=True):
     return _tip_over(j, int(start), int(dur), (np.cos(ang), np.sin(ang)), rng=rng)
 
 
+def _low_pose_heights(kind):
+    """Starting joint heights for a bent/crouched/reaching/kneeling pose -- the SAME
+    pose family as gen_normal's hard-negative low poses. Returns dict name->height."""
+    if kind == "crouch":
+        return {"head": 1.0, "neck": 0.86, "l_shoulder": 0.84, "r_shoulder": 0.84, "pelvis": 0.6}
+    if kind == "reach_down":
+        return {"head": 0.85, "neck": 0.75, "l_shoulder": 0.73, "r_shoulder": 0.73, "pelvis": 0.7}
+    if kind == "kneel":
+        return {"head": 1.1, "neck": 0.9, "l_shoulder": 0.88, "r_shoulder": 0.88, "pelvis": 0.5}
+    raise ValueError(kind)
+
+
+def gen_fall_from_low(rng, T=90):
+    """Fall that starts from an ALREADY-LOW bent/crouched/reaching/kneeling pose (not
+    standing), toppling the rest of the way to the floor. Real-world falls often start
+    from exactly this kind of low pose (someone bent over a chair/table who loses
+    balance) -- visually it's a SMALL net height change plus a fast topple/kick dynamic,
+    not the big standing->floor silhouette drop gen_fall produces. Without this variant
+    the training data teaches "low pose = normal" and "big height drop = fall" but never
+    "low pose that topples = fall", exactly the case a real low-starting-pose fall is."""
+    kind = rng.choice(["crouch", "reach_down", "kneel"])
+    heights = _low_pose_heights(kind)
+    j = _base_standing(T)
+    for n, h in heights.items():
+        j[n][:, 2] = h
+    if kind == "reach_down":
+        for n in ("head", "neck", "l_shoulder", "r_shoulder"):
+            j[n][:, 0] += 0.35   # leaning forward, reaching
+    elif kind == "kneel":
+        j["l_ankle"][:, 2] = j["r_ankle"][:, 2] = 0.1
+
+    start = int(rng.integers(30, 45))
+    dur = int(rng.integers(6, 12))
+    ang = rng.uniform(0, 2 * np.pi)
+    dx, dy = np.cos(ang), np.sin(ang)
+    floor_z = 0.15
+    h0 = {n: heights[n] for n in ("head", "neck", "l_shoulder", "r_shoulder")}
+    pelvis0 = heights["pelvis"]
+    ankle0 = 0.1 if kind != "crouch" else 0.08
+    for t in range(start, T):
+        f = min(1.0, (t - start) / max(1, dur))
+        for n, h in h0.items():
+            j[n][t, 2] = h * (1 - f) + floor_z * f
+            j[n][t, 0] += dx * f * 0.5
+            j[n][t, 1] += dy * f * 0.5
+        j["pelvis"][t, 2] = pelvis0 * (1 - f) + (floor_z + 0.05) * f
+        j["pelvis"][t, 0] += dx * f * 0.25
+        j["pelvis"][t, 1] += dy * f * 0.25
+        # transient leg-kick: ankles swing UP above resting height mid-topple, then
+        # settle back down -- the kinematic signature a fast topple actually has,
+        # regardless of how small the head/torso height drop is.
+        kick = np.sin(np.clip(f, 0, 1) * np.pi) * 0.5   # 0->peak mid-topple->0
+        for n in ("l_ankle", "r_ankle"):
+            j[n][t, 2] = ankle0 * (1 - f) + ankle0 * f + kick
+            j[n][t, 0] += -dx * f * 0.3
+            j[n][t, 1] += -dy * f * 0.3
+    return j, f"fall_from_{kind}"
+
+
 def gen_faint(rng, T=90):
     # vertical crumple: slower, less horizontal translation, collapses in place
     j = _base_standing(T)
@@ -177,8 +236,17 @@ def gen_normal(rng, T=90):
     return j, kind
 
 
+def gen_fall_mixed(rng):
+    # 60% standing-topple (original), 40% low-pose-topple (crouch/reach/kneel -> floor)
+    # -- covers both "fell from standing" and "fell from an already-bent/low posture",
+    # the latter being what real falls-from-a-chair/table often look like.
+    if rng.random() < 0.6:
+        return gen_fall(rng, fast=True), "fall_standing"
+    return gen_fall_from_low(rng)
+
+
 GEN = {
-    LabelClass.FALL: lambda rng: (gen_fall(rng, fast=True), "fall"),
+    LabelClass.FALL: gen_fall_mixed,
     LabelClass.FAINT: lambda rng: (gen_faint(rng), "faint"),
     LabelClass.IMMOBILE: lambda rng: (gen_immobile(rng), "immobile"),
     LabelClass.DISTRESS: lambda rng: (gen_distress(rng), "distress"),

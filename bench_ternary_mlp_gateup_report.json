@@ -1,0 +1,22 @@
+{
+  "2.2B-ternary-mlp-gateup": {
+    "n": 60,
+    "accuracy": 0.683,
+    "binary_sensitivity_recall": 0.875,
+    "binary_specificity": 0.464,
+    "binary_precision": 0.651,
+    "binary_f1": 0.747,
+    "person_down_recall": 0.875,
+    "peak_rss_mb": 5147.6,
+    "prefill_time": {
+      "p50_s": 0.048,
+      "p95_s": 0.048,
+      "mean_s": 0.052
+    },
+    "inference_time_full_generate": {
+      "p50_s": 0.413,
+      "p95_s": 0.416,
+      "mean_s": 0.414
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "Qwen3.5-4B-LoRA": {
+    "n": 60,
+    "accuracy": 0.217,
+    "binary_sensitivity_recall": 0.5,
+    "binary_specificity": 0.464,
+    "binary_precision": 0.516,
+    "binary_f1": 0.508,
+    "person_down_recall": 0.469,
+    "peak_rss_mb": 9702.2,
+    "prefill_time": {
+      "p50_s": 0.146,
+      "p95_s": 0.146,
+      "mean_s": 0.148
+    },
+    "inference_time_full_generate": {
+      "p50_s": 1.01,
+      "p95_s": 1.015,
+      "mean_s": 1.01
+    }
+  }
+}

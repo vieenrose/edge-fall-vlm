@@ -1,0 +1,22 @@
+{
+  "Qwen3.5-2B-fullFT": {
+    "n": 60,
+    "accuracy": 0.833,
+    "binary_sensitivity_recall": 0.812,
+    "binary_specificity": 0.857,
+    "binary_precision": 0.867,
+    "binary_f1": 0.839,
+    "person_down_recall": 0.812,
+    "peak_rss_mb": 5265.1,
+    "prefill_time": {
+      "p50_s": 0.097,
+      "p95_s": 0.098,
+      "mean_s": 0.099
+    },
+    "inference_time_full_generate": {
+      "p50_s": 0.443,
+      "p95_s": 0.454,
+      "mean_s": 0.449
+    }
+  }
+}
