@@ -36,9 +36,9 @@ class Sample:
 # (person-down recall was already 0.73). distress/normal kept.
 LABEL_COLLAPSE = {
     "down3": {"fall": "down", "faint-collapse": "down", "lying-immobile": "down",
-              "distress": "distress", "normal": "normal"},
+              "seizure": "down", "distress": "distress", "normal": "normal"},
     "binary": {"fall": "danger", "faint-collapse": "danger", "lying-immobile": "danger",
-               "distress": "danger", "normal": "normal"},
+               "seizure": "danger", "distress": "danger", "normal": "normal"},
 }
 
 

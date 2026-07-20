@@ -16,6 +16,7 @@ class LabelClass(str, Enum):
     FAINT = "faint-collapse"
     IMMOBILE = "lying-immobile"
     DISTRESS = "distress"
+    SEIZURE = "seizure"
     NORMAL = "normal"
 
 

@@ -20,12 +20,12 @@ from dataclasses import dataclass
 
 # scheme-agnostic: danger = anything not "normal"; DOWN = on-the-floor classes (incl the
 # collapsed "down"/"danger" labels) — the core person-on-floor alert.
-DANGER = {"fall", "faint-collapse", "lying-immobile", "distress", "down", "danger"}
-DOWN = {"fall", "faint-collapse", "lying-immobile", "down", "danger"}
+DANGER = {"fall", "faint-collapse", "lying-immobile", "seizure", "distress", "down", "danger"}
+DOWN = {"fall", "faint-collapse", "lying-immobile", "seizure", "down", "danger"}
 _JSON_RE = re.compile(r"\{[^{}]*\}")
 
 
-CANON = ("fall", "faint-collapse", "lying-immobile", "distress", "normal")
+CANON = ("fall", "faint-collapse", "lying-immobile", "seizure", "distress", "normal")
 
 
 def normalize_status(s: str) -> str:
@@ -37,9 +37,11 @@ def normalize_status(s: str) -> str:
         return s
     if s == "down" or s == "danger":        # collapsed-scheme labels, keep as-is
         return s
-    if "faint" in s or "collaps" in s:
+    if "faint" in s or "collaps" in s or "syncop" in s:
         return "faint-collapse"
-    if "distress" in s or "struggl" in s:
+    if "seizur" in s or "convuls" in s or "jerk" in s or "tonic" in s or "clonic" in s:
+        return "seizure"
+    if "distress" in s or "struggl" in s or "choking" in s or "chest" in s:
         return "distress"
     if "fall" in s:                        # "fall", "falling", "fallen"
         return "fall"

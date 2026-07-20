@@ -82,7 +82,12 @@ def classify(f: KinFeatures, ev: Events, intended: LabelClass | None = None) -> 
     low_end = f.hip_height[-1] < 0.5           # pelvis near floor
     fast_descent = ev.min_com_vz < -1.0        # strong downward velocity
     ended_still = ev.immobile_from is not None
+    # oscillating COM velocity in the tail = clonic jerking, not stillness -- the kinematic
+    # signature distinguishing a seizure's convulsing end-state from calm immobility.
+    tail_jitter = float(np.std(f.com_vz[-tail:])) if len(f.com_vz) >= tail else 0.0
 
+    if horizontal_end and low_end and intended == LabelClass.SEIZURE and tail_jitter > 0.3:
+        return LabelClass.SEIZURE
     if horizontal_end and low_end and ended_still:
         if fast_descent:
             return LabelClass.FALL
@@ -109,6 +114,7 @@ def build_rationale(f: KinFeatures, ev: Events, label: LabelClass) -> str:
         LabelClass.FAINT: "-> collapse without protective reaction (faint)",
         LabelClass.IMMOBILE: "-> person lying immobile",
         LabelClass.DISTRESS: "-> distress / struggling posture",
+        LabelClass.SEIZURE: "-> rigid fall followed by convulsive jerking (seizure)",
         LabelClass.NORMAL: "-> normal activity, no danger",
     }[label]
     return "; ".join(parts) + " " + verdict
@@ -134,7 +140,8 @@ def posture(f: KinFeatures) -> str:
 
 def build_answer(label: LabelClass, f: KinFeatures, ev: Events) -> dict:
     """The short JSON the deployed VLM must emit."""
-    danger = label in (LabelClass.FALL, LabelClass.FAINT, LabelClass.IMMOBILE, LabelClass.DISTRESS)
+    danger = label in (LabelClass.FALL, LabelClass.FAINT, LabelClass.IMMOBILE,
+                       LabelClass.DISTRESS, LabelClass.SEIZURE)
     person_down = bool(f.hip_height[-1] < 0.5 and f.torso_vertical_deg[-1] > 55)
     # confidence proxy from signal strength (real training uses this as a soft target)
     conf = 0.6
