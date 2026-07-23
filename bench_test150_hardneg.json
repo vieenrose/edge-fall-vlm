@@ -1,0 +1,2448 @@
+{
+  "hardneg": {
+    "n": 150,
+    "accuracy": 0.887,
+    "binary_sensitivity_recall": 0.92,
+    "binary_specificity": 0.853,
+    "binary_precision": 0.863,
+    "binary_f1": 0.89,
+    "person_down_recall": 0.92,
+    "parse_failures": 0,
+    "peak_rss_mb": 5245.4,
+    "prefill_time": {
+      "p50_s": 0.096,
+      "p95_s": 0.097,
+      "mean_s": 0.096
+    },
+    "inference_time_full_generate": {
+      "p50_s": 0.561,
+      "p95_s": 0.596,
+      "mean_s": 0.562
+    },
+    "predictions": [
+      {
+        "id": "down_0115",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0042",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0119",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0064",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0013",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0145",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0101",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0147",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0018",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0083",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0110",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0131",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0071",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0040",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0002",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0092",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-low\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0118",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0132",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0062",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0024",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0130",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0127",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0049",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0085",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0026",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0128",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0119",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0082",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0134",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0113",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0126",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0116",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0122",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0070",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0020",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0061",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0142",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0004",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0048",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0072",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0070",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0109",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0015",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0138",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0032",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0102",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-low\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0045",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0065",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0116",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0086",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0104",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0100",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0077",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0035",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0044",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0059",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"non-upright-normal\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: body may be low/horizontal/dynamic (other) but nobody has fallen -> normal.\n"
+      },
+      {
+        "id": "normal_0093",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0100",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0054",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0057",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-low\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0056",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0036",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0003",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0030",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0113",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"non-upright-normal\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: body may be low/horizontal/dynamic (other) but nobody has fallen -> normal.\n"
+      },
+      {
+        "id": "down_0146",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0121",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0130",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0080",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0024",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0012",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0022",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0128",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0000",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0079",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0117",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0097",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0014",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0001",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0031",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0077",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0047",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0081",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0051",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0074",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0148",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0066",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0096",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0103",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0098",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0057",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0072",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0068",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0034",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0054",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0088",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0078",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"non-upright-normal\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: body may be low/horizontal/dynamic (other) but nobody has fallen -> normal.\n"
+      },
+      {
+        "id": "down_0103",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0076",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0028",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"non-upright-normal\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: body may be low/horizontal/dynamic (other) but nobody has fallen -> normal.\n"
+      },
+      {
+        "id": "down_0052",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0004",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0007",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0095",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0043",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0027",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0087",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0124",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0063",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0031",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0064",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0114",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0076",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0085",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0033",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0047",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0019",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0044",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0075",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0046",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0011",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0030",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0010",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0101",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0089",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0009",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0138",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0080",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0021",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0032",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"non-upright-normal\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: body may be low/horizontal/dynamic (other) but nobody has fallen -> normal.\n"
+      },
+      {
+        "id": "normal_0012",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0095",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0025",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0137",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0058",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0038",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0140",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0039",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0112",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0106",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0142",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0006",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0055",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0023",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0008",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0022",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0035",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"non-upright-normal\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: body may be low/horizontal/dynamic (other) but nobody has fallen -> normal.\n"
+      },
+      {
+        "id": "down_0065",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0005",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0029",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      }
+    ]
+  },
+  "realfall": {
+    "n": 150,
+    "accuracy": 0.853,
+    "binary_sensitivity_recall": 0.893,
+    "binary_specificity": 0.813,
+    "binary_precision": 0.827,
+    "binary_f1": 0.859,
+    "person_down_recall": 0.893,
+    "parse_failures": 0,
+    "peak_rss_mb": 6290.2,
+    "prefill_time": {
+      "p50_s": 0.097,
+      "p95_s": 0.098,
+      "mean_s": 0.095
+    },
+    "inference_time_full_generate": {
+      "p50_s": 0.557,
+      "p95_s": 0.602,
+      "mean_s": 0.564
+    },
+    "predictions": [
+      {
+        "id": "down_0115",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0042",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0119",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0064",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0013",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0145",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0101",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0147",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0018",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0083",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0110",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0131",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0071",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0040",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-low\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0002",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0092",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-low\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0118",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0132",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0062",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0024",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0130",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0127",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0049",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0085",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0026",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0128",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0119",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0082",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0134",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0113",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0126",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0116",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0122",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0070",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0020",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0061",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0142",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0004",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0048",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0072",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0070",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0109",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0015",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0138",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0032",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0102",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"upright-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0045",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0065",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0116",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0086",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0104",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0100",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0077",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0035",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0044",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0059",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0093",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0100",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0054",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0057",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0056",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0036",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0003",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0030",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0113",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0146",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0121",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0130",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0080",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0024",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0012",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0022",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0128",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0000",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0079",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0117",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0097",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0014",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0001",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0031",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0077",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0047",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0081",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0051",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0074",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0148",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0066",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0096",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0103",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0098",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0057",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0072",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0068",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0034",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0054",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0088",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0078",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0103",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0076",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0028",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0052",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0004",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0007",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0095",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0043",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0027",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0087",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0124",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0063",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0031",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0064",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0114",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0076",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0085",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0033",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0047",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0019",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0044",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0075",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0046",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0011",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0030",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0010",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0101",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0089",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0009",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0138",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0080",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0021",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0032",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0012",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0095",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0025",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0137",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0058",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0038",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0140",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0039",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0112",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0106",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0142",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0006",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "normal_0055",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0023",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0008",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0022",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0035",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      },
+      {
+        "id": "down_0065",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "down_0005",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": "{\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: Real in-the-wild clip: person goes down and ends on the floor -> fall.\n"
+      },
+      {
+        "id": "normal_0029",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": "{\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8,\"person_down\":false}\nWHY: Real in-the-wild clip: activity continues without anyone down -> normal.\n"
+      }
+    ]
+  }
+}

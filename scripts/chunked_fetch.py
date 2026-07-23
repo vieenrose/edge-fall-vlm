@@ -13,8 +13,13 @@ import time
 import urllib.request
 
 URL = sys.argv[1]
-CHUNK = int(sys.argv[2]) * 1024 * 1024 if len(sys.argv) > 2 else 32 * 1024 * 1024
-MAX_RETRY = 8
+CHUNK = int(sys.argv[2]) * 1024 * 1024 if len(sys.argv) > 2 else 16 * 1024 * 1024
+# The OOPS host throttles to ~0 after ~8GB of SUSTAINED pull, then recovers for fresh short
+# connections after a cooldown window. Each urlopen is a new connection, so the survival
+# strategy is: many retries, and after a run of failures wait out the throttle window with a
+# long cooldown rather than giving up (the un-resumable stream must not die).
+MAX_RETRY = 40
+COOLDOWN = 300   # seconds to wait out a throttle window after repeated failures
 
 
 def head_size(url):
@@ -24,19 +29,25 @@ def head_size(url):
 
 
 def fetch_range(url, start, end):
-    """Return exactly bytes [start, end] (inclusive), retrying on short/failed reads."""
+    """Return exactly bytes [start, end] (inclusive). Survives throttle windows: after a few
+    quick retries fail, sleep a long cooldown to let the per-IP throttle reset, then keep
+    trying — up to MAX_RETRY total before giving up."""
     for attempt in range(MAX_RETRY):
         try:
             req = urllib.request.Request(url, headers={"Range": f"bytes={start}-{end}"})
-            with urllib.request.urlopen(req, timeout=120) as r:
+            with urllib.request.urlopen(req, timeout=90) as r:
                 data = r.read()
             if len(data) == end - start + 1:
                 return data
-            # short read -> retry the whole chunk
             sys.stderr.write(f"chunk {start}: got {len(data)} want {end-start+1}, retry\n")
         except Exception as e:
             sys.stderr.write(f"chunk {start} attempt {attempt}: {type(e).__name__} {e}\n")
-        time.sleep(min(30, 2 ** attempt))
+        # quick backoff for the first few; then long cooldowns to outlast a throttle window
+        wait = min(20, 2 ** attempt) if attempt < 5 else COOLDOWN
+        if wait >= COOLDOWN:
+            sys.stderr.write(f"  cooldown {wait}s (throttle) at chunk {start}, attempt {attempt}\n")
+        sys.stderr.flush()
+        time.sleep(wait)
     raise RuntimeError(f"chunk {start}-{end} failed after {MAX_RETRY} retries")
 
 

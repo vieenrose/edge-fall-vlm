@@ -398,3 +398,30 @@ Findings:
    size that reaches usable recall.
 
 Report: bench_val150_smallmodels_realfall.json. Models: runs/sft-{256m,500m}-realfall.
+
+## 2026-07-23 — Durable false-alarm fix: hard-negatives work (concept validated)
+
+The realfall model over-triggers "down" on non-upright bodies that aren't fallen (gymnastics
+inverted mid-air, a leaning cyclist, a slip that recovers — all 25 of its false alarms report
+posture "horizontal-on-floor"). Fix: mine real "horizontal-but-normal" clips from the OOPS
+labels build_oops excludes — other(9)/lie_down(5)/lying(6)/crawl(14), which OmniFall separates
+from actual falls, i.e. annotator-judged non-falls — label them NORMAL, continual-FT.
+
+Concept test on a PARTIAL harvest (96 hard-neg clips, 3x oversampled) -> runs/sft-qwen35-2b-hardneg:
+
+| set | model | acc | recall | spec |
+|---|---|---|---|---|
+| val (150)  | realfall | 0.887 | 0.920 | 0.853 |
+| val (150)  | **hardneg** | **0.907** | 0.920 | **0.893** |
+| test (150) | realfall | 0.853 | 0.893 | 0.813 |
+| test (150) | **hardneg** | **0.887** | **0.920** | **0.853** |
+
+Pooled val+test (300 clips, paired): FALSE ALARMS 25 -> 19 (9 fixed, 3 new, net -6;
+McNemar p=0.146), RECALL 0.907 -> 0.920 (actually +2 falls, none lost). **Strictly better
+on both axes** — fewer false alarms AND slightly higher recall — from just 96 hard-negatives.
+FA clips fixed incl. normal_0014 (lake-slip), normal_0125 (cyclist), normal_0115, normal_0149.
+Lone holdout: normal_0127 (inverted gymnast mid-air, the most extreme non-upright pose).
+
+Not yet significant (only 96 clips) — harvesting the full 446-video / ~682-clip set (robust
+chunked fetch that survives the OOPS throttle) to strengthen it before deploying. Reports:
+bench_{val,test}150_hardneg.json.
