@@ -310,3 +310,39 @@ CUDA_VISIBLE_DEVICES=0 python training/sft.py \
 python scripts/eval_xview.py --model runs/sft-xview3 \
   --samples data/bootstrap/shards/samples.jsonl --holdout ceiling,low_shelf --n 200
 ```
+
+## 2026-07-23 — Deep-review reorientation: capacity CLOSED, data is the constraint
+
+A statistical audit (EVAL_PROTOCOL.md, pre-registered) + per-clip logging landed before
+the Qwen3.5-4B full-FT finished. Sweep on the full oops_val n=150, per-clip records,
+zero parse failures on every model:
+
+| model | acc | recall | spec | verdict |
+|---|---|---|---|---|
+| qwen2b-fullft (champion) | 0.853 | 0.773 | 0.933 | deployed |
+| qwen4b-fullft (fresh)    | 0.753 | 0.627 | 0.880 | SHELVED: below 0.72 recall floor; McNemar vs 2B p=0.0041, net -15 clips; 0 unique catches -> deleted |
+| smol2b-real              | 0.773 | 0.880 | 0.680 | kept — 7 UNIQUE positive catches |
+| qwen9b-lora              | 0.767 | 0.573 | 0.960 | 1 unique catch (<5) -> deleted |
+
+**Backbone scaling is CLOSED**: 2B > 4B > 9B on recall with identical training data.
+A clean full-FT 4B (no LoRA confound, no parse issues) is *significantly worse* than the
+2B. Consistent with the review diagnosis: training has zero in-the-wild real fall
+positives, so extra capacity just preserves a stronger conservative prior.
+
+**Measured ensemble fusion** (same 150 clips — replaces the old 0.92–1.0 bound):
+- OR(qwen2b, smol2b): recall **0.947**, spec 0.667 — a recall no single model reaches;
+  the two backbones are genuinely complementary (smol2b uniquely catches 7 positives).
+- AND(qwen2b, smol2b): spec **0.947** at recall 0.707 — high-precision confirmer.
+- MAJ-2-of-3 (+4B): 0.827/0.907 — no better than the pair; 4B adds nothing.
+- Only 2/75 positives are missed by ALL models (down_0015, down_0048): the OR-system
+  ceiling with current checkpoints is 0.973 recall.
+
+Report: bench_val150_perclip_4models.json (has per-clip predictions; paired tests via
+scripts/paired_test.py).
+
+**p_lying probe** (same val clips, only the LAST 3 frames per strip): recall drops for
+every model (qwen2b 0.773->0.693, smol2b 0.880->0.653) — detection leans on the fall
+transient, not the aftermath. Caveat: OOPS fallers often stand back up, so some tail-3
+"misses" are correct reads of a recovered person; still, do not assume post-fall lying is
+the easy case. The real-fall harvest includes OmniFall `fallen` (lying) segments, which
+directly train this. Report: bench_val150_tail3.json.

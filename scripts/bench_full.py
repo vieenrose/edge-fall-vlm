@@ -36,7 +36,7 @@ def peak_rss_mb() -> float:
 
 
 def bench_one(model_dir: str, samples, device: str, max_frames: int, img_size: int,
-              max_new_tokens: int) -> dict:
+              max_new_tokens: int, tail_frames: int = 0) -> dict:
     import torch
     from transformers import AutoModelForImageTextToText, AutoProcessor
     from training.dataset import load_images
@@ -54,7 +54,10 @@ def bench_one(model_dir: str, samples, device: str, max_frames: int, img_size: i
     prefill_t, gen_t = [], []
     preds, golds, records = [], [], []
     for i, s in enumerate(samples):
-        imgs = _subsample(load_images(s), max_frames)
+        imgs = load_images(s)
+        if tail_frames > 0:
+            imgs = imgs[-tail_frames:]   # post-fall/static window probe (p_lying)
+        imgs = _subsample(imgs, max_frames)
         msgs = [{"role": "user", "content": [{"type": "image"} for _ in imgs] +
                  [{"type": "text", "text": s.prompt}]}]
         try:
@@ -137,6 +140,9 @@ def main():
     ap.add_argument("--max-frames", type=int, default=6)
     ap.add_argument("--img-size", type=int, default=384)
     ap.add_argument("--max-new-tokens", type=int, default=64)
+    ap.add_argument("--tail-frames", type=int, default=0,
+                    help="use only the last N frames of each clip (0 = all) -- probes "
+                    "post-fall static-lying detection separately from the fall transient")
     ap.add_argument("--out", type=Path, default=Path("bench_full_report.json"))
     args = ap.parse_args()
 
@@ -154,7 +160,8 @@ def main():
         label = label or path
         print(f"=== {label} ({path}) ===", flush=True)
         report[label] = bench_one(path, samples, args.device, args.max_frames,
-                                  args.img_size, args.max_new_tokens)
+                                  args.img_size, args.max_new_tokens,
+                                  tail_frames=args.tail_frames)
         print(json.dumps({k: v for k, v in report[label].items() if k != "predictions"},
                          indent=2), flush=True)
 
