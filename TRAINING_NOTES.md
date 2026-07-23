@@ -459,3 +459,21 @@ realfall's 25), recall 0.900. Single-pass on the reported clips: benny/gymnast/c
 ALL -> normal; real falls -> down; costs ~1 edge fall (down_0016). Reports: bench_{val,test}150_
 {A,realhn_full}.json. 3D+projection's only unique value (clean inverted-normal labels) was not
 needed once enough real hard-negatives were harvested.
+
+## 2026-07-23 — Hard-negative DOSE curve: x1 is optimal (final deployed model)
+
+Full 679 real hard-negatives at oversampling x1/x2/x3 (pooled val+test, 150 falls/150 normals):
+
+| dose | pooled FA | recall |
+|---|---|---|
+| realfall (baseline) | 25 | 0.907 |
+| **679 x1** | **16** | **0.920** |
+| 679 x2 | 16 | 0.900 |
+| 679 x3 | 17 | 0.900 |
+
+x1 (lightest dose) DOMINATES: same false-alarm floor (16) as heavier doses but preserves recall
+(0.920 > realfall 0.907). Heavier doses just trade recall away for no FA gain — the model only
+needs to SEE each hard-negative, not have it hammered in. **Final deployed = runs/sft-qwen35-2b-
+realhn-x1**: FA 25->16 (-36%) AND recall 0.907->0.920, strictly better than realfall on both axes.
+Fixes benny/cyclist/lake-slip; catches down_0016 (the gymnast normal_0127 is now 1 of its 16 FA,
+net-better trade). Reports: bench_{val,test}150_x{1,3}.json.
