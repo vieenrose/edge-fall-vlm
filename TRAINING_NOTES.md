@@ -346,3 +346,30 @@ transient, not the aftermath. Caveat: OOPS fallers often stand back up, so some 
 "misses" are correct reads of a recovered person; still, do not assume post-fall lying is
 the easy case. The real-fall harvest includes OmniFall `fallen` (lying) segments, which
 directly train this. Report: bench_val150_tail3.json.
+
+## 2026-07-23 — REAL fall data WINS: the reorientation validated
+
+Continual-FT of the champion (runs/sft-qwen35-2b-fullft) on train_mixed (1576) + **1692
+real in-the-wild OOPS fall clips** (scripts/build_oops_train.py, leakage-free at the
+source-video level) -> runs/sft-qwen35-2b-realfall. lr 3e-6, 1 epoch, train_loss 0.018.
+First time the project trained on real ITW falls beyond the 10 URFD lab clips.
+
+| set | model | acc | recall | spec |
+|---|---|---|---|---|
+| oops_val (150)  | champion | 0.853 | 0.773 | 0.933 |
+| oops_val (150)  | **realfall** | **0.887** | **0.920** | 0.853 |
+| oops_test (150) | champion | 0.807 | 0.787 | 0.827 |
+| oops_test (150) | **realfall** | **0.853** | **0.893** | 0.813 |
+
+Paired McNemar (per-clip, 0 parse failures anywhere):
+- **RECALL, pooled 300 clips: realfall catches 19 falls the champion misses, loses 0.
+  p < 0.00001.** Significant on val (p=0.001) AND test (p=0.008) independently.
+- SPEC: −6 on val (p=0.03), −1 on test (p=1.0) — small, inconsistent cost.
+- COMBINED danger-correctness, pooled: net +12, **p=0.043** (significant). Val-only was
+  +5/p=0.33 — underpowered at n=150, exactly as the eval audit predicted; pooling resolves it.
+
+**Verdict: PROMOTE.** The real-fall model is the new best on the metric that matters for a
+safety detector (fall recall 0.773->~0.91), significant and replicated across both held-out
+sets, at a small specificity cost the verification stack absorbs. This confirms the review's
+binding-constraint diagnosis: the ceiling was zero real fall positives in training, not
+model capacity. Reports: bench_val150_realfall_vs_champion.json, bench_test150_*.json.
