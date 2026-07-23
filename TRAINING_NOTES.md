@@ -425,3 +425,11 @@ Lone holdout: normal_0127 (inverted gymnast mid-air, the most extreme non-uprigh
 Not yet significant (only 96 clips) — harvesting the full 446-video / ~682-clip set (robust
 chunked fetch that survives the OOPS throttle) to strengthen it before deploying. Reports:
 bench_{val,test}150_hardneg.json.
+
+## 2026-07-23 — Hard-negative FA fix is capacity-dependent (small-model negative result)
+Applied the hardneg fix to 256M/500M (both GPUs in parallel). Unlike the 2B (FA down, recall
+held), the small models got WORSE specificity: 256M spec 0.75->0.57 (FA 19->32), 500M spec
+0.89->0.72 (FA 8->21), while recall rose. The small models lack capacity to learn the
+"horizontal-but-normal != fallen" distinction; the added normal clips just shift the balance
+toward more "down". The durable FA fix requires ~2B capacity — it does not transfer to edge
+models. Reports: bench_val150_{256m,500m}_hardneg.json.

@@ -1,0 +1,2448 @@
+{
+  "500m-hardneg": {
+    "n": 150,
+    "accuracy": 0.62,
+    "binary_sensitivity_recall": 0.533,
+    "binary_specificity": 0.72,
+    "binary_precision": 0.656,
+    "binary_f1": 0.588,
+    "person_down_recall": 0.533,
+    "parse_failures": 1,
+    "peak_rss_mb": 1985.6,
+    "prefill_time": {
+      "p50_s": 0.019,
+      "p95_s": 0.019,
+      "mean_s": 0.021
+    },
+    "inference_time_full_generate": {
+      "p50_s": 0.334,
+      "p95_s": 0.444,
+      "mean_s": 0.352
+    },
+    "predictions": [
+      {
+        "id": "down_0056",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: These person is likely in distress (down position), then lying immobile (down posture); now lying still (down posture). Person is lying still."
+      },
+      {
+        "id": "normal_0019",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false}\nWHY: All people appear to be acting normally. All are in the \"normal\" posture. The person in the middle (of the group) with the ponytail and black top is"
+      },
+      {
+        "id": "down_0016",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8}\nWHY: 2 people (one lying, one standing). All acting normally -> normal."
+      },
+      {
+        "id": "down_0098",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: The person is lying immobile, then lying on their back with arms and head facing the ground. They're in distress, so the response is: \"distress\"."
+      },
+      {
+        "id": "down_0009",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: 1 person(s) in view. the person: Torso angle from vertical goes 0 deg -> 97 deg; head"
+      },
+      {
+        "id": "normal_0114",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0053",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-grass\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0111",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.7,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.7}\nWHY: 2 people (one in blue, one in red)\nTHEY'RE ALL IN NORMAL PATIENCE -> normal\nVIDEO 670,671 -> N"
+      },
+      {
+        "id": "down_0141",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0073",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false}\nWHY: The person is lying still, so the answer is normal."
+      },
+      {
+        "id": "down_0118",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0000",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false}\nWHY: The person in the video is likely in a normal posture. They appear to be walking normally, with minimal to no signs of distress or disorientation. The person's head is"
+      },
+      {
+        "id": "down_0075",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-snow\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: The person is lying immobile. They are in distress."
+      },
+      {
+        "id": "normal_0127",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-bar\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: The person is lying immobile, so it's normal."
+      },
+      {
+        "id": "down_0104",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: This person is lying immobile, so the answer is: horizontal_on_floor."
+      },
+      {
+        "id": "down_0133",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8}\nWHY: The person in the video who appears to be in distress (faintly) is still swimming. They don't seem to have fallen yet."
+      },
+      {
+        "id": "normal_0058",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0016",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0087",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9}\nWHY: \u53ef\u80fd\u67091 \u4e2a\u4eba(\u4ed6\u4eec\u90fd\u662f\u8d77\u59cb\u4f4d\u4e8e\u6865\u6881\u4e0a\u7684)\uff0c\u4f46\u4ed6\u4eec"
+      },
+      {
+        "id": "normal_0050",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-ground\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: The person in the video is lying immobile, so the answer is: down."
+      },
+      {
+        "id": "down_0120",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.7,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.7,\"person_down\":false}\nWHY: The person in the video is in a normal posture. They are facing the camera, with their head up, arms at their sides, and body mostly vertical. They then:"
+      },
+      {
+        "id": "normal_0125",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9,\"person_down\":false}\nWHY: The person in the video is likely in a normal posture, as they are lying still with their head down (normal posture) and their arms hanging at their sides (normal posture"
+      },
+      {
+        "id": "down_0037",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9}\nWHY: 2 consecutive frames (oldest first): person in gray jacket and pink beanie lying on their back in the water; person in black jacket and red beanie lying on their side in the water."
+      },
+      {
+        "id": "down_0125",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9}\nWHY: The person in the video who appears to be in distress (faintly) is still lying immobile. The person closest to the camera (on the right) is wearing a blue shirt, so they"
+      },
+      {
+        "id": "down_0106",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9}\nWHY: The person in the video is likely in normal posture, as they are still facing forward. They are lying on their side, which is a normal posture for a person who has fallen, but they are still"
+      },
+      {
+        "id": "down_0003",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9}\nWHY: 2 people (one in each of the above videos). All appear to be in normal postures. The person in the middle of the last frame (of the last one) is lying immobile, which"
+      },
+      {
+        "id": "normal_0014",
+        "gold": "normal",
+        "pred": "distress",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-low\",\"status\":\"distress\",\"confidence\":0.9,\"person_down\":false}\nWHY: This person is lying immobile with head down and body facing the same direction (downstream). They appear to be in distress, possibly with a cold or wetness from"
+      },
+      {
+        "id": "down_0061",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0066",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9}\nWHY: Two people are in view: one in gray (of whom only the back is visible), and one in red. The person in gray is facing the red chair, then bends over to pick it up,"
+      },
+      {
+        "id": "down_0055",
+        "gold": "down",
+        "pred": "fall",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"downright-fallen\",\"status\":\"fall\",\"confidence\":0.9}\nWHY: "
+      },
+      {
+        "id": "down_0097",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: The person is lying immobile. They're in distress."
+      },
+      {
+        "id": "normal_0023",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9,\"person_down\":false}\nWHY: These are the same video that we have already seen. All people appear to be acting normally."
+      },
+      {
+        "id": "down_0123",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9,\"person_down\":false}\nWHY: The person in the video who appears to be in distress (lack of head-down posture, hair up, arms down, looking down) is actually in the \"normal"
+      },
+      {
+        "id": "normal_0109",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6}\nWHY: 2 people (2 male, 1 female) in view. All acting normally. They all: head down, hip angle to 90 deg (normal), arms at sides (normal), voice"
+      },
+      {
+        "id": "normal_0033",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0105",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":2}\nWHY: 2 people (one of them possibly falling). Person 2: Torso angle from vertical goes 0 deg -> 90 deg"
+      },
+      {
+        "id": "normal_0141",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9}\nWHY: All people appear to be acting normally. All appear to be walking normally."
+      },
+      {
+        "id": "down_0111",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "none",
+        "confidence": 0.0,
+        "raw": " \"person-001 person-002 person-003 person-004 person-005 person-006 person-007 person-008 person-009 person-010 person-011 person-012 person-0"
+      },
+      {
+        "id": "normal_0062",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0145",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9}\nWHY: 2 people (2 distinct postures): head up, body straight (normal); body pointing to left (normal); head down, body pointing down (drowning/lose-air-status);"
+      },
+      {
+        "id": "normal_0139",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-river\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: The person is lying immobile, so it's normal."
+      },
+      {
+        "id": "down_0084",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-pin\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0069",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9,\"person_down\":false}\nWHY: The person is in a normal posture. They are standing still, with their arms at their sides, looking straight ahead. They are not wearing a helmet, which is a safety"
+      },
+      {
+        "id": "down_0107",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-ground\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0149",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-ground\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0093",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: All people appear to be in a normal posture. The person in the middle (of the last frame) is lying still, but the person on the right (of the"
+      },
+      {
+        "id": "normal_0140",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9}\nWHY: 2 consecutive videos (video 2 has more people) -> normal posture."
+      },
+      {
+        "id": "normal_0026",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9}\nWHY: 5 people in view. All acting normally."
+      },
+      {
+        "id": "down_0048",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9}\nWHY: All people appear to be acting normally. All appear to be in a normal posture. The person in the middle (of the boat) is facing forward, head down, head down, then head up and"
+      },
+      {
+        "id": "down_0046",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9,\"person_down\":false}\nWHY: The person is lying immobile, so it's normal."
+      },
+      {
+        "id": "down_0050",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9}\nWHY: \u53ef\u80fd\u6709\u4e09\u4e2a\u6216\u66f4\u591a\u4eba\u5728\u89c6\u91ce\u4e2d\u4f4d\u4e8e\u961f\u4f0d\u4e2d\u7684\u4f4d\u7f6e\uff0c\u4f46\u6240\u89c6\u7684"
+      },
+      {
+        "id": "normal_0107",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9,\"person_down\":false}\nWHY: The person in the video is in a normal posture. They are facing the camera, so they are not in any distress. They are wearing a green long-sleeve"
+      },
+      {
+        "id": "down_0039",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: These person(s) are likely in distress because they're lying immobile. They're in the most distress category."
+      },
+      {
+        "id": "down_0017",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-grass\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0011",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false}\nWHY: Two people are in the frame. All of them are in the \"normal\" posture. The person on the left is facing forward, the person in the center is facing forward"
+      },
+      {
+        "id": "down_0029",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9,\"person_down\":false}\nWHY: The person in the video is in a normal posture. They are facing the camera, so they appear to be in a normal situation. The person's head is above the horizontal"
+      },
+      {
+        "id": "normal_0115",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0083",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9,\"person_down\":false}\nWHY: The person is in a normal posture. They are lying still, with head down and body facing the same direction as before. The person's head is not above the horizontal axis"
+      },
+      {
+        "id": "normal_0148",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9,\"person_down\":false}\nWHY: The person is lying immobile. They're in a normal posture."
+      },
+      {
+        "id": "down_0108",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0135",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false}\nWHY: The person is in a normal posture. They are standing still, with arms down at their sides, looking straight ahead. They are not wearing any headgear, so their head"
+      },
+      {
+        "id": "normal_0005",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9,\"person_down\":false}\nWHY: The person is in a normal posture. They are lying still, with head down, arms at their sides, and head down (down 1), followed by a head down"
+      },
+      {
+        "id": "normal_0149",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0015",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9,\"person_down\":false}\nWHY: The person is lying still, normal posture."
+      },
+      {
+        "id": "down_0040",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: These person is lying immobile. They appear to be in distress, so the result is: DIS."
+      },
+      {
+        "id": "normal_0084",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0002",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9,\"person_down\":false}\nWHY: The person is lying immobile. They appear to be in distress, but nothing unusual."
+      },
+      {
+        "id": "down_0042",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6}\nWHY: The person(s) who appear to be in distress is/are: 1 person (down)\nResult: normal"
+      },
+      {
+        "id": "down_0117",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-water\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: The person is lying immobile on the water. They appear to be in distress, possibly falling."
+      },
+      {
+        "id": "normal_0045",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9}\nWHY: 2 people (one above, one below). All acting normally. All acting normally."
+      },
+      {
+        "id": "down_0122",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: The person is lying immobile, so it's normal."
+      },
+      {
+        "id": "normal_0037",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false}\nWHY: All people appear to be acting normally. All actions are normal."
+      },
+      {
+        "id": "down_0068",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9}\nWHY: The person in the video who appears to be in distress (faintly) is actually lying still, not falling."
+      },
+      {
+        "id": "down_0067",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0123",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9,\"person_down\":false}\nWHY: Both person A (on the left) and person B (on the right) are in the same position. They both: head down, hip-up, body straight,"
+      },
+      {
+        "id": "down_0136",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":3}\nWHY: 3 people (man in blue, woman in white, other guy in gray)\nWHY: All of them are lying immobile"
+      },
+      {
+        "id": "normal_0036",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false}\nWHY: The person is lying on the ground, not in distress. They're in a normal posture."
+      },
+      {
+        "id": "normal_0041",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0088",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: The person is lying immobile, so the answer is: down."
+      },
+      {
+        "id": "down_0074",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0136",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9,\"person_down\":false}\nWHY: These person is in the \"Yellow shirt\" (yellow) posture. They appear to be walking/standing still. They: head down, hip-width above the ground,"
+      },
+      {
+        "id": "down_0135",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9}\nWHY: The person in the video appears to be in a normal posture. They are lying on their back with their arms at their sides, head down, and head slightly to the left. The person's head is"
+      },
+      {
+        "id": "normal_0144",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9}\nWHY: The person in the video appears to be in a normal posture. They are lying on their back with their arms hanging at their sides, head down, and head slightly to the left. The person's head"
+      },
+      {
+        "id": "normal_0096",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9}\nWHY: The person in the video is likely in normal posture. They appear to be walking normally, with minimal movement. The person's head is slightly turning to the left, but otherwise they are not showing any signs"
+      },
+      {
+        "id": "normal_0133",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.7,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.7}\nWHY: Two people are in the frame. All of them are standing still. All of them are wearing normal clothing. The person on the left is wearing a pink shirt and dark blue shorts, while the person on"
+      },
+      {
+        "id": "normal_0020",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: The person is lying immobile. They are in distress."
+      },
+      {
+        "id": "down_0013",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-street\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0010",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9,\"person_down\":false}\nWHY: Both people appear to be in a normal posture. The person on the left is lying on their side, but they're still wearing a helmet, which is a safety feature."
+      },
+      {
+        "id": "down_0069",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: The person is lying immobile. They're in distress."
+      },
+      {
+        "id": "normal_0043",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9}\nWHY: \u4ece\u89c6\u89c9\u4e2d\u770b\uff0c\u6240\u6709\u4eba\u90fd\u5728\u6b63\u786e\u5730\u4f4d\uff0c\u6240\u6709\u4eba\u90fd\u6b63\u786e\u5730\ufffd"
+      },
+      {
+        "id": "down_0094",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8}\nWHY: The person in the video appears to be in a normal posture. They are lying still with their arms at their sides, looking down at the ground. Their head is slightly turning to the left, possibly in"
+      },
+      {
+        "id": "down_0079",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0091",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9,\"person_down\":false}\nWHY: The person is lying immobile. They're in a normal posture."
+      },
+      {
+        "id": "down_0124",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: "
+      },
+      {
+        "id": "normal_0017",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9}\nWHY: 2 people (one in each of the above videos). All acting normally."
+      },
+      {
+        "id": "normal_0018",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9,\"person_down\":false}\nWHY: The person is lying still, normal posture."
+      },
+      {
+        "id": "down_0132",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9}\nWHY: \u8fd9\u6b21\u89c6\u9891\u4e2d\u7684\u4eba\u4f4d\u4e8e\u666f\u89c2\u4e2d\u7684\u57ce\u5e02\u8def\u8fb9\uff0c\u4f4d\u4e8e\u6865"
+      },
+      {
+        "id": "normal_0060",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9,\"person_down\":false}\nWHY: The person is lying immobile. They're in a normal posture."
+      },
+      {
+        "id": "normal_0099",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false}\nWHY: The person is lying immobile. They're in a normal posture."
+      },
+      {
+        "id": "down_0126",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0139",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-ground\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: The person is lying immobile. They are in the \"down\" posture."
+      },
+      {
+        "id": "normal_0147",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9}\nWHY: 2 people (one in each of the above videos). All appear to be in normal postures. The person in the middle of the last frame (of the last one) is lying immobile, which"
+      },
+      {
+        "id": "down_0041",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0129",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0102",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9}\nWHY: 3 people (3 different angles)\nWHERE: outdoor, of house and fence in snow\nWEARED: person only\nWEARE: gray shirt on top, blue pants below, dark"
+      },
+      {
+        "id": "down_0091",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0129",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9,\"person_down\":false}\nWHY: The person is lying immobile, so the answer is: normal."
+      },
+      {
+        "id": "normal_0137",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: The person is lying immobile, so it's clear they're in distress."
+      },
+      {
+        "id": "down_0034",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.7,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.7,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0120",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false}\nWHY: The person in the video who appears to be in distress (lacking head-down posture) is actually in the \"normal\" posture."
+      },
+      {
+        "id": "normal_0090",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9}\nWHY: The person in the video appears to be in a normal posture. They are facing the camera, with their arms at their sides, and they are all looking in the same direction (down at the person on"
+      },
+      {
+        "id": "down_0021",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9}\nWHY: The person in the video is likely in normal posture. They are facing the camera, standing still, and their head is above the horizontal line. They are not wearing a helmet, which is a safety feature"
+      },
+      {
+        "id": "normal_0071",
+        "gold": "normal",
+        "pred": "distress",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-low\",\"status\":\"distress\",\"confidence\":0.9,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0008",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6}\nWHY: Two people have fallen (oldest): person 1 (black shirt, gray shorts, red headgear) -> lying on ground (0 s), person 2 (gray shirt, blue shorts, yellow"
+      },
+      {
+        "id": "normal_0143",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false}\nWHY: Two people are in the frame. All of them are in the \"normal\" posture. The person in the middle (black shirt, white pants) is facing the camera,"
+      },
+      {
+        "id": "normal_0081",
+        "gold": "normal",
+        "pred": "distress",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-low\",\"status\":\"distress\",\"confidence\":0.9,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0025",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0049",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9}\nWHY: The person's posture looks normal. They are standing still, facing forward, with arms at their sides. Their head is slightly turning to the left (head-down), but they don't appear to be"
+      },
+      {
+        "id": "normal_0105",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: The person is lying immobile, so it's normal."
+      },
+      {
+        "id": "normal_0053",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9}\nWHY: The person in the video appears to be in a normal posture. They are: head down, arms at sides, head down (head angle is 0 degrees), body facing forward (body angle is "
+      },
+      {
+        "id": "down_0144",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.8,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.8}\nWHY: Two people are in the water. The person in the middle is wearing a purple top and the person on the right is wearing a pink top. The water is clear. All of them are swimming normally."
+      },
+      {
+        "id": "normal_0112",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0110",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false}\nWHY: This person is in the middle of a 0.67-mile-long video, with 1 other person. All acting normally. All actions are normal: sitting"
+      },
+      {
+        "id": "down_0038",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0028",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9,\"person_down\":false}\nWHY: The person in the video is in normal posture. They are facing the camera, so they appear to be in a normal situation. The person's head is above the waterline"
+      },
+      {
+        "id": "normal_0006",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false}\nWHY: The person is lying still with head down, then lying down with head down, then lying down with head down, then lying down with head down, then lying down with head"
+      },
+      {
+        "id": "normal_0086",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: The person is lying immobile. They're in distress."
+      },
+      {
+        "id": "down_0078",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9}\nWHY: 2 people (2 males, 1 female) in view. All acting normally -> normal."
+      },
+      {
+        "id": "normal_0089",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9}\nWHY: 5 out of 5 people appear to be in a normal posture. All appear to be of normal height and weight. The person in the middle of the action (hip-up) is in the"
+      },
+      {
+        "id": "normal_0094",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: The person is lying immobile, so it's normal."
+      },
+      {
+        "id": "normal_0121",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false}\nWHY: The person is lying immobile. They are in a normal posture."
+      },
+      {
+        "id": "normal_0063",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-water\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0092",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-road\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0099",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: 1 person(s) in view. the person: Torso angle from vertical goes 87 deg -> 87 deg;"
+      },
+      {
+        "id": "down_0143",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false}\nWHY: The person is lying on the ground, not in distress. They're in a normal posture."
+      },
+      {
+        "id": "normal_0082",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6}\nWHY: Three of the most likely person(s) to be in distress: person in black top and gray shorts (from behind), person in black top and gray shorts (from the back); all appear to be"
+      },
+      {
+        "id": "normal_0146",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":2}\nWHY: 2 person(s) in view. Person 2 of 2: Torso angle from vertical goes 0 deg -> 9"
+      },
+      {
+        "id": "down_0090",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.7,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.7}\nWHY: 2 people (2 different angles)\nPerson 1: head down; body in disarray\nPerson 2: head down; body in disarray -> person 1 (disarray)\n"
+      },
+      {
+        "id": "down_0001",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: The person is lying immobile on the floor. They are in the \"horizontal on floor\" posture."
+      },
+      {
+        "id": "normal_0067",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true}\nWHY: The person is lying immobile, then they start to lean forward, then they begin to descend vertically, then they stop, and finally they fall to the ground."
+      },
+      {
+        "id": "down_0060",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0051",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0134",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0059",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0007",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false}\nWHY: The person is lying still on the grass, with arms down at their sides. They appear to be in a normal posture. They are of normal height and build, with a"
+      },
+      {
+        "id": "normal_0108",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false}\nWHY: Both of these people appear to be in a normal posture. They're all looking straight ahead, with the person in the middle holding a toy above their head. The person on"
+      },
+      {
+        "id": "down_0131",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-ground\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0027",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9}\nWHY: 2 people (2 males, 1 female) in view. All acting normally -> normal."
+      },
+      {
+        "id": "normal_0052",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9}\nWHY: All people appear to be acting normally. All of them are: head down (person 1), body still (person 2), head down (person 3); all of them: head down ("
+      },
+      {
+        "id": "down_0073",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6}\nWHY: Two people are in the frame. They all appear to be in a normal posture. The person on the right is lying still, looking down. The person on the left is lying on their back with their"
+      }
+    ]
+  },
+  "500m-realfall": {
+    "n": 150,
+    "accuracy": 0.653,
+    "binary_sensitivity_recall": 0.52,
+    "binary_specificity": 0.893,
+    "binary_precision": 0.83,
+    "binary_f1": 0.639,
+    "person_down_recall": 0.427,
+    "parse_failures": 0,
+    "peak_rss_mb": 2869.8,
+    "prefill_time": {
+      "p50_s": 0.019,
+      "p95_s": 0.021,
+      "mean_s": 0.019
+    },
+    "inference_time_full_generate": {
+      "p50_s": 0.265,
+      "p95_s": 0.455,
+      "mean_s": 0.306
+    },
+    "predictions": [
+      {
+        "id": "down_0056",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0019",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":3}\nWHY: "
+      },
+      {
+        "id": "down_0016",
+        "gold": "down",
+        "pred": "distress",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"down-lying\",\"status\":\"distress\",\"confidence\":0.9,\"person_down\":true,\"n_people\":2}\nWHY: 2 people (man in green, woman in black)\nMALFICTION: MAN 1 FALLING\nMAN 1"
+      },
+      {
+        "id": "down_0098",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0009",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0114",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0053",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-grass\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0111",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.7,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.7,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0141",
+        "gold": "down",
+        "pred": "distress",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"down-lying\",\"status\":\"distress\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0073",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0118",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0000",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0075",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-snow\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0127",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-bar\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":3}\nWHY: "
+      },
+      {
+        "id": "down_0104",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-ice\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":2}\nWHY: "
+      },
+      {
+        "id": "down_0133",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0058",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0016",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0087",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: One person is lying immobile. They're in distress."
+      },
+      {
+        "id": "normal_0050",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.7,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.7,\"person_down\":false,\"n_people\":3}\nWHY: 3 people in view. All acting normally."
+      },
+      {
+        "id": "down_0120",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0125",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0037",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":2}\nWHY: "
+      },
+      {
+        "id": "down_0125",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0106",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0003",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0014",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0061",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0066",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0055",
+        "gold": "down",
+        "pred": "distress",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"down-lying\",\"status\":\"distress\",\"confidence\":0.9,\"person_down\":true,\"n_people\":3}\nWHY: "
+      },
+      {
+        "id": "down_0097",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.7,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.7}\nWHY: 2 people (2 adults, 1 child). All acting normally. All acting with normal posture."
+      },
+      {
+        "id": "normal_0023",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0123",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: All people appear to be acting normally. All of them are: standing, lying still (0th), standing (1st), standing (1"
+      },
+      {
+        "id": "normal_0109",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.7,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.7,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0033",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0105",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-surface\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0141",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"people_down\":0,\"n_people\":6}\nWHY: All people appear to be in a normal posture. The person in the middle (of the group) is facing the camera, all others are facing"
+      },
+      {
+        "id": "down_0111",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-posture\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0062",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0145",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0139",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"downright-fall\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":6}\nWHY: "
+      },
+      {
+        "id": "down_0084",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"downright-down\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0069",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0107",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-sand\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0149",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-ground\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":2}\nWHY: "
+      },
+      {
+        "id": "down_0093",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":3}\nWHY: All people appear to be in a normal posture. The person in the middle (of the group) is lying on their side, then lying"
+      },
+      {
+        "id": "normal_0140",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0026",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0048",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":3}\nWHY: "
+      },
+      {
+        "id": "down_0046",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0050",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0107",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0039",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0017",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-grass\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0011",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0029",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0115",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0083",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0148",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0108",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0135",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0005",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0149",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0015",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0040",
+        "gold": "down",
+        "pred": "distress",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"down-lying\",\"status\":\"distress\",\"confidence\":0.9,\"person_down\":true,\"n_people\":3}\nWHY: 3 people (person 1, person 2, person 3) lying immobile. Person 3 then starts lying down (dist"
+      },
+      {
+        "id": "normal_0084",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0002",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0042",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6}\nWHY: All of the people appear to be in a normal posture. The person in the middle of the action (who is wearing a grey suit) appears to be bending over, possibly to pick something up. All"
+      },
+      {
+        "id": "down_0117",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-water\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0045",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0122",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0037",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":3}\nWHY: 3 people in view. All acting normally -> normal."
+      },
+      {
+        "id": "down_0068",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0067",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0123",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":2}\nWHY: Both person A (on the left) and person B (on the right) are in the \"normal\" posture. They are both: lying"
+      },
+      {
+        "id": "down_0136",
+        "gold": "down",
+        "pred": "distress",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"down-lying\",\"status\":\"distress\",\"confidence\":0.9}\nWHY: 2 people (one lying, one lying down) -> distress (person lying down)\nperson to lie down: Torso -> down\nperson to lie down: Torso -> down\nperson to"
+      },
+      {
+        "id": "normal_0036",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0041",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0088",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0074",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0136",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":3}\nWHY: "
+      },
+      {
+        "id": "down_0135",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: There is 1 person(s) lying immobile. They are: person in orange, white, and black snowboard. They are lying"
+      },
+      {
+        "id": "normal_0144",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9}\nWHY: All people appear to be acting normally. All appear to be in a position of normal activity. The person in the lead (most upright) continues with the same posture. The person in the lead (most"
+      },
+      {
+        "id": "normal_0096",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0133",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.7,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.7,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0020",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-surface\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0013",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-street\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0010",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0069",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0043",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0094",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6}\nWHY: Several people appear to be in distress (e.g. man in white top with his hands on hips, woman in blue top with her head down); person in blue top starts to move away (to"
+      },
+      {
+        "id": "down_0079",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0091",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0124",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0017",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0018",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0132",
+        "gold": "down",
+        "pred": "distress",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"down-fallen\",\"status\":\"distress\",\"confidence\":0.9,\"person_down\":true,\"n_people\":2}\nWHY: 2 people (one in each of the last 2)\nWHY: 2 people (2 of the 2)\n"
+      },
+      {
+        "id": "normal_0060",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0099",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0126",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0139",
+        "gold": "down",
+        "pred": "distress",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"down-lying\",\"status\":\"distress\",\"confidence\":0.9}\nWHY: 2 people (one lying, one lying down) -> person 1 lying down -> person 1 lying down -> person 1 lying down -> person 1 lying down -> person 1 lying down"
+      },
+      {
+        "id": "normal_0147",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: One person is lying immobile (person 0). All other people are standing normally (person 1-4)."
+      },
+      {
+        "id": "down_0041",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0129",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0102",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0091",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0129",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0137",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.7,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.7}\nWHY: Two people are in the frame. All of them are in the normal posture. The person in the blue shirt and black pants (on the left) remains still, the person in the black tank top and"
+      },
+      {
+        "id": "down_0034",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0120",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0090",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.9}\nWHY: All individuals appear to be in a normal posture. They all appear to be walking or standing in a normal manner, with no one falling, fainting, or lying immobile. The person in the lead"
+      },
+      {
+        "id": "down_0021",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0071",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0008",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0143",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":2}\nWHY: 2 people (one lying down, 1 standing). All acting normally -> normal."
+      },
+      {
+        "id": "normal_0081",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0025",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0049",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6}\nWHY: The person appears to be standing normally. All actions appear to be within normal range. Person is lying immobile -> normal."
+      },
+      {
+        "id": "normal_0105",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0053",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0144",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":2}\nWHY: 2 people. All acting normally -> normal."
+      },
+      {
+        "id": "normal_0112",
+        "gold": "normal",
+        "pred": "distress",
+        "parse": "json",
+        "confidence": 0,
+        "raw": " {\"posture\":\"down-fallen\",\"status\":\"distress\",\"confidence\":0,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0110",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0038",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0028",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0006",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0086",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0078",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.7,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.7}\nWHY: All people appear to be acting normally. All appear to be in the right posture. The person in the lead (of the group) descends into a sitting position followed by a head-down posture, then"
+      },
+      {
+        "id": "normal_0089",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0094",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0121",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0063",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-water\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0092",
+        "gold": "down",
+        "pred": "fall",
+        "parse": "json",
+        "confidence": 0,
+        "raw": " {\"posture\":\"downright-fallen\",\"status\":\"falling\",\"confidence\":0,\"person_down\":true,\"n_people\":1}\nWHY: One person has fallen (person 1). The person is lying immobile (immobile). The person is lying immobile (lose_"
+      },
+      {
+        "id": "down_0099",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0143",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0082",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"people\":3,\"n_people\":3}\nWHY: 3 people in view. All acting normally. The person in the middle (of the group) bends down to pick up a bucket from the water."
+      },
+      {
+        "id": "normal_0146",
+        "gold": "normal",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-snow\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0090",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6}\nWHY: 2 people (one above, one below). All acting normally. All going in the same direction (down). Person 1 of 2: head down -> normal -> normal\nWHY: "
+      },
+      {
+        "id": "down_0001",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0067",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.7,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.7,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0060",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-sand\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0051",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0134",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-low\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "down_0059",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-floor\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0007",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0108",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":2}\nWHY: Both of these people appear to be in a normal posture. The person on the right is wearing a striped pajama-style outfit with red"
+      },
+      {
+        "id": "down_0131",
+        "gold": "down",
+        "pred": "down",
+        "parse": "json",
+        "confidence": 0.9,
+        "raw": " {\"posture\":\"horizontal-on-ground\",\"status\":\"down\",\"confidence\":0.9,\"person_down\":true,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0027",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":1}\nWHY: "
+      },
+      {
+        "id": "normal_0052",
+        "gold": "normal",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":3}\nWHY: "
+      },
+      {
+        "id": "down_0073",
+        "gold": "down",
+        "pred": "normal",
+        "parse": "json",
+        "confidence": 0.6,
+        "raw": " {\"posture\":\"upright-standing\",\"status\":\"normal\",\"confidence\":0.6,\"person_down\":false,\"n_people\":2}\nWHY: 2 people (man in black, woman in white)\nWALKER: man -> woman\nFALL: no\nWRITE"
+      }
+    ]
+  }
+}
