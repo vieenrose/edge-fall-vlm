@@ -15,6 +15,17 @@ N_FRAMES = 6
 MIN_PIXELS = 64 * 64
 MAX_PIXELS = 384 * 384
 
+# A fall is a brief event (~1-4s). Sampling 6 frames uniformly across a long clip dilutes
+# the fall frames among the surrounding normal activity and washes the verdict out to
+# "normal" (this is what made IMG_9144-style ~60s clips read as normal). Instead we slide
+# a short window across the clip, score each window, and take the max-severity verdict --
+# a fall ANYWHERE in the clip raises the alert. This mirrors the real streaming deployment
+# (deploy/monitor.py), where each ~3.5s window is inferred separately and persistence
+# raises the alert. Bounded to MAX_WINDOWS so the ZeroGPU per-call budget holds.
+WIN_SEC = 3.0
+MAX_WINDOWS = 10
+_SEVERITY = {"down": 2, "distress": 1, "normal": 0}
+
 PROMPT = ("You are a safety monitor. These are consecutive video frames (oldest first), "
           "possibly with more than one person. Report whether ANYONE has fallen, fainted, "
           "is lying immobile, or is in distress; else normal. Answer with JSON only.")
@@ -44,26 +55,41 @@ def _canon(s: str) -> str:
     return "normal"
 
 
-def _sample_frames(video_path: str) -> list[Image.Image]:
+def _read_all_frames(video_path: str):
     cap = cv2.VideoCapture(video_path)
-    n = int(cap.get(cv2.CAP_PROP_FRAME_COUNT) or 0)
+    fps = cap.get(cv2.CAP_PROP_FPS) or 20.0
     frames = []
-    if n <= 0:
-        while True:
-            ok, f = cap.read()
-            if not ok: break
-            frames.append(f)
-    else:
-        for i in np.linspace(0, n - 1, N_FRAMES).astype(int):
-            cap.set(cv2.CAP_PROP_POS_FRAMES, int(i))
-            ok, f = cap.read()
-            if ok: frames.append(f)
+    while True:
+        ok, f = cap.read()
+        if not ok: break
+        frames.append(Image.fromarray(cv2.cvtColor(f, cv2.COLOR_BGR2RGB)))
     cap.release()
     if not frames:
         raise gr.Error("Could not read any frames from the video.")
-    if len(frames) > N_FRAMES:
-        frames = [frames[i] for i in np.linspace(0, len(frames) - 1, N_FRAMES).astype(int)]
-    return [Image.fromarray(cv2.cvtColor(f, cv2.COLOR_BGR2RGB)) for f in frames]
+    return frames, (fps if fps > 0 else 20.0)
+
+
+def _sample_windows(video_path: str):
+    """Return a list of windows, each a list of N_FRAMES PIL images, plus per-window start
+    times (seconds). Short clips -> one window (single pass, unchanged behavior). Long
+    clips -> up to MAX_WINDOWS short windows spanning the clip, so a brief fall is not
+    diluted by the surrounding normal activity."""
+    frames, fps = _read_all_frames(video_path)
+    n = len(frames)
+    win = max(N_FRAMES, int(WIN_SEC * fps))
+    if n <= int(win * 1.5):
+        starts = [0]
+        spans = [(0, n - 1)]
+    else:
+        nwin = min(MAX_WINDOWS, max(2, int(np.ceil(n / win))))
+        starts = np.linspace(0, n - win, nwin).astype(int).tolist()
+        spans = [(s, s + win - 1) for s in starts]
+    windows, times = [], []
+    for a, b in spans:
+        idxs = np.linspace(a, b, N_FRAMES).astype(int)
+        windows.append([frames[i] for i in idxs])
+        times.append(round(a / fps, 1))
+    return windows, times
 
 
 def _generate(proc, model, frames, device) -> str:
@@ -84,11 +110,11 @@ def _generate(proc, model, frames, device) -> str:
 
 
 @spaces.GPU(duration=60)
-def _infer_gpu(frames) -> str:
+def _infer_gpu(windows) -> list:
     proc, model = _get()
     model.to("cuda")
     try:
-        return _generate(proc, model, frames, "cuda")
+        return [_generate(proc, model, w, "cuda") for w in windows]
     finally:
         model.to("cpu")   # keep model on CPU between calls (ZeroGPU releases the GPU)
 
@@ -106,25 +132,38 @@ def _format(gen: str, used: str):
 
 
 def analyze(video_path):
-    """Detect fall / person-down / distress in a short clip (single pass — real
-    deployment behavior). Uses ZeroGPU, else CPU fallback."""
+    """Detect fall / person-down / distress in a clip. Slides a short window across the
+    clip and takes the MAX-severity verdict (a fall anywhere = alert) -- so a brief fall
+    in a long clip is not diluted to 'normal'. Uses ZeroGPU, else CPU fallback."""
     if not video_path:
         raise gr.Error("Please provide a video clip.")
-    frames = _sample_frames(video_path)
+    windows, times = _sample_windows(video_path)
     try:
-        gen = _infer_gpu(frames)
+        gens = _infer_gpu(windows)
         used = "ZeroGPU"
     except Exception as e:
         msg = str(e).lower()
         if any(x in msg for x in ("quota", "gpu", "zerogpu", "exceeded", "abort")):
             gr.Info("ZeroGPU quota unavailable — running on CPU (slower).")
             proc, model = _get()
-            gen = _generate(proc, model, frames, "cpu")
+            gens = [_generate(proc, model, w, "cpu") for w in windows]
             used = "CPU fallback"
         else:
             raise
-    label, parsed = _format(gen, used)
-    return label, parsed, frames
+
+    # pick the most severe window as the verdict
+    best_i, best_label, best_parsed = 0, "normal", {}
+    for i, gen in enumerate(gens):
+        label, parsed = _format(gen, used)
+        if _SEVERITY.get(parsed.get("status", "normal"), 0) > _SEVERITY.get(best_label, 0):
+            best_i, best_label, best_parsed = i, parsed.get("status", "normal"), parsed
+    if not best_parsed:
+        _, best_parsed = _format(gens[0], used)
+    if len(windows) > 1:
+        best_parsed["_windows"] = len(windows)
+        if best_label != "normal":
+            best_parsed["_event_at_sec"] = times[best_i]
+    return _LABEL[_canon(best_parsed.get("status", "normal"))], best_parsed, windows[best_i]
 
 
 with gr.Blocks(title="Edge Fall / Danger Detection VLM") as demo:
