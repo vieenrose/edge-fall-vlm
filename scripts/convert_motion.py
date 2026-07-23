@@ -401,6 +401,52 @@ def gen_normal(rng, T=90):
     return j, kind
 
 
+def gen_athletic_normal(rng, T=90):
+    """NORMAL hard-negatives the existing gen_normal set lacks: INVERTED / feet-up / arched /
+    horizontal-BUT-ELEVATED bodies. These target the deployed model's dominant false-alarm
+    mode -- it reads any non-upright body as 'down'. The point of doing this in 3D is exact
+    geometric control: a horizontal or inverted body placed OFF the floor (or head-down),
+    labeled normal, teaches 'horizontal/inverted != fallen unless at floor level & upright-ish'
+    -- the cue the VLM is missing. z is height in metres (floor=0); keep hips consistent with
+    pelvis (bone chain)."""
+    kind = rng.choice(["handstand", "cartwheel", "bridge", "vault_leap"])
+    j = _base_standing(T)
+    if kind == "handstand":                              # fully inverted: head low, feet up
+        for n, h in (("head", 0.22), ("neck", 0.5), ("l_shoulder", 0.66), ("r_shoulder", 0.66),
+                     ("pelvis", 1.05), ("l_hip", 1.12), ("r_hip", 1.12),
+                     ("l_ankle", 1.85), ("r_ankle", 1.85)):
+            j[n][:, 2] = h + 0.03 * np.sin(np.linspace(0, 2 * np.pi, T))   # slight sway
+        return j, kind
+    if kind == "cartwheel":                              # rotate through inverted over the clip
+        for t in range(T):
+            a = np.pi * t / T                            # 0 -> pi: upright -> inverted -> ...
+            c = np.cos(a)                                # +1 upright, -1 inverted
+            j["head"][t, 2] = 0.9 + 0.7 * c
+            j["neck"][t, 2] = 0.9 + 0.5 * c
+            j["l_shoulder"][t, 2] = j["r_shoulder"][t, 2] = 0.9 + 0.48 * c
+            j["pelvis"][t, 2] = 1.0
+            j["l_hip"][t, 2] = j["r_hip"][t, 2] = 0.95
+            j["l_ankle"][t, 2] = j["r_ankle"][t, 2] = 1.0 - 0.9 * c   # feet swing up as head drops
+            for n in JOINTS:
+                j[n][t, 0] += 1.2 * t / T                # travels sideways
+        return j, kind
+    if kind == "bridge":                                 # backbend: pelvis arched UP, feet+head down
+        for n, h in (("head", 0.35), ("neck", 0.5), ("l_shoulder", 0.6), ("r_shoulder", 0.6),
+                     ("pelvis", 0.85), ("l_hip", 0.8), ("r_hip", 0.8),
+                     ("l_ankle", 0.1), ("r_ankle", 0.1)):
+            j[n][:, 2] = h
+        return j, kind
+    # vault_leap: whole body HORIZONTAL but ELEVATED (mid-air), travelling forward
+    for n in ("head", "neck", "pelvis", "l_hip", "r_hip", "l_shoulder", "r_shoulder"):
+        j[n][:, 2] = 1.15 + 0.05 * np.sin(np.linspace(0, np.pi, T))
+    j["l_ankle"][:, 2] = j["r_ankle"][:, 2] = 1.0
+    j["head"][:, 0] = 0.7                                 # body laid out horizontally along x
+    j["l_ankle"][:, 0] = j["r_ankle"][:, 0] = -0.7
+    for n in JOINTS:
+        j[n][:, 0] += np.linspace(0, 1.4, T)             # forward travel
+    return j, kind
+
+
 def gen_seizure(rng, T=90):
     """Tonic-clonic seizure: rigid full-body stiffening then falling like a plank (NO
     protective bracing at all -- more rigid than even syncope's passive drop), followed

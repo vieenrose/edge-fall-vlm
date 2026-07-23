@@ -433,3 +433,29 @@ held), the small models got WORSE specificity: 256M spec 0.75->0.57 (FA 19->32),
 "horizontal-but-normal != fallen" distinction; the added normal clips just shift the balance
 toward more "down". The durable FA fix requires ~2B capacity — it does not transfer to edge
 models. Reports: bench_val150_{256m,500m}_hardneg.json.
+
+## 2026-07-23 — Approach A (3D synthetic hard-negatives) verdict: does NOT help; real data at scale wins
+
+Rendered 809 athletic-NORMAL scenes (handstand/cartwheel/bridge/vault, mannequin + projection:
+185 fisheye / 115 wide / 256 night) to target the "non-upright body = down" false-alarm mode,
+and ran a clean 5-way comparison. Select on val, CONFIRM on held-out test (no test tuning);
+leakage-audited (0 eval-id, 0 source-video overlap).
+
+| model | val FA | test FA | pooled FA | pooled recall | gymnast_0127 |
+|---|---|---|---|---|---|
+| realfall (was deployed) | 11 | 14 | 25 | 0.907 | down (miss) |
+| real-hn 96 clips | 8 | 11 | 19 | 0.920 | down (miss) |
+| **real-hn 679 clips** | 4 | 12 | **16** | 0.900 | **normal ✓** |
+| synth-only (Approach A) | 10 | 13 | 23 | 0.920 | down (miss) |
+| combined (real679 + synth) | 7 | 14 | 21 | 0.900 | normal ✓ |
+
+**Clean isolation (real-679 vs real-679+synth, identical real data):** adding synthetic made FA
+WORSE (16 → 21). Crude synthetic mannequins don't transfer for specificity and actively hurt —
+confirms the project's long prior. The inverted-gymnast fix I first attributed to synthetic is
+actually done by MORE REAL DATA: real-hn-679 alone fixes normal_0127 (real-hn-96 didn't).
+
+**Winner = real-hn-679** (full 679 real OOPS hard-negatives, no synthetic): pooled FA 16 (from
+realfall's 25), recall 0.900. Single-pass on the reported clips: benny/gymnast/cyclist/lake-slip
+ALL -> normal; real falls -> down; costs ~1 edge fall (down_0016). Reports: bench_{val,test}150_
+{A,realhn_full}.json. 3D+projection's only unique value (clean inverted-normal labels) was not
+needed once enough real hard-negatives were harvested.
