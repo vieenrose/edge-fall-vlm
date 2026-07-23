@@ -373,3 +373,28 @@ safety detector (fall recall 0.773->~0.91), significant and replicated across bo
 sets, at a small specificity cost the verification stack absorbs. This confirms the review's
 binding-constraint diagnosis: the ceiling was zero real fall positives in training, not
 model capacity. Reports: bench_val150_realfall_vs_champion.json, bench_test150_*.json.
+
+## 2026-07-23 — Real fall data helps EVERY size (small models partially rehabilitated)
+
+Applied the same real-fall continual-FT (train_qwen_real, lr 3e-6, 1ep) to the 500M and
+256M SmolVLM2 baselines. oops_val n=150, per-clip, paired McNemar vs each baseline:
+
+| model | recall before | recall after | Δfalls (caught/lost) | McNemar p | spec before→after |
+|---|---|---|---|---|---|
+| 256M | 0.093 | **0.360** | +20 / 0 | <0.0001 | 0.96 → 0.75 |
+| 500M | 0.427 | **0.520** | +7 / 0  | 0.016 | 0.95 → 0.89 |
+| 2B (ref) | 0.773 | 0.920 | +19 / 0 | <1e-5 | 0.93 → 0.83 |
+
+Findings:
+1. **Real data lifts recall at every size, significantly, losing zero falls** — the effect
+   is not capacity-specific.
+2. **It helps the SMALLEST model the most in relative terms** (256M recall ~4x: 0.09→0.36).
+   This REVISES the earlier "small models are capacity-bound" conclusion: they were *also*
+   data-starved (zero real falls). Capacity and data were BOTH binding.
+3. **But real data does NOT close the capacity gap.** Even post-fix, 256M (0.36) and 500M
+   (0.52) recall stay far below 2B (0.92) and below any deployable bar for a safety
+   detector; specificity also drops (same recall/spec trade as the 2B). The RPi5 edge path
+   is more viable than the SIZE_COMPARISON.md numbers suggested, but 2B remains the smallest
+   size that reaches usable recall.
+
+Report: bench_val150_smallmodels_realfall.json. Models: runs/sft-{256m,500m}-realfall.
