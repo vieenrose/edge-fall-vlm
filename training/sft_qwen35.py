@@ -92,6 +92,8 @@ def main():
                     help="train on JSON-only target (no WHY: tail) -- forces an immediate "
                     "answer instead of open-ended reasoning that can run past the token budget")
     ap.add_argument("--smoke", action="store_true")
+    ap.add_argument("--local_rank", type=int, default=-1,
+                    help="set by the deepspeed/torchrun launcher, unused otherwise")
     args = ap.parse_args()
 
     if "CUDA_VISIBLE_DEVICES" not in os.environ:

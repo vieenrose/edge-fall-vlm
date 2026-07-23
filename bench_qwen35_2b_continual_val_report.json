@@ -1,0 +1,22 @@
+{
+  "runs/sft-qwen35-2b-continual": {
+    "n": 150,
+    "accuracy": 0.807,
+    "binary_sensitivity_recall": 0.76,
+    "binary_specificity": 0.853,
+    "binary_precision": 0.838,
+    "binary_f1": 0.797,
+    "person_down_recall": 0.76,
+    "peak_rss_mb": 5241.2,
+    "prefill_time": {
+      "p50_s": 0.108,
+      "p95_s": 0.116,
+      "mean_s": 0.111
+    },
+    "inference_time_full_generate": {
+      "p50_s": 0.529,
+      "p95_s": 0.579,
+      "mean_s": 0.536
+    }
+  }
+}

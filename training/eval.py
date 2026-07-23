@@ -53,7 +53,11 @@ def normalize_status(s: str) -> str:
 
 
 def parse_answer(text: str) -> dict:
-    """Extract the JSON verdict from a model generation. Robust to extra prose."""
+    """Extract the JSON verdict from a model generation. Robust to extra prose.
+
+    The returned dict carries a "_parse" tag ("json" / "keyword" / "none") so callers can
+    count parse failures separately from perception errors — a "none" default-to-normal is
+    a harness artifact, not a model miss, and must not be silently scored as one."""
     m = None
     for m in _JSON_RE.finditer(text):
         pass  # take the LAST json object (after the rationale)
@@ -61,6 +65,7 @@ def parse_answer(text: str) -> dict:
         try:
             d = json.loads(m.group(0))
             d["status"] = normalize_status(d.get("status", ""))
+            d["_parse"] = "json"
             return d
         except json.JSONDecodeError:
             pass
@@ -69,8 +74,8 @@ def parse_answer(text: str) -> dict:
     for kw in ("faint", "distress", "fall", "immobile", "lying", "normal"):
         if kw in low:
             return {"status": normalize_status(kw), "confidence": 0.5,
-                    "person_down": normalize_status(kw) in DOWN}
-    return {"status": "normal", "confidence": 0.0, "person_down": False}
+                    "person_down": normalize_status(kw) in DOWN, "_parse": "keyword"}
+    return {"status": "normal", "confidence": 0.0, "person_down": False, "_parse": "none"}
 
 
 @dataclass
@@ -145,7 +150,8 @@ def cross_view_gap(train_view_metrics: Metrics, holdout_view_metrics: Metrics) -
 
 
 # ---- GPU generation path ----
-def run_model(model_dir: str, samples, max_frames=6, img_size=384, max_new_tokens=96):
+def run_model(model_dir: str, samples, max_frames=6, img_size=384, max_new_tokens=96,
+              return_records=False):
     import os
     os.environ.setdefault("CUDA_VISIBLE_DEVICES", "0")
     import torch
@@ -153,21 +159,36 @@ def run_model(model_dir: str, samples, max_frames=6, img_size=384, max_new_token
     from training.dataset import load_images
     from training.sft import _subsample
 
-    proc = AutoProcessor.from_pretrained(model_dir, do_image_splitting=False,
-                                         size={"longest_edge": img_size})
+    try:
+        proc = AutoProcessor.from_pretrained(model_dir, do_image_splitting=False,
+                                             size={"longest_edge": img_size})
+    except (ValueError, TypeError):
+        # non-SmolVLM processors (e.g. Qwen3.5, sized by pixel area) reject these kwargs;
+        # the saved model dir already carries correct sizing.
+        proc = AutoProcessor.from_pretrained(model_dir)
     model = AutoModelForImageTextToText.from_pretrained(model_dir, dtype=torch.bfloat16).to("cuda").eval()
-    preds, golds = [], []
+    preds, golds, records = [], [], []
     for s in samples:
         imgs = _subsample(load_images(s), max_frames)
         msgs = [{"role": "user", "content": [{"type": "image"} for _ in imgs] +
                  [{"type": "text", "text": s.prompt}]}]
-        text = proc.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
+        try:
+            text = proc.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True,
+                                            enable_thinking=False)
+        except TypeError:
+            text = proc.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
         batch = proc(text=[text], images=[imgs], return_tensors="pt").to("cuda")
         with torch.no_grad():
             out = model.generate(**batch, max_new_tokens=max_new_tokens, do_sample=False)
         gen = proc.batch_decode(out[:, batch["input_ids"].shape[1]:], skip_special_tokens=True)[0]
-        preds.append(parse_answer(gen).get("status", "normal"))
+        d = parse_answer(gen)
+        preds.append(d.get("status", "normal"))
         golds.append(s.label)
+        records.append({"id": s.id, "gold": s.label, "pred": preds[-1],
+                        "parse": d.get("_parse", "json"), "confidence": d.get("confidence"),
+                        "raw": gen})
+    if return_records:
+        return preds, golds, records
     return preds, golds
 
 

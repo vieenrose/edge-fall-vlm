@@ -1,0 +1,22 @@
+{
+  "runs/sft-qwen35-9b-lora": {
+    "n": 150,
+    "accuracy": 0.767,
+    "binary_sensitivity_recall": 0.573,
+    "binary_specificity": 0.96,
+    "binary_precision": 0.935,
+    "binary_f1": 0.711,
+    "person_down_recall": 0.573,
+    "peak_rss_mb": 18966.5,
+    "prefill_time": {
+      "p50_s": 0.204,
+      "p95_s": 0.208,
+      "mean_s": 0.202
+    },
+    "inference_time_full_generate": {
+      "p50_s": 1.179,
+      "p95_s": 1.475,
+      "mean_s": 1.236
+    }
+  }
+}

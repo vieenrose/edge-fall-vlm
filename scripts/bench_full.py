@@ -52,7 +52,7 @@ def bench_one(model_dir: str, samples, device: str, max_frames: int, img_size: i
     model = AutoModelForImageTextToText.from_pretrained(model_dir, dtype=dtype).to(device).eval()
 
     prefill_t, gen_t = [], []
-    preds, golds = [], []
+    preds, golds, records = [], [], []
     for i, s in enumerate(samples):
         imgs = _subsample(load_images(s), max_frames)
         msgs = [{"role": "user", "content": [{"type": "image"} for _ in imgs] +
@@ -79,8 +79,12 @@ def bench_one(model_dir: str, samples, device: str, max_frames: int, img_size: i
         gen_t.append(time.perf_counter() - t0)
 
         gen = proc.batch_decode(out[:, batch["input_ids"].shape[1]:], skip_special_tokens=True)[0]
-        preds.append(parse_answer(gen).get("status", "normal"))
+        d = parse_answer(gen)
+        preds.append(d.get("status", "normal"))
         golds.append(s.label)
+        records.append({"id": s.id, "gold": s.label, "pred": preds[-1],
+                        "parse": d.get("_parse", "json"), "confidence": d.get("confidence"),
+                        "raw": gen})
         if (i + 1) % 25 == 0:
             print(f"  {model_dir}: {i+1}/{len(samples)}", flush=True)
 
@@ -102,9 +106,13 @@ def bench_one(model_dir: str, samples, device: str, max_frames: int, img_size: i
         "binary_precision": _precision_from_confusion(m),
         "binary_f1": m.binary_f1,
         "person_down_recall": m.person_down_recall,
+        "parse_failures": sum(1 for r in records if r["parse"] != "json"),
         "peak_rss_mb": round(peak_rss_mb(), 1),
         "prefill_time": stats(prefill_t),
         "inference_time_full_generate": stats(gen_t),
+        # per-clip records make paired tests (McNemar), ensemble fusion, and parse-failure
+        # audits possible — aggregates alone cannot resolve the deltas this project gates on
+        "predictions": records,
     }
 
 
@@ -124,7 +132,7 @@ def main():
                     help="path=label, repeatable")
     ap.add_argument("--manifest", type=Path, required=True)
     ap.add_argument("--label-set", default="down3")
-    ap.add_argument("--n", type=int, default=100)
+    ap.add_argument("--n", type=int, default=100, help="clip count; 0 = the full manifest")
     ap.add_argument("--device", default="cuda")
     ap.add_argument("--max-frames", type=int, default=6)
     ap.add_argument("--img-size", type=int, default=384)
@@ -135,7 +143,9 @@ def main():
     import os
     os.environ.setdefault("CUDA_VISIBLE_DEVICES", "0")
 
-    samples = load_manifest_as_samples(args.manifest, args.label_set)[:args.n]
+    samples = load_manifest_as_samples(args.manifest, args.label_set)
+    if args.n > 0:
+        samples = samples[:args.n]
     print(f"benchmarking {len(samples)} clips from {args.manifest}", flush=True)
 
     report = {}
@@ -145,7 +155,8 @@ def main():
         print(f"=== {label} ({path}) ===", flush=True)
         report[label] = bench_one(path, samples, args.device, args.max_frames,
                                   args.img_size, args.max_new_tokens)
-        print(json.dumps(report[label], indent=2), flush=True)
+        print(json.dumps({k: v for k, v in report[label].items() if k != "predictions"},
+                         indent=2), flush=True)
 
     args.out.write_text(json.dumps(report, indent=2))
     print("\n=== SUMMARY ===")

@@ -71,8 +71,8 @@ def main():
     samples = load_manifest_as_samples(args.manifest, args.label_set)[:args.n]
     from collections import Counter
     print(f"real clips: {len(samples)}  labels={dict(Counter(s.label for s in samples))}")
-    preds, golds = run_model(args.model, samples, max_frames=args.max_frames,
-                             img_size=args.img_size)
+    preds, golds, records = run_model(args.model, samples, max_frames=args.max_frames,
+                                      img_size=args.img_size, return_records=True)
     m = score(preds, golds)
     print(f"\n=== REAL validation ({args.manifest.parent.name}) ===")
     print(f"acc={m.accuracy} binary_danger_sens={m.binary_sensitivity} "
@@ -80,7 +80,9 @@ def main():
     print("per-class recall:", m.per_class_recall)
     print("confusion:\n" + m.confusion_str())
     Path(args.model, "eval_real.json").write_text(json.dumps(
-        {"manifest": str(args.manifest), "metrics": m.__dict__}, indent=2, default=str))
+        {"manifest": str(args.manifest), "metrics": m.__dict__,
+         "parse_failures": sum(1 for r in records if r["parse"] != "json"),
+         "predictions": records}, indent=2, default=str))
 
 
 if __name__ == "__main__":
