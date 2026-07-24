@@ -196,11 +196,25 @@ async function loadModel(){
   }
 }
 
+// compose the 6 frames into ONE 3x2 mosaic image (single-image path is far more reliable in
+// wllama than multi-image, and the model gives identical verdicts on the mosaic — verified)
+async function framesToMosaic(frames){
+  const imgs=await Promise.all(frames.map(f=>new Promise((res,rej)=>{
+    const im=new Image(); im.onload=()=>res(im); im.onerror=rej; im.src=f.url; })));
+  const T=384, cols=3, rows=2;
+  const cv=document.createElement('canvas'); cv.width=cols*T; cv.height=rows*T;
+  const ctx=cv.getContext('2d');
+  imgs.forEach((im,i)=>ctx.drawImage(im,(i%cols)*T,Math.floor(i/cols)*T,T,T));
+  const blob=await new Promise(r=>cv.toBlob(r,'image/jpeg',0.9));
+  return {buf:await blob.arrayBuffer(), url:cv.toDataURL('image/jpeg',0.6)};
+}
+
 async function runFrames(frames, onProgress){
-  const content=frames.map(f=>({type:'image', data:f.buf}));
-  content.push({type:'text', text:PROMPT});
+  if(onProgress) onProgress('preparing frames…');
+  const mosaic=await framesToMosaic(frames);
+  const content=[{type:'image', data:mosaic.buf}, {type:'text', text:PROMPT}];
   let full='';
-  if(onProgress) onProgress('encoding 6 frames on the GPU…');
+  if(onProgress) onProgress('encoding on the GPU…');
   const stream=await wllama.createChatCompletion({
     messages:[{role:'user', content}], max_tokens:96, temperature:0, stream:true,
   });
