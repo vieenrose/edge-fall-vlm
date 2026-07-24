@@ -120,17 +120,16 @@ function canon(s){s=(s||'').toLowerCase();
   if(['fall','fallen','down','immobil','lying','faint','collaps'].some(k=>s.includes(k)))return'down';
   return'normal';}
 
-// robustly seek a video to time t and wait until the frame is actually decoded/painted
+// seek a video to time t and wait until the frame is decoded; timeout-safe so it can't hang
 function seekTo(v,t){
   return new Promise(resolve=>{
     let done=false;
     const finish=()=>{ if(done)return; done=true; v.removeEventListener('seeked',onSeek);
-      // double rAF ensures the seeked frame is composited before we draw it
+      clearTimeout(to);
+      // double rAF gives the compositor a chance to present the seeked frame before we draw
       requestAnimationFrame(()=>requestAnimationFrame(resolve)); };
-    const onSeek=()=>{
-      if(v.requestVideoFrameCallback) v.requestVideoFrameCallback(()=>finish());
-      else finish();
-    };
+    const onSeek=()=>finish();
+    const to=setTimeout(finish, 2000);   // safety: never hang if 'seeked' is missed
     v.addEventListener('seeked',onSeek);
     v.currentTime=t;
   });
@@ -180,17 +179,18 @@ async function loadModel(){
   }
 }
 
-async function runFrames(frames){
+async function runFrames(frames, onProgress){
   const content=frames.map(f=>({type:'image', data:f.buf}));
   content.push({type:'text', text:PROMPT});
   let full='';
+  if(onProgress) onProgress('encoding 6 frames on the GPU…');
   const stream=await wllama.createChatCompletion({
     messages:[{role:'user', content}], max_tokens:96, temperature:0, stream:true,
   });
   for await(const chunk of stream){
     const delta=chunk.choices && chunk.choices[0] && chunk.choices[0].delta
                 ? chunk.choices[0].delta.content : '';
-    if(delta) full+=delta;
+    if(delta){ full+=delta; if(onProgress) onProgress(full); }
   }
   return full;
 }
@@ -225,9 +225,11 @@ async function runClip(clip, card){
     const frames=await extractFrames(`examples/${clip}`);
     // show the 6 frames the model actually receives (so you can see it caught the fall)
     $('upframes').innerHTML=frames.map(fr=>`<img src="${fr.url}">`).join('');
-    $('upverdict').innerHTML=`<div class="note">frames the model saw for <b>${NAMES[clip]}</b> ↑</div>`;
-    const text=await runFrames(frames);
+    const prog=t=>$('upverdict').innerHTML=`<div class="note"><b>${NAMES[clip]}</b> — ${t}</div>`;
+    const text=await runFrames(frames, prog);
     const v=parseVerdict(text); badge(b, v.status);
+    $('upverdict').innerHTML=`<div class="verdict"><span class="e">${LABELS[v.status].e}</span>`+
+      `<span class="l">${LABELS[v.status].t}</span></div><pre>${JSON.stringify(v.obj,null,2)}</pre>`;
   }catch(e){ b.className='badge b-wait'; b.textContent='error'; console.error(e); }
   card.classList.remove('busy');
 }
@@ -240,8 +242,9 @@ $('file').onchange=async e=>{
   const frames=await extractFrames(f);
   $('upframes').innerHTML=frames.map(fr=>`<img src="${fr.url}">`).join('');
   if(!ready){ $('upverdict').innerHTML='<div class="note">Load the model above, then re-select to get a verdict.</div>'; return; }
-  $('upverdict').innerHTML='<div class="verdict"><span class="e">⏳</span><span class="l">running on your GPU…</span></div>';
-  const text=await runFrames(frames);
+  const prog=t=>$('upverdict').innerHTML=`<div class="note">running on your GPU — ${t}</div>`;
+  prog('starting…');
+  const text=await runFrames(frames, prog);
   const {status,obj}=parseVerdict(text); const L=LABELS[status];
   $('upverdict').innerHTML=`<div class="verdict"><span class="e">${L.e}</span>
     <span class="l">${L.t}</span></div><pre>${JSON.stringify(obj,null,2)}</pre>`;
