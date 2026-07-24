@@ -477,3 +477,19 @@ needs to SEE each hard-negative, not have it hammered in. **Final deployed = run
 realhn-x1**: FA 25->16 (-36%) AND recall 0.907->0.920, strictly better than realfall on both axes.
 Fixes benny/cyclist/lake-slip; catches down_0016 (the gymnast normal_0127 is now 1 of its 16 FA,
 net-better trade). Reports: bench_{val,test}150_x{1,3}.json.
+
+## 2026-07-24 — Complementary indoor dataset (GMDCSA24): backfires, x1 stays best
+
+Downloaded GMDCSA24 (CC-BY, Zenodo; 4 subjects, 303 indoor ADL hard-negs). Clean subject-held-out
+indoor eval (Subject_4: 34 fall/59 normal):
+
+| model | INDOOR recall | INDOOR FA | OOPS-test recall | OOPS-test FA |
+|---|---|---|---|---|
+| x1 (OOPS-only, deployed) | **0.941** | 6/59 | 0.920 | 9/75 |
+| x1 + GMDCSA24 indoor | 0.588 | 2/59 | 0.907 | 10/75 |
+
+Adding indoor ADL hard-negatives collapsed indoor recall (0.941->0.588) — the lie_down/lying/
+sit-on-floor "normal" segments are visually ~identical to indoor "fallen", so training them NORMAL
+taught the model to miss indoor falls (bed-vs-floor confusion). Also didn't help OOPS. Notably x1
+(OOPS-only) ALREADY generalizes to indoor (recall 0.941) — staged indoor is easier than wild OOPS.
+VERDICT: x1 remains the best & deployed model on both domains. Reports: bench_indoor_{x1,gmd123}.json.
