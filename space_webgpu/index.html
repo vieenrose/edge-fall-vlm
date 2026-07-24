@@ -120,17 +120,39 @@ function canon(s){s=(s||'').toLowerCase();
   if(['fall','fallen','down','immobil','lying','faint','collaps'].some(k=>s.includes(k)))return'down';
   return'normal';}
 
-// extract 6 evenly-spaced frames from a video File/URL -> array of {blob, dataURL}
+// robustly seek a video to time t and wait until the frame is actually decoded/painted
+function seekTo(v,t){
+  return new Promise(resolve=>{
+    let done=false;
+    const finish=()=>{ if(done)return; done=true; v.removeEventListener('seeked',onSeek);
+      // double rAF ensures the seeked frame is composited before we draw it
+      requestAnimationFrame(()=>requestAnimationFrame(resolve)); };
+    const onSeek=()=>{
+      if(v.requestVideoFrameCallback) v.requestVideoFrameCallback(()=>finish());
+      else finish();
+    };
+    v.addEventListener('seeked',onSeek);
+    v.currentTime=t;
+  });
+}
+
+// extract 6 evenly-spaced frames from a video File/URL -> array of {buf, url}
 async function extractFrames(src){
   const v=document.createElement('video');v.muted=true;v.crossOrigin='anonymous';
+  v.preload='auto'; v.playsInline=true;
   v.src=typeof src==='string'?src:URL.createObjectURL(src);
-  await new Promise(r=>v.addEventListener('loadedmetadata',r,{once:true}));
-  const dur=v.duration||1, cv=document.createElement('canvas'), out=[];
-  const S=384; cv.width=S; cv.height=S;
+  // wait until frames are actually decodable (not just metadata)
+  await new Promise((res,rej)=>{
+    v.addEventListener('loadeddata',res,{once:true});
+    v.addEventListener('error',()=>rej(new Error('video load error')),{once:true});
+  });
+  if(v.readyState<2) await new Promise(r=>v.addEventListener('canplay',r,{once:true}));
+  const dur=(isFinite(v.duration)&&v.duration>0)?v.duration:1;
+  const cv=document.createElement('canvas'), out=[];
+  const S=384; cv.width=S; cv.height=S; const ctx=cv.getContext('2d');
   for(let i=0;i<6;i++){
-    v.currentTime=Math.min(dur*i/5, dur-0.03);
-    await new Promise(r=>v.addEventListener('seeked',r,{once:true}));
-    cv.getContext('2d').drawImage(v,0,0,S,S);
+    await seekTo(v, Math.min(dur*i/5, Math.max(0,dur-0.05)));
+    ctx.drawImage(v,0,0,S,S);
     const blob=await new Promise(r=>cv.toBlob(r,'image/jpeg',0.85));
     out.push({buf:await blob.arrayBuffer(), url:cv.toDataURL('image/jpeg',0.7)});
   }
@@ -201,8 +223,11 @@ async function runClip(clip, card){
   card.classList.add('busy');
   try{
     const frames=await extractFrames(`examples/${clip}`);
+    // show the 6 frames the model actually receives (so you can see it caught the fall)
+    $('upframes').innerHTML=frames.map(fr=>`<img src="${fr.url}">`).join('');
+    $('upverdict').innerHTML=`<div class="note">frames the model saw for <b>${NAMES[clip]}</b> ↑</div>`;
     const text=await runFrames(frames);
-    badge(b, parseVerdict(text).status);
+    const v=parseVerdict(text); badge(b, v.status);
   }catch(e){ b.className='badge b-wait'; b.textContent='error'; console.error(e); }
   card.classList.remove('busy');
 }
