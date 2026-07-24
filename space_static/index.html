@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Edge Fall / Danger Detection VLM — Static Demo</title>
+<style>
+  :root{
+    --bg:#0b0e14; --panel:#141925; --panel2:#1b2130; --text:#e6e9ef; --muted:#98a2b3;
+    --line:#263043; --accent:#5b8cff; --down:#ff5b6e; --distress:#ffab5b; --normal:#3ecf8e;
+  }
+  @media (prefers-color-scheme: light){
+    :root{ --bg:#f6f8fc; --panel:#ffffff; --panel2:#f0f3f9; --text:#0f1728; --muted:#5a6474;
+      --line:#e2e8f2; --accent:#2f6bff; --down:#e5384f; --distress:#e08415; --normal:#12a866; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:960px;margin:0 auto;padding:32px 20px 64px}
+  header h1{font-size:1.7rem;margin:0 0 6px;letter-spacing:-.02em}
+  header p.sub{color:var(--muted);margin:0 0 4px;max-width:640px}
+  .pill{display:inline-block;font-size:.72rem;font-weight:600;padding:3px 9px;border-radius:999px;
+    background:var(--panel2);border:1px solid var(--line);color:var(--muted);vertical-align:middle}
+  .note{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px 15px;
+    color:var(--muted);font-size:.88rem;margin:18px 0}
+  section{margin-top:36px}
+  h2{font-size:1.15rem;margin:0 0 4px;letter-spacing:-.01em}
+  .h2sub{color:var(--muted);font-size:.9rem;margin:0 0 16px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;
+    cursor:pointer;transition:border-color .15s,transform .15s}
+  .card:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .card video{width:100%;display:block;background:#000;aspect-ratio:16/10;object-fit:cover}
+  .card .cap{padding:9px 12px;font-size:.85rem;display:flex;justify-content:space-between;align-items:center}
+  .badge{font-weight:700;font-size:.72rem;padding:3px 9px;border-radius:999px;color:#08101f;white-space:nowrap}
+  .b-down{background:var(--down);color:#fff} .b-distress{background:var(--distress);color:#241300}
+  .b-normal{background:var(--normal);color:#052117}
+  dialog{border:none;border-radius:16px;padding:0;background:var(--panel);color:var(--text);
+    max-width:720px;width:calc(100% - 32px);box-shadow:0 24px 60px rgba(0,0,0,.5)}
+  dialog::backdrop{background:rgba(3,6,12,.66)}
+  .modal-in{padding:20px 22px 24px}
+  .modal-in h3{margin:0 0 2px;font-size:1.05rem}
+  .modal-in .vsub{color:var(--muted);font-size:.85rem;margin:0 0 14px}
+  .verdict{display:flex;align-items:center;gap:12px;background:var(--panel2);border:1px solid var(--line);
+    border-radius:12px;padding:13px 15px;margin-bottom:14px}
+  .verdict .lbl{font-weight:700;font-size:1.05rem}
+  .frames{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-bottom:6px}
+  .frames img{width:100%;border-radius:6px;display:block;border:1px solid var(--line)}
+  .frames-cap{color:var(--muted);font-size:.76rem;text-align:center}
+  pre{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:11px 13px;
+    overflow-x:auto;font-size:.8rem;margin:12px 0 0;color:var(--text)}
+  .x{position:absolute;top:12px;right:14px;background:none;border:none;color:var(--muted);
+    font-size:1.5rem;cursor:pointer;line-height:1}
+  .up{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .up input[type=file]{display:block;margin:8px 0 2px;color:var(--muted);font-size:.9rem}
+  .results{width:100%;border-collapse:collapse;font-size:.9rem;margin-top:6px}
+  .results th,.results td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line)}
+  .results th{color:var(--muted);font-weight:600}
+  .results td.n{font-variant-numeric:tabular-nums}
+  footer{margin-top:44px;color:var(--muted);font-size:.82rem;border-top:1px solid var(--line);padding-top:16px}
+  .links{display:flex;gap:18px;flex-wrap:wrap;margin-top:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>🛡️ Fall / Danger Detection — single VLM <span class="pill">static demo</span></h1>
+    <p class="sub">A <strong>Qwen3.5-2B</strong> vision-language model that flags <strong>falls,
+      a person down, or distress</strong> from a short strip of video frames — trained mostly on
+      synthetic 3D data plus real in-the-wild fall footage.</p>
+  </header>
+
+  <div class="note">⚡ This is a <strong>static</strong> Space (no backend GPU), so it can't run the
+    2B model live. The example verdicts below are the <strong>deployed model's real outputs,
+    pre-computed</strong>. To analyze your own clips, run the
+    <a href="https://huggingface.co/Luigi/edge-fall-vlm-qwen3.5-2b">model</a> directly.</div>
+
+  <section>
+    <h2>Example clips</h2>
+    <p class="h2sub">Real footage (UR Fall Detection dataset). Click a clip to see the model's
+      verdict and the exact 6-frame strip it analyzed.</p>
+    <div class="grid" id="gallery"></div>
+  </section>
+
+  <section>
+    <h2>Try your own clip</h2>
+    <p class="h2sub">Runs entirely in your browser — it extracts the 6-frame strip the model would
+      see, so you can preview the input. The verdict step needs the model (a 2B VLM can't run in a
+      static page).</p>
+    <div class="up">
+      <label>Upload a short video clip:</label>
+      <input type="file" id="file" accept="video/*">
+      <div id="upframes" class="frames" style="margin-top:14px"></div>
+      <div id="upnote" class="frames-cap"></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>How well does it work?</h2>
+    <p class="h2sub">Held-out in-the-wild benchmark (OmniFall / OOPS, 300 clips), honest numbers.</p>
+    <table class="results">
+      <tr><th>Model</th><th>False alarms (per 150 normals)</th><th>Fall recall</th></tr>
+      <tr><td>Baseline fine-tune</td><td class="n">25</td><td class="n">0.907</td></tr>
+      <tr><td><strong>Deployed model</strong> (+ real hard-negatives)</td><td class="n"><strong>16</strong></td><td class="n"><strong>0.920</strong></td></tr>
+    </table>
+    <div class="note">The deployed model was tuned to <strong>minimize false alarms</strong> while
+      holding recall — real in-the-wild hard-negatives cut false alarms 36% with no recall cost.
+      Trained on synthetic + real data; <strong>research prototype, not a medical/safety device.</strong></div>
+  </section>
+
+  <footer>
+    <div>Single-stage VLM (no separate pose detector). Trained on synthetic 3D renders + real
+      in-the-wild fall footage.</div>
+    <div class="links">
+      <a href="https://huggingface.co/Luigi/edge-fall-vlm-qwen3.5-2b">Model ↗</a>
+      <a href="https://huggingface.co/Luigi/edge-fall-vlm-2.2b">SmolVLM2 sibling ↗</a>
+      <a href="https://github.com/vieenrose/edge-fall-vlm">Code ↗</a>
+    </div>
+  </footer>
+</div>
+
+<dialog id="modal"><div class="modal-in">
+  <button class="x" onclick="document.getElementById('modal').close()">×</button>
+  <h3 id="m-title"></h3>
+  <p class="vsub" id="m-sub"></p>
+  <div class="verdict"><span id="m-emoji" style="font-size:1.5rem"></span>
+    <span class="lbl" id="m-label"></span></div>
+  <div class="frames" id="m-frames"></div>
+  <div class="frames-cap">the 6-frame strip the model analyzed (oldest → newest)</div>
+  <pre id="m-json"></pre>
+</div></dialog>
+
+<script>
+const LABELS={down:{t:"🔴 PERSON DOWN (fall / fainted / lying immobile)",e:"🔴",c:"b-down"},
+  distress:{t:"🟠 DISTRESS",e:"🟠",c:"b-distress"},normal:{t:"🟢 normal",e:"🟢",c:"b-normal"}};
+const NAMES={"real_fall.mp4":"Fall","real_person_down.mp4":"Person down",
+  "real_normal_walk.mp4":"Normal — walking","real_normal_sit.mp4":"Normal — sitting"};
+function canon(s){s=(s||"").toLowerCase();
+  if(s.includes("distress"))return"distress";
+  if(["fall","fallen","down","immobil","lying","faint","collaps"].some(k=>s.includes(k)))return"down";
+  return"normal";}
+
+fetch("examples.json").then(r=>r.json()).then(data=>{
+  const g=document.getElementById("gallery");
+  Object.keys(NAMES).forEach(clip=>{
+    if(!data[clip])return;
+    const st=canon(data[clip].verdict.status), L=LABELS[st];
+    const card=document.createElement("div");card.className="card";
+    card.innerHTML=`<video src="examples/${clip}" muted loop playsinline
+        onmouseover="this.play()" onmouseout="this.pause()"></video>
+      <div class="cap"><span>${NAMES[clip]}</span><span class="badge ${L.c}">${st.toUpperCase()}</span></div>`;
+    card.onclick=()=>openModal(clip,data[clip]);
+    g.appendChild(card);
+  });
+});
+
+function openModal(clip,d){
+  const st=canon(d.verdict.status),L=LABELS[st];
+  document.getElementById("m-title").textContent=NAMES[clip];
+  document.getElementById("m-sub").textContent="Deployed model verdict (pre-computed)";
+  document.getElementById("m-emoji").textContent=L.e;
+  document.getElementById("m-label").textContent=L.t;
+  document.getElementById("m-frames").innerHTML=d.frames.map(f=>`<img src="${f}">`).join("");
+  document.getElementById("m-json").textContent=JSON.stringify(d.verdict,null,2);
+  document.getElementById("modal").showModal();
+}
+
+// client-side frame extraction (preview only — no inference in a static page)
+document.getElementById("file").addEventListener("change",e=>{
+  const f=e.target.files[0];if(!f)return;
+  const v=document.createElement("video");v.muted=true;v.src=URL.createObjectURL(f);
+  const box=document.getElementById("upframes"),note=document.getElementById("upnote");
+  box.innerHTML="";note.textContent="extracting frames…";
+  v.addEventListener("loadedmetadata",()=>{
+    const dur=v.duration||1,times=[...Array(6)].map((_,i)=>dur*i/5),shots=[];
+    const cv=document.createElement("canvas");
+    function grab(i){
+      if(i>=6){box.innerHTML=shots.map(s=>`<img src="${s}">`).join("");
+        note.innerHTML="the 6-frame strip the model would see — "+
+          "<a href='https://huggingface.co/Luigi/edge-fall-vlm-qwen3.5-2b'>run the model</a> for a verdict";
+        return;}
+      v.currentTime=Math.min(times[i],dur-0.05);
+      v.addEventListener("seeked",function h(){
+        v.removeEventListener("seeked",h);
+        cv.width=160;cv.height=160*v.videoHeight/v.videoWidth;
+        cv.getContext("2d").drawImage(v,0,0,cv.width,cv.height);
+        shots.push(cv.toDataURL("image/jpeg",0.72));grab(i+1);
+      },{once:true});
+    }
+    grab(0);
+  });
+});
+</script>
+</body>
+</html>
