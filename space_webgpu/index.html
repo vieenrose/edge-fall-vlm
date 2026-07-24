@@ -179,7 +179,7 @@ async function loadModel(){
   $('loadbtn').disabled=true;
   wllama=new Wllama(WASM);
   try{
-    await wllama.loadModelFromUrl({url:MODEL_URL, mmprojUrl:MMPROJ_URL}, {
+    await wllama.loadModelFromHF({repo:REPO, file:'model-Q4_K_M.gguf', mmprojFile:'mmproj-f16.gguf'}, {
       n_ctx:4096, n_gpu_layers:99,
       progressCallback:({loaded,total})=>{
         const p=total?Math.round(100*loaded/total):0;
