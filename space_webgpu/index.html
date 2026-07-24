@@ -120,42 +120,59 @@ function canon(s){s=(s||'').toLowerCase();
   if(['fall','fallen','down','immobil','lying','faint','collaps'].some(k=>s.includes(k)))return'down';
   return'normal';}
 
-// seek a video to time t and wait until the frame is decoded; timeout-safe so it can't hang
+// timeout-safe seek (fallback path)
 function seekTo(v,t){
   return new Promise(resolve=>{
     let done=false;
     const finish=()=>{ if(done)return; done=true; v.removeEventListener('seeked',onSeek);
-      clearTimeout(to);
-      // double rAF gives the compositor a chance to present the seeked frame before we draw
-      requestAnimationFrame(()=>requestAnimationFrame(resolve)); };
+      clearTimeout(to); requestAnimationFrame(()=>requestAnimationFrame(resolve)); };
     const onSeek=()=>finish();
-    const to=setTimeout(finish, 2000);   // safety: never hang if 'seeked' is missed
+    const to=setTimeout(finish, 2000);
     v.addEventListener('seeked',onSeek);
     v.currentTime=t;
   });
 }
 
-// extract 6 evenly-spaced frames from a video File/URL -> array of {buf, url}
+// extract 6 evenly-spaced frames. Primary method: PLAY the clip and capture frames as they
+// are actually presented (requestVideoFrameCallback gives real mediaTime) — far more reliable
+// than seeking, which can draw stale/pre-event frames. Falls back to seeking if rVFC absent.
 async function extractFrames(src){
   const v=document.createElement('video');v.muted=true;v.crossOrigin='anonymous';
   v.preload='auto'; v.playsInline=true;
   v.src=typeof src==='string'?src:URL.createObjectURL(src);
-  // wait until frames are actually decodable (not just metadata)
   await new Promise((res,rej)=>{
     v.addEventListener('loadeddata',res,{once:true});
     v.addEventListener('error',()=>rej(new Error('video load error')),{once:true});
   });
-  if(v.readyState<2) await new Promise(r=>v.addEventListener('canplay',r,{once:true}));
   const dur=(isFinite(v.duration)&&v.duration>0)?v.duration:1;
-  const cv=document.createElement('canvas'), out=[];
-  const S=384; cv.width=S; cv.height=S; const ctx=cv.getContext('2d');
-  for(let i=0;i<6;i++){
-    await seekTo(v, Math.min(dur*i/5, Math.max(0,dur-0.05)));
-    ctx.drawImage(v,0,0,S,S);
-    const blob=await new Promise(r=>cv.toBlob(r,'image/jpeg',0.85));
-    out.push({buf:await blob.arrayBuffer(), url:cv.toDataURL('image/jpeg',0.7)});
+  const targets=[...Array(6)].map((_,i)=>Math.min(dur*i/5, Math.max(0,dur-0.03)));
+  const S=384, cv=document.createElement('canvas'); cv.width=S; cv.height=S;
+  const ctx=cv.getContext('2d'); let out=[];
+
+  const grab=async()=>{ ctx.drawImage(v,0,0,S,S);
+    const blob=await new Promise(r=>cv.toBlob(r,'image/jpeg',0.9));
+    return {buf:await blob.arrayBuffer(), url:cv.toDataURL('image/jpeg',0.7)}; };
+
+  if(v.requestVideoFrameCallback){
+    await new Promise((resolve)=>{
+      let idx=0, busy=false;
+      const onFrame=async(now,meta)=>{
+        if(!busy && idx<targets.length && meta.mediaTime>=targets[idx]-0.06){
+          busy=true; out.push(await grab()); idx++; busy=false;
+        }
+        if(idx>=targets.length){ v.pause(); resolve(); return; }
+        v.requestVideoFrameCallback(onFrame);
+      };
+      v.requestVideoFrameCallback(onFrame);
+      v.play().catch(()=>{});
+      setTimeout(resolve, Math.min(25000, dur*1000+4000));  // safety
+    });
   }
-  return out;
+  if(out.length<6){   // fallback to seeking
+    out=[];
+    for(let i=0;i<6;i++){ await seekTo(v, targets[i]); out.push(await grab()); }
+  }
+  return out.slice(0,6);
 }
 
 async function loadModel(){
