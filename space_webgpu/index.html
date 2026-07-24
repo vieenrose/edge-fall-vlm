@@ -98,8 +98,7 @@
 import { Wllama } from 'https://cdn.jsdelivr.net/npm/@wllama/wllama@3.5.1/esm/index.js';
 
 const WASM = {
-  'single-thread/wllama.wasm':'https://cdn.jsdelivr.net/npm/@wllama/wllama@3.5.1/esm/single-thread/wllama.wasm',
-  'multi-thread/wllama.wasm':'https://cdn.jsdelivr.net/npm/@wllama/wllama@3.5.1/esm/multi-thread/wllama.wasm',
+  default:'https://cdn.jsdelivr.net/npm/@wllama/wllama@3.5.1/esm/wasm/wllama.wasm',
 };
 const REPO='Luigi/edge-fall-vlm-qwen3.5-2b-gguf';
 const MODEL_URL=`https://huggingface.co/${REPO}/resolve/main/model-Q4_K_M.gguf`;
@@ -142,8 +141,8 @@ async function loadModel(){
   $('loadbtn').disabled=true;
   wllama=new Wllama(WASM);
   try{
-    await wllama.loadModelFromUrl(MODEL_URL, {
-      mmprojUrl:MMPROJ_URL, n_ctx:4096, n_gpu_layers:99,
+    await wllama.loadModelFromUrl({url:MODEL_URL, mmprojUrl:MMPROJ_URL}, {
+      n_ctx:4096, n_gpu_layers:99,
       progressCallback:({loaded,total})=>{
         const p=total?Math.round(100*loaded/total):0;
         $('loadbar').style.width=p+'%';
