@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fall Detection VLM — WebGPU</title>
+<style>
+  :root{--bg:#0b0e14;--panel:#141925;--panel2:#1b2130;--text:#e6e9ef;--muted:#98a2b3;
+    --line:#263043;--accent:#7c5cff;--down:#ff5b6e;--distress:#ffab5b;--normal:#3ecf8e;}
+  @media (prefers-color-scheme:light){:root{--bg:#f6f8fc;--panel:#fff;--panel2:#eef2f9;
+    --text:#0f1728;--muted:#5a6474;--line:#e2e8f2;--accent:#6b46ff;--down:#e5384f;--distress:#e08415;--normal:#12a866;}}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+  .wrap{max-width:900px;margin:0 auto;padding:30px 20px 60px}
+  h1{font-size:1.55rem;margin:0 0 4px;letter-spacing:-.02em}
+  .sub{color:var(--muted);margin:0;max-width:640px}
+  .pill{display:inline-block;font-size:.68rem;font-weight:700;padding:3px 9px;border-radius:999px;
+    background:var(--accent);color:#fff;vertical-align:middle}
+  .note{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px 15px;
+    color:var(--muted);font-size:.86rem;margin:16px 0}
+  .load{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;margin:20px 0}
+  button{background:var(--accent);color:#fff;border:none;border-radius:9px;padding:10px 18px;
+    font-size:.92rem;font-weight:600;cursor:pointer}
+  button:disabled{opacity:.5;cursor:default}
+  .bar{height:8px;background:var(--panel2);border-radius:6px;overflow:hidden;margin-top:12px}
+  .bar>div{height:100%;width:0;background:var(--accent);transition:width .2s}
+  .status{font-size:.85rem;color:var(--muted);margin-top:8px;font-variant-numeric:tabular-nums}
+  h2{font-size:1.1rem;margin:26px 0 4px}.h2s{color:var(--muted);font-size:.88rem;margin:0 0 14px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:13px;overflow:hidden;
+    cursor:pointer;transition:border-color .15s,transform .15s}
+  .card:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .card.busy{opacity:.6;pointer-events:none}
+  .card video{width:100%;display:block;background:#000;aspect-ratio:16/10;object-fit:cover}
+  .card .cap{padding:8px 11px;font-size:.84rem;display:flex;justify-content:space-between;align-items:center;gap:6px}
+  .badge{font-weight:700;font-size:.68rem;padding:3px 8px;border-radius:999px;white-space:nowrap}
+  .b-down{background:var(--down);color:#fff}.b-distress{background:var(--distress);color:#241300}
+  .b-normal{background:var(--normal);color:#052117}.b-wait{background:var(--panel2);color:var(--muted)}
+  .up{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;margin-top:14px}
+  .frames{display:grid;grid-template-columns:repeat(6,1fr);gap:5px;margin:12px 0}
+  .frames img{width:100%;border-radius:5px;border:1px solid var(--line)}
+  pre{background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:10px 12px;
+    overflow-x:auto;font-size:.8rem;margin:10px 0 0;white-space:pre-wrap}
+  .verdict{display:flex;align-items:center;gap:11px;background:var(--panel2);border:1px solid var(--line);
+    border-radius:11px;padding:12px 14px;margin-top:12px}
+  .verdict .e{font-size:1.5rem}.verdict .l{font-weight:700}
+  footer{margin-top:36px;color:var(--muted);font-size:.8rem;border-top:1px solid var(--line);padding-top:14px}
+  .links{display:flex;gap:16px;flex-wrap:wrap;margin-top:6px}
+  #nowebgpu{display:none;background:#5a1e1e;color:#ffd7d7;border-radius:10px;padding:12px 15px;margin:14px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🛡️ Fall Detection VLM <span class="pill">WebGPU · in-browser</span></h1>
+  <p class="sub">The actual fine-tuned <strong>Qwen3.5-2B</strong> fall-detection model, running
+    entirely on <strong>your GPU</strong> via WebGPU (llama.cpp/wllama). No server — your video
+    never leaves your device.</p>
+
+  <div id="nowebgpu">⚠️ Your browser doesn't expose <strong>WebGPU</strong>. Use Chrome/Edge 121+
+    or Firefox Nightly to run the model. You can still browse the examples below (verdicts load
+    once the model is running).</div>
+
+  <div class="load" id="loadbox">
+    <button id="loadbtn">⬇️ Load model &amp; run on my GPU</button>
+    <div class="status" id="loadstatus">~1.9 GB download on first use, then cached. Runs locally.</div>
+    <div class="bar"><div id="loadbar"></div></div>
+  </div>
+
+  <div class="note">The 6-frame strip the model sees is extracted from each clip <strong>in your
+    browser</strong>. Once the model is loaded, click a clip (or upload your own) to get a live verdict.</div>
+
+  <h2>Example clips</h2>
+  <p class="h2s">Real footage (UR Fall Detection dataset). Click to run the model live.</p>
+  <div class="grid" id="gallery"></div>
+
+  <div class="up">
+    <h2 style="margin-top:0">Try your own clip</h2>
+    <p class="h2s">Runs locally on your GPU — nothing is uploaded.</p>
+    <input type="file" id="file" accept="video/*">
+    <div class="frames" id="upframes"></div>
+    <div id="upverdict"></div>
+  </div>
+
+  <footer>
+    <div>Single-stage VLM · GGUF (Q4_K_M) · WebGPU via
+      <a href="https://github.com/ngxson/wllama">wllama</a> (llama.cpp WASM+WebGPU).</div>
+    <div class="links">
+      <a href="https://huggingface.co/Luigi/edge-fall-vlm-qwen3.5-2b-gguf">GGUF model ↗</a>
+      <a href="https://huggingface.co/Luigi/edge-fall-vlm-qwen3.5-2b">Full model ↗</a>
+      <a href="https://github.com/vieenrose/edge-fall-vlm">Code ↗</a>
+    </div>
+  </footer>
+</div>
+
+<script type="module">
+import { Wllama } from 'https://cdn.jsdelivr.net/npm/@wllama/wllama@3.5.1/esm/index.js';
+
+const WASM = {
+  'single-thread/wllama.wasm':'https://cdn.jsdelivr.net/npm/@wllama/wllama@3.5.1/esm/single-thread/wllama.wasm',
+  'multi-thread/wllama.wasm':'https://cdn.jsdelivr.net/npm/@wllama/wllama@3.5.1/esm/multi-thread/wllama.wasm',
+};
+const REPO='Luigi/edge-fall-vlm-qwen3.5-2b-gguf';
+const MODEL_URL=`https://huggingface.co/${REPO}/resolve/main/model-Q4_K_M.gguf`;
+const MMPROJ_URL=`https://huggingface.co/${REPO}/resolve/main/mmproj-f16.gguf`;
+const PROMPT="You are a safety monitor. These are consecutive video frames (oldest first), "+
+  "possibly with more than one person. Report whether ANYONE has fallen, fainted, is lying "+
+  "immobile, or is in distress; else normal. Answer with JSON only.";
+const NAMES={"real_fall.mp4":"Fall","real_person_down.mp4":"Person down",
+  "real_normal_walk.mp4":"Normal — walking","real_normal_sit.mp4":"Normal — sitting"};
+const LABELS={down:{e:"🔴",t:"PERSON DOWN",c:"b-down"},distress:{e:"🟠",t:"DISTRESS",c:"b-distress"},
+  normal:{e:"🟢",t:"normal",c:"b-normal"}};
+
+let wllama=null, ready=false;
+const $=id=>document.getElementById(id);
+if(!navigator.gpu) $('nowebgpu').style.display='block';
+
+function canon(s){s=(s||'').toLowerCase();
+  if(s.includes('distress'))return'distress';
+  if(['fall','fallen','down','immobil','lying','faint','collaps'].some(k=>s.includes(k)))return'down';
+  return'normal';}
+
+// extract 6 evenly-spaced frames from a video File/URL -> array of {blob, dataURL}
+async function extractFrames(src){
+  const v=document.createElement('video');v.muted=true;v.crossOrigin='anonymous';
+  v.src=typeof src==='string'?src:URL.createObjectURL(src);
+  await new Promise(r=>v.addEventListener('loadedmetadata',r,{once:true}));
+  const dur=v.duration||1, cv=document.createElement('canvas'), out=[];
+  const S=384; cv.width=S; cv.height=S;
+  for(let i=0;i<6;i++){
+    v.currentTime=Math.min(dur*i/5, dur-0.03);
+    await new Promise(r=>v.addEventListener('seeked',r,{once:true}));
+    cv.getContext('2d').drawImage(v,0,0,S,S);
+    const blob=await new Promise(r=>cv.toBlob(r,'image/jpeg',0.85));
+    out.push({buf:await blob.arrayBuffer(), url:cv.toDataURL('image/jpeg',0.7)});
+  }
+  return out;
+}
+
+async function loadModel(){
+  $('loadbtn').disabled=true;
+  wllama=new Wllama(WASM);
+  try{
+    await wllama.loadModelFromUrl(MODEL_URL, {
+      mmprojUrl:MMPROJ_URL, n_ctx:4096, n_gpu_layers:99,
+      progressCallback:({loaded,total})=>{
+        const p=total?Math.round(100*loaded/total):0;
+        $('loadbar').style.width=p+'%';
+        $('loadstatus').textContent=`downloading weights… ${p}%  (${(loaded/1e6|0)} / ${(total/1e6|0)} MB)`;
+      },
+    });
+    ready=true;
+    $('loadstatus').textContent='✅ model loaded on your GPU — click a clip to run';
+    $('loadbtn').textContent='✅ Model ready';
+  }catch(e){
+    $('loadstatus').textContent='load failed: '+e.message;
+    $('loadbtn').disabled=false;
+  }
+}
+
+async function runFrames(frames){
+  const content=frames.map(f=>({type:'image', data:f.buf}));
+  content.push({type:'text', text:PROMPT});
+  let full='';
+  const stream=await wllama.createChatCompletion({
+    messages:[{role:'user', content}], max_tokens:96, temperature:0, stream:true,
+  });
+  for await(const chunk of stream){
+    const delta=chunk.choices && chunk.choices[0] && chunk.choices[0].delta
+                ? chunk.choices[0].delta.content : '';
+    if(delta) full+=delta;
+  }
+  return full;
+}
+
+function parseVerdict(text){
+  const m=[...text.matchAll(/\{[^{}]*\}/g)].pop();
+  let obj={}; if(m){ try{obj=JSON.parse(m[0]);}catch(e){} }
+  const status=canon(obj.status||text);
+  return {status, obj:Object.keys(obj).length?obj:{status}};
+}
+
+function badge(el, status){
+  const L=LABELS[status]; el.className='badge '+L.c; el.textContent=L.e+' '+L.t;
+}
+
+// gallery
+const gal=$('gallery'), cards={};
+for(const clip of Object.keys(NAMES)){
+  const c=document.createElement('div');c.className='card';
+  c.innerHTML=`<video src="examples/${clip}" muted loop playsinline
+      onmouseover="this.play()" onmouseout="this.pause()"></video>
+    <div class="cap"><span>${NAMES[clip]}</span><span class="badge b-wait">— load model —</span></div>`;
+  c.onclick=()=>runClip(clip, c);
+  gal.appendChild(c); cards[clip]=c;
+}
+
+async function runClip(clip, card){
+  if(!ready){ $('loadstatus').textContent='load the model first ↑'; return; }
+  const b=card.querySelector('.badge'); b.className='badge b-wait'; b.textContent='⏳ running…';
+  card.classList.add('busy');
+  try{
+    const frames=await extractFrames(`examples/${clip}`);
+    const text=await runFrames(frames);
+    badge(b, parseVerdict(text).status);
+  }catch(e){ b.className='badge b-wait'; b.textContent='error'; console.error(e); }
+  card.classList.remove('busy');
+}
+
+$('loadbtn').onclick=loadModel;
+
+// upload
+$('file').onchange=async e=>{
+  const f=e.target.files[0]; if(!f) return;
+  const frames=await extractFrames(f);
+  $('upframes').innerHTML=frames.map(fr=>`<img src="${fr.url}">`).join('');
+  if(!ready){ $('upverdict').innerHTML='<div class="note">Load the model above, then re-select to get a verdict.</div>'; return; }
+  $('upverdict').innerHTML='<div class="verdict"><span class="e">⏳</span><span class="l">running on your GPU…</span></div>';
+  const text=await runFrames(frames);
+  const {status,obj}=parseVerdict(text); const L=LABELS[status];
+  $('upverdict').innerHTML=`<div class="verdict"><span class="e">${L.e}</span>
+    <span class="l">${L.t}</span></div><pre>${JSON.stringify(obj,null,2)}</pre>`;
+};
+</script>
+</body>
+</html>
